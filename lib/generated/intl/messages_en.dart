@@ -21,5 +21,47 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "all": MessageLookupByLibrary.simpleMessage("All"),
+        "app_name": MessageLookupByLibrary.simpleMessage("Quiz"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "createYourAccount":
+            MessageLookupByLibrary.simpleMessage("Let’s create your account!"),
+        "destination": MessageLookupByLibrary.simpleMessage("Destination"),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailExample": MessageLookupByLibrary.simpleMessage("xyz@example.com"),
+        "enterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("Enter phone number"),
+        "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "forgotPasswordAnswer":
+            MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
+            "You’ll get messages soon on your e-mail address"),
+        "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "google": MessageLookupByLibrary.simpleMessage("Google"),
+        "hi": MessageLookupByLibrary.simpleMessage("Hi, Welcome back!"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginWith": MessageLookupByLibrary.simpleMessage("or log in with"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordExample": MessageLookupByLibrary.simpleMessage("********"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "popularDestination":
+            MessageLookupByLibrary.simpleMessage("Populra Destination"),
+        "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "searchTitle":
+            MessageLookupByLibrary.simpleMessage("Search your destination"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up")
+      };
 }
