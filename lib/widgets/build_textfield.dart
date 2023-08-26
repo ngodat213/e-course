@@ -7,6 +7,7 @@ class BuildTextField extends StatelessWidget {
     super.key,
     this.isPassword,
     this.isNumber,
+    this.func,
     required this.label,
     required this.hintText,
   });
@@ -14,7 +15,7 @@ class BuildTextField extends StatelessWidget {
   final String hintText;
   bool? isPassword = false;
   bool? isNumber = false;
-
+  void Function(String value)? func;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,6 +36,7 @@ class BuildTextField extends StatelessWidget {
             style: TxtStyle.labelStyle,
           ),
           TextFormField(
+            onChanged: (value) => func!(value),
             keyboardType: isNumber == true ? TextInputType.number : null,
             obscureText: isPassword ?? false,
             style: TxtStyle.inputStyle,

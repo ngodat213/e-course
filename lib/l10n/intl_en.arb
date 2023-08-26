@@ -13,6 +13,7 @@
     "hi": "Hi, Welcome back!",
     "email":"Email",
     "password": "Password",
+    "confirmPassword": "ConfirmPassword",
     "rememberMe": "Remember me",
     "forgotPasswordAnswer": "Forgot password?",
     "loginWith": "or log in with",
