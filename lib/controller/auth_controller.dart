@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:quiz_flutter/screen/sign_in/bloc/sign_in_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_flutter/screen/sign_in/widget/custom_toast.dart';
@@ -28,7 +29,11 @@ class AuthController {
         var user = credential.user;
         if (user != null) {
           toastInfo(msg: "Login successful");
-          BaseNavigation.push(context, routeName: ManagerRoutes.homeScreen);
+          BaseNavigation.push(
+            context,
+            routeName: ManagerRoutes.homeScreen,
+            clearStack: true,
+          );
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -61,7 +66,12 @@ class AuthController {
             .createUserWithEmailAndPassword(email: email, password: password);
         if (credential.user != null) {
           await credential.user?.updateDisplayName(displayName);
-          BaseNavigation.pop(context);
+          toastInfo(msg: 'Register successfull');
+          BaseNavigation.push(
+            context,
+            routeName: ManagerRoutes.signInScreen,
+            clearStack: true,
+          );
         }
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -73,6 +83,31 @@ class AuthController {
             break;
           case "invalid-email":
             toastInfo(msg: "Your email addres is invalid");
+            break;
+        }
+      }
+    }
+  }
+
+  Future<void> handleResetPassword() async {
+    final state = context.read<ForgotPasswordBloc>().state;
+
+    final String email = state.email;
+    if (email.isEmpty) {
+      toastInfo(msg: "Need to fill email address");
+    } else {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        toastInfo(msg: "Check your email");
+        BaseNavigation.push(
+          context,
+          routeName: ManagerRoutes.signInScreen,
+          clearStack: true,
+        );
+      } on FirebaseAuthException catch (e) {
+        switch (e.code) {
+          case "invalid-email":
+            toastInfo(msg: "Email address is not valid");
             break;
         }
       }

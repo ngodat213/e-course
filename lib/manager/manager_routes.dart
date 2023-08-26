@@ -15,5 +15,6 @@ class ManagerRoutes {
     signUpScreen: (context) => const SignUpScreen(),
     signInScreen: (context) => const SignInScreen(),
     homeScreen: (context) => const HomeScreen(),
+    forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
   };
 }
