@@ -190,6 +190,16 @@ class S {
     );
   }
 
+  /// `ConfirmPassword`
+  String get confirmPassword {
+    return Intl.message(
+      'ConfirmPassword',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Remember me`
   String get rememberMe {
     return Intl.message(

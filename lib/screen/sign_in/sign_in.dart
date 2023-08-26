@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/controller/auth_controller.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/sign_in/bloc/sign_in_bloc.dart';
 import 'package:quiz_flutter/screen/sign_in/widget/build_checkbox.dart';
 import 'package:quiz_flutter/screen/sign_in/widget/build_forgot_password.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -17,6 +20,8 @@ import 'package:quiz_flutter/widgets/login_with_social.dart';
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
+  static Page page() => const MaterialPage<void>(child: SignInScreen());
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -26,48 +31,55 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
+    return BlocBuilder<SignInBloc, SignInState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Stack(
               children: [
-                BuildHeader(text: S.of(context).login, title: S.of(context).hi),
-                const SizedBox(height: 25),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      BuildTextField(
-                        label: S.of(context).email,
-                        hintText: S.of(context).emailExample,
-                        // func: (value) {
-                        //   context.read<SigninBloc>().add(EmailEvent(value));
-                        // },
+                Column(
+                  children: [
+                    BuildHeader(
+                        text: S.of(context).login, title: S.of(context).hi),
+                    const SizedBox(height: 25),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Column(
+                        children: [
+                          BuildTextField(
+                            label: S.of(context).email,
+                            hintText: S.of(context).emailExample,
+                            func: (value) {
+                              context.read<SignInBloc>().add(EmailEvent(value));
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          BuildTextField(
+                            label: S.of(context).password,
+                            hintText: S.of(context).passwordExample,
+                            isPassword: true,
+                            func: (value) {
+                              context
+                                  .read<SignInBloc>()
+                                  .add(PasswordEvent(value));
+                            },
+                          ),
+                          const _BuildRememberMe(),
+                          const SizedBox(height: 20),
+                          const _BuildButtonLogin(),
+                          const ThirtyPartLogin(),
+                          const _BuildSignUp()
+                        ],
                       ),
-                      const SizedBox(height: 20),
-                      BuildTextField(
-                        label: S.of(context).password,
-                        hintText: S.of(context).passwordExample,
-                        isPassword: true,
-                        // func: (value) {
-                        //   context.read<SigninBloc>().add(PasswordEvent(value));
-                        // },
-                      ),
-                      const _BuildRememberMe(),
-                      const SizedBox(height: 20),
-                      const _BuildButtonLogin(),
-                      const ThirtyPartLogin(),
-                      const _BuildSignUp()
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                const BuildBackButton(),
               ],
             ),
-            const BuildBackButton(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -79,7 +91,9 @@ class _BuildButtonLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return BuildButton(
       text: S.of(context).login,
-      onTap: () {},
+      onTap: () {
+        AuthController(context: context).handleSignIn();
+      },
     );
   }
 }

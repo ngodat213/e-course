@@ -36,6 +36,9 @@ dependencies:
   #FIREBASE
   firebase_core: ^2.15.1
   firebase_auth: ^4.8.0
+  equatable: ^2.0.5
+  flow_builder: ^0.0.9
+  
 
 dev_dependencies:
   flutter_test:
