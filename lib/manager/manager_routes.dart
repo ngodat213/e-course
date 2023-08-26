@@ -12,7 +12,7 @@ class ManagerRoutes {
 
   static Map<String, Widget Function(BuildContext context)> manager = {
     splashScreen: (context) => const SplashScreen(),
+    signUpScreen: (context) => const SignUpScreen(),
     signInScreen: (context) => const SignInScreen(),
-    signUpScreen: (context) => const SignInScreen(),
   };
 }

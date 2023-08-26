@@ -33,7 +33,9 @@ dependencies:
   dots_indicator: ^3.0.0
   #TOAST
   fluttertoast: ^8.2.2
+  #FIREBASE
   firebase_core: ^2.15.1
+  firebase_auth: ^4.8.0
 
 dev_dependencies:
   flutter_test:
