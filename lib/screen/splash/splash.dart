@@ -7,6 +7,8 @@ import 'package:quiz_flutter/utils/base_navigation.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  static Page page() => const MaterialPage<void>(child: SplashScreen());
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

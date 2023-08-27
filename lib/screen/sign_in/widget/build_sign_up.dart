@@ -4,8 +4,8 @@ import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
-class _BuildSignUp extends StatelessWidget {
-  const _BuildSignUp();
+class BuildSignUp extends StatelessWidget {
+  const BuildSignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
