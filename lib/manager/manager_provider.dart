@@ -1,16 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:quiz_flutter/screen/forgot_password/bloc/forgot_password_bloc.dart';
-import 'package:quiz_flutter/screen/sign_in/bloc/sign_in_bloc.dart';
-import 'package:quiz_flutter/screen/sign_up/bloc/sign_up_bloc.dart';
+import 'package:quiz_flutter/repo/auth_repository.dart';
+import 'package:quiz_flutter/screen/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:quiz_flutter/screen/sign_in/cubit/sign_in_cubit.dart';
+import 'package:quiz_flutter/screen/sign_up/cubit/sign_up_cubit.dart';
 
 class ManagerProvider {
   ManagerProvider._();
 
   static List<SingleChildWidget> provider = [
-    BlocProvider(create: (context) => SignInBloc()),
-    BlocProvider(create: (context) => SignUpBloc()),
-    BlocProvider(create: (context) => SignUpBloc()),
-    BlocProvider(create: (context) => ForgotPasswordBloc()),
+    BlocProvider(
+        create: (context) => SignInCubit(context.read<AuthRepository>())),
+    BlocProvider(
+        create: (context) => SignUpCubit(context.read<AuthRepository>())),
+    BlocProvider(
+        create: (context) =>
+            ForgotPasswordCubit(context.read<AuthRepository>())),
   ];
 }

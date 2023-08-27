@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
 import 'package:quiz_flutter/screen/home/home.dart';
-import 'package:quiz_flutter/screen/splash/splash.dart';
+import 'package:quiz_flutter/screen/sign_in/sign_in.dart';
 
 List<Page> onGenerateAppViewPages(
   AppStatus state,
@@ -11,6 +11,6 @@ List<Page> onGenerateAppViewPages(
     case AppStatus.authenticated:
       return [HomeScreen.page()];
     case AppStatus.unauthenticated:
-      return [SplashScreen.page()];
+      return [SignInScreen.page()];
   }
 }

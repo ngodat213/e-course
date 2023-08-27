@@ -1,11 +1,13 @@
 class ApiPath {
+  ApiPath._();
+
   /*------------------------------- FireStore --------------------------------*/
-  static String user() => 'user';
-  static String product() => 'product';
-  static String category() => 'category';
-  static String myLearning() => 'my_learning';
+  static const String USER = 'user';
+  static const String PRODUCT = 'product';
+  static const String CATEGORY = 'category';
+  static const String MY_LEARNING = 'my_learning';
 
   /*-------------------------------- Storage ---------------------------------*/
-  static String userImages() => 'user_images';
-  static String courseAvatar() => 'course_avatar';
+  static String USER_IMAGES = 'user_images';
+  static String COURSE_AVATAR = 'course_avatar';
 }

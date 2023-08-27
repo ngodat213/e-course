@@ -7,11 +7,14 @@ import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/app/app.dart';
 
 Future<void> main() {
-  return BlocOverrides.runZoned(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
-    final AuthRepository authRepository = AuthRepository();
-    runApp(App(authRepository: authRepository));
-  }, blocObserver: AppBlocObserver());
+  return BlocOverrides.runZoned(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform);
+      final AuthRepository authRepository = AuthRepository();
+      runApp(App(authRepository: authRepository));
+    },
+    blocObserver: AppBlocObserver(),
+  );
 }
