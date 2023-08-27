@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_flutter/controller/auth_controller.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/screen/forgot_password/bloc/forgot_password_bloc.dart';
+import 'package:quiz_flutter/repo/auth_repository.dart';
+import 'package:quiz_flutter/screen/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:quiz_flutter/screen/forgot_password/widget/forgot_password_btn.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
-import 'package:quiz_flutter/widgets/build_button.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
 import 'package:quiz_flutter/widgets/build_textfield.dart';
 
@@ -18,46 +18,57 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: Stack(children: [
-            Column(
-              children: [
-                BuildHeader(
-                  text: S.of(context).forgotPassword,
-                  title: S.of(context).forgotPasswordTitle,
+    return BlocProvider(
+      create: (context) => ForgotPasswordCubit(context.read<AuthRepository>()),
+      child: const ForgotPasswordForm(),
+    );
+  }
+}
+
+class ForgotPasswordForm extends StatelessWidget {
+  const ForgotPasswordForm({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
+      listener: (context, state) {
+        if (state.status == ForgotPasswordStatus.error) {}
+      },
+      child: Scaffold(
+        body: Stack(children: [
+          Column(
+            children: [
+              BuildHeader(
+                text: S.of(context).forgotPassword,
+                title: S.of(context).forgotPasswordTitle,
+              ),
+              const SizedBox(height: 25),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  children: [
+                    _textField(context),
+                    const SizedBox(height: 20),
+                    const ForgotPasswordButton()
+                  ],
                 ),
-                const SizedBox(height: 25),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      BuildTextField(
-                        label: S.of(context).email,
-                        hintText: S.of(context).emailExample,
-                        func: (value) {
-                          context
-                              .read<ForgotPasswordBloc>()
-                              .add(EmailEvent(value));
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      BuildButton(
-                        text: S.of(context).send,
-                        onTap: () {
-                          AuthController(context: context)
-                              .handleResetPassword();
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const BuildBackButton()
-          ]),
-        );
+              ),
+            ],
+          ),
+          const BuildBackButton()
+        ]),
+      ),
+    );
+  }
+
+  BuildTextField _textField(BuildContext context) {
+    return BuildTextField(
+      label: S.of(context).email,
+      hintText: S.of(context).emailExample,
+      func: (value) {
+        context.read<ForgotPasswordCubit>().emailChanged(value);
       },
     );
   }
