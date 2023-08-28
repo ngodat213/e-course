@@ -18,7 +18,7 @@ class BuildHeader extends StatelessWidget {
       height: Dimens.HEIGHT_200,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: AppColors.lavender,
+        color: AppColors.main,
         boxShadow: AppColors.shadow,
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(Dimens.RADIUS_35),

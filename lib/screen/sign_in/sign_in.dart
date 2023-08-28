@@ -7,10 +7,9 @@ import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/sign_in/cubit/sign_in_cubit.dart';
 import 'package:quiz_flutter/screen/sign_in/widget/login_btn.dart';
 import 'package:quiz_flutter/screen/sign_in/widget/remenber_me.dart';
-import 'package:quiz_flutter/screen/sign_in/widget/sign_in.dart';
+import 'package:quiz_flutter/screen/sign_in/widget/sign_up.dart';
 import 'package:quiz_flutter/screen/sign_up/widget/thirty_part_login.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
 import 'package:quiz_flutter/widgets/build_textfield.dart';
 
@@ -46,36 +45,35 @@ class LoginForm extends StatelessWidget {
       listener: (context, state) {
         if (state.status == LoginStatus.error) {}
         if (state.status == LoginStatus.success) {
-          BaseNavigation.push(context, routeName: ManagerRoutes.homeScreen);
+          BaseNavigation.push(
+            context,
+            routeName: ManagerRoutes.homeScreen,
+            clearStack: true,
+          );
         }
       },
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  BuildHeader(
-                    text: S.of(context).login,
-                    title: S.of(context).hi,
-                  ),
-                  const SizedBox(height: 25),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      children: [
-                        _textField(context),
-                        const BuildRememberMe(),
-                        const SizedBox(height: 20),
-                        const LoginButton(),
-                        const ThirtyPartLogin(),
-                        const BuildSignIn()
-                      ],
-                    ),
-                  ),
-                ],
+              BuildHeader(
+                text: S.of(context).login,
+                title: S.of(context).hi,
               ),
-              const BuildBackButton(),
+              const SizedBox(height: 25),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  children: [
+                    _textField(context),
+                    const BuildRememberMe(),
+                    const SizedBox(height: 20),
+                    const LoginButton(),
+                    const ThirtyPartLogin(),
+                    const BuildSignUp()
+                  ],
+                ),
+              ),
             ],
           ),
         ),
