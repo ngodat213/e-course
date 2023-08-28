@@ -35,7 +35,7 @@ class _BuildCheckBoxState extends State<BuildCheckBox> {
             child: isCheck
                 ? const Icon(
                     Icons.check,
-                    color: AppColors.lavender,
+                    color: AppColors.main,
                     size: 14,
                   )
                 : null,

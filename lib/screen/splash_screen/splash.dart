@@ -17,14 +17,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2)).whenComplete(() =>
-        BaseNavigation.push(context, routeName: ManagerRoutes.signInScreen));
+        BaseNavigation.push(context, routeName: ManagerRoutes.mainScreen));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.main,
+      backgroundColor: AppColors.white,
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

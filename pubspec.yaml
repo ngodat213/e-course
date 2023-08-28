@@ -40,7 +40,6 @@ dependencies:
   #FLOW BUILDER
   flow_builder: ^0.0.9
   cloud_firestore: ^4.9.0
-  
 
 dev_dependencies:
   flutter_test:

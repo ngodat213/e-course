@@ -60,8 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Populra Destination"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
-        "searchTitle":
-            MessageLookupByLibrary.simpleMessage("Search your destination"),
+        "searchTitle": MessageLookupByLibrary.simpleMessage("Search exam test"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up")

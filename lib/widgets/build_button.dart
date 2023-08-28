@@ -22,7 +22,7 @@ class BuildButton extends StatelessWidget {
         height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: bgColor ?? AppColors.lavender,
+          color: bgColor ?? AppColors.main,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(

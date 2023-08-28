@@ -29,6 +29,12 @@ class TxtStyle {
   static TextStyle title = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.input);
 
+  static TextStyle titleWhite = GoogleFonts.rubik(
+      fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.white);
+
+  static TextStyle labelWhite = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400, fontSize: 18, color: AppColors.white);
+
   static TextStyle text = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.input);
 
@@ -36,11 +42,18 @@ class TxtStyle {
       fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.white);
 
   static TextStyle textButton = GoogleFonts.rubik(
-      fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.lavender);
+      fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.main);
 
   static TextStyle buttonWhite = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.white);
 
   static TextStyle buttonBlack = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.input);
+
+  static TextStyle linkText = GoogleFonts.rubik(
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    color: AppColors.white,
+    decoration: TextDecoration.underline,
+  );
 }

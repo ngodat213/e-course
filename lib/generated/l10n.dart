@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Search your destination`
+  /// `Search exam test`
   String get searchTitle {
     return Intl.message(
-      'Search your destination',
+      'Search exam test',
       name: 'searchTitle',
       desc: '',
       args: [],
