@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/screen/sign_up/widget/divider_sign_up.dart';
+import 'package:quiz_flutter/screen/sign_up_screen/widget/divider_sign_up.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flutter/screen/home/widget/card_exam.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/card_exam.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class ListExam extends StatelessWidget {

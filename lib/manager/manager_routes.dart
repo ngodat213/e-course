@@ -7,14 +7,21 @@ class ManagerRoutes {
   static String signInScreen = '/sign_in';
   static String signUpScreen = '/sign_up';
   static String forgotPasswordScreen = '/forgot_password';
-  static String onboardingScreen = '/onboarding_screen';
-  static String homeScreen = '/home';
+  static String mainScreen = '/main_screen';
+  static String homeScreen = '/home_screen';
+  static String favoriteScreen = '/favorite_screen';
+  static String workspaceScreen = '/workspace_screen';
+  static String settingScreen = '/setting_screen';
 
   static Map<String, Widget Function(BuildContext context)> manager = {
     splashScreen: (context) => const SplashScreen(),
-    signUpScreen: (context) => const SignUpScreen(),
     signInScreen: (context) => const SignInScreen(),
-    homeScreen: (context) => const HomeScreen(),
+    signUpScreen: (context) => const SignUpScreen(),
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
+    mainScreen: (context) => const MainScreen(),
+    homeScreen: (context) => const HomeScreen(),
+    favoriteScreen: (context) => const FavoriteScreen(),
+    workspaceScreen: (context) => const WorkspaceScreen(),
+    settingScreen: (context) => const SettingScreen(),
   };
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
+import 'package:quiz_flutter/themes/text_styles.dart';
 
 class ExamDone extends StatelessWidget {
   const ExamDone({
@@ -35,9 +36,9 @@ class ExamDone extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Math final Exam'),
+                Text('Math Final Exam', style: TxtStyle.text),
                 Expanded(child: Container()),
-                const Text('45 Minutes'),
+                Text('45 Minutes', style: TxtStyle.labelStyle),
               ],
             ),
             Expanded(child: Container()),

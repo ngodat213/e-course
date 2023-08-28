@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/screen/home/widget/bottom_nav.dart';
-import 'package:quiz_flutter/screen/home/widget/exam_done.dart';
-import 'package:quiz_flutter/screen/home/widget/list_exam.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -23,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BuildBottomNavBar(),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 25),

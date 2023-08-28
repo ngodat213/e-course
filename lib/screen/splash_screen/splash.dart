@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2)).whenComplete(() =>
-        BaseNavigation.push(context, routeName: ManagerRoutes.homeScreen));
+        BaseNavigation.push(context, routeName: ManagerRoutes.mainScreen));
     super.initState();
   }
 

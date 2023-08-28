@@ -4,6 +4,7 @@ import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/l10n/support_locale.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:quiz_flutter/manager/manager_provider.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
 
@@ -21,7 +22,8 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => AppBloc(authRepository: _authRepository))
+              create: (context) => AppBloc(authRepository: _authRepository)),
+          ...ManagerProvider.provider
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/screen/sign_up/cubit/sign_up_cubit.dart';
+import 'package:quiz_flutter/screen/sign_in_screen/cubit/sign_in_cubit.dart';
 import 'package:quiz_flutter/widgets/build_button.dart';
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
-    super.key,
-  });
+class LoginButton extends StatelessWidget {
+  const LoginButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
+    return BlocBuilder<SignInCubit, SignInState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.status == SignUpStatus.submitting
+        return state.status == LoginStatus.submitting
             ? const CircularProgressIndicator()
             : BuildButton(
-                text: S.of(context).signUp,
+                text: S.of(context).login,
                 onTap: () {
-                  context.read<SignUpCubit>().signupFormSubmitted();
+                  context.read<SignInCubit>().logInWithCredentials();
                 },
               );
       },
