@@ -22,80 +22,82 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 32),
-              Row(
-                children: [
-                  SvgPicture.asset(Images.iconMenu, width: 16),
-                  Expanded(child: Container()),
-                  SvgPicture.asset(Images.iconBell, width: 16),
-                  Container(
-                    width: 32,
-                    height: 32,
-                    margin: const EdgeInsets.only(left: 16),
-                    child: const CircleAvatar(
-                      radius: Dimens.RADIUS_CIRCLE,
-                      backgroundImage: NetworkImage(DEFAULT_AVATAR),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    SvgPicture.asset(Images.iconMenu, width: 16),
+                    Expanded(child: Container()),
+                    SvgPicture.asset(Images.iconBell, width: 16),
+                    Container(
+                      width: 32,
+                      height: 32,
+                      margin: const EdgeInsets.only(left: 16),
+                      child: const CircleAvatar(
+                        radius: Dimens.RADIUS_CIRCLE,
+                        backgroundImage: NetworkImage(DEFAULT_AVATAR),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(vertical: 25),
+                  decoration: BoxDecoration(
+                    boxShadow: AppColors.shadow,
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: S.of(context).searchTitle,
+                      hintStyle: TxtStyle.hintStyle,
+                      border: InputBorder.none,
                     ),
                   ),
-                ],
-              ),
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(vertical: 25),
-                decoration: BoxDecoration(
-                  boxShadow: AppColors.shadow,
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 17),
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: S.of(context).searchTitle,
-                    hintStyle: TxtStyle.hintStyle,
-                    border: InputBorder.none,
+                Text('Hi, HydraCoder', style: TxtStyle.title),
+                const SizedBox(height: 8),
+                Text('Here you progress last week', style: TxtStyle.hintStyle),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 120,
+                  margin: const EdgeInsetsDirectional.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                    color: AppColors.main,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: Text('Your beat of 95% of the other student',
+                              style: TxtStyle.titleWhite),
+                        ),
+                        Expanded(child: Container()),
+                        Text('Read more', style: TxtStyle.linkText)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Text('Hi, HydraCoder', style: TxtStyle.title),
-              const SizedBox(height: 8),
-              Text('Here you progress last week', style: TxtStyle.hintStyle),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 120,
-                margin: const EdgeInsetsDirectional.symmetric(vertical: 18),
-                decoration: BoxDecoration(
-                  color: AppColors.main,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: Text('Your beat of 95% of the other student',
-                            style: TxtStyle.titleWhite),
-                      ),
-                      Expanded(child: Container()),
-                      Text('Read more', style: TxtStyle.linkText)
-                    ],
-                  ),
-                ),
-              ),
-              const ListExam(),
-              Text('Last exam done', style: TxtStyle.title),
-              const ExamDone()
-            ],
+                const ListExam(),
+                Text('Last exam done', style: TxtStyle.title),
+                const ExamDone()
+              ],
+            ),
           ),
         ),
       ),

@@ -47,7 +47,7 @@ class LoginForm extends StatelessWidget {
         if (state.status == LoginStatus.success) {
           BaseNavigation.push(
             context,
-            routeName: ManagerRoutes.homeScreen,
+            routeName: ManagerRoutes.mainScreen,
             clearStack: true,
           );
         }
