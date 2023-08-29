@@ -44,8 +44,8 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
               ),
               GButton(
                 iconSize: 24,
-                icon: Icons.work_outlined,
-                text: 'Workshop',
+                icon: Icons.chat_bubble,
+                text: 'Comunity',
               ),
               GButton(
                 iconSize: 24,

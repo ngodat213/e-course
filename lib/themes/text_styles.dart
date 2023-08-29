@@ -26,6 +26,12 @@ class TxtStyle {
   static TextStyle p = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
 
+  static TextStyle textMsg = GoogleFonts.rubik(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: AppColors.input,
+  );
+
   static TextStyle title = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.input);
 

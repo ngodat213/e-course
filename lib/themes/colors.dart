@@ -4,6 +4,7 @@ class AppColors {
   AppColors._();
   static const Color colorFb = Color(0xff3B5998);
   static const Color colorTw = Color(0xFF55ACEE);
+  static const Color colorGpt = Color(0xff78AD9F);
   static const Color white = Colors.white;
   static const Color orage = Color(0xffFE9C5E);
   static const Color red = Color(0xFFF77777);

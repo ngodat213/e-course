@@ -7,6 +7,6 @@ import 'package:quiz_flutter/screen/setting_screen/setting_screen.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/sign_in.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/sign_up.dart';
 import 'package:quiz_flutter/screen/splash_screen/splash.dart';
-import 'package:quiz_flutter/screen/workspace_screen/workspace.dart';
+import 'package:quiz_flutter/screen/community_screen/community.dart';
 
 part 'manager_routes.dart';

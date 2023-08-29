@@ -11,6 +11,7 @@ class Images {
   static const String iconBell = '$iconPath/bell.svg';
   static const String iconClock = '$iconPath/clock.svg';
   static const String iconCheck = '$iconPath/check.svg';
+  static const String iconGptLogo = '$iconPath/gpt_logo.svg';
 
   static const String imageSplash = '$imagePath/splash.png';
 }
