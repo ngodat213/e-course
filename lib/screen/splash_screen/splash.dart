@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
+import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,11 +19,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool keepLogin = false;
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2)).whenComplete(() =>
-        BaseNavigation.push(context, routeName: ManagerRoutes.mainScreen));
+    checkUserKeepLogin().whenComplete(
+        () async => Timer(const Duration(seconds: DELAY_SPLASH_SCREEN), () {
+              keepLogin
+                  ? BaseNavigation.push(context,
+                      routeName: ManagerRoutes.mainScreen)
+                  : BaseNavigation.push(context,
+                      routeName: ManagerRoutes.signInScreen);
+            }));
     super.initState();
+  }
+
+  Future<void> checkUserKeepLogin() async {
+    print(
+        "${await BaseSharedPreferences.containKey(ManagerKeyStorage.keepLogin)}- ${await BaseSharedPreferences.getStringValue(ManagerKeyStorage.accessToken)}");
+    if (await BaseSharedPreferences.containKey(ManagerKeyStorage.keepLogin) ==
+        true) {
+      setState(() {
+        keepLogin = true;
+      });
+    } else if (await BaseSharedPreferences.getStringValue(
+            ManagerKeyStorage.accessToken) !=
+        '') {
+      setState(() {
+        keepLogin = true;
+      });
+    }
   }
 
   @override

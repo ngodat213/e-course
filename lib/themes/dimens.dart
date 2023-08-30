@@ -5,6 +5,7 @@ class Dimens {
   static const HEIGHT_200 = 200.0;
 
   static const RADIUS_8 = 8.0;
+  static const RADIUS_18 = 18.0;
   static const RADIUS_35 = 35.0;
   static const RADIUS_CIRCLE = 100.0;
 }

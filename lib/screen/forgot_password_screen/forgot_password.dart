@@ -4,6 +4,7 @@ import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/cubit/forgot_password_cubit.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/widget/forgot_password_btn.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
 import 'package:quiz_flutter/widgets/build_textfield.dart';
@@ -35,6 +36,9 @@ class ForgotPasswordForm extends StatelessWidget {
     return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state.status == ForgotPasswordStatus.error) {}
+        if (state.status == ForgotPasswordStatus.success) {
+          BaseNavigation.pop(context);
+        }
       },
       child: Scaffold(
         body: Stack(children: [
