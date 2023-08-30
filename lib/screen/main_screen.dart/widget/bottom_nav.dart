@@ -32,26 +32,10 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
             tabBackgroundColor: AppColors.main.withOpacity(0.3),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             tabs: const [
-              GButton(
-                iconSize: 24,
-                icon: Icons.home,
-                text: 'Home',
-              ),
-              GButton(
-                iconSize: 24,
-                icon: Icons.play_arrow,
-                text: 'Watch',
-              ),
-              GButton(
-                iconSize: 24,
-                icon: Icons.chat_bubble,
-                text: 'Comunity',
-              ),
-              GButton(
-                iconSize: 24,
-                icon: Icons.person,
-                text: 'Setting',
-              )
+              GButton(iconSize: 24, icon: Icons.home, text: 'Home'),
+              GButton(iconSize: 24, icon: Icons.play_arrow, text: 'Course'),
+              GButton(iconSize: 24, icon: Icons.chat_bubble, text: 'Comunity'),
+              GButton(iconSize: 24, icon: Icons.person, text: 'Setting')
             ],
           ),
         );

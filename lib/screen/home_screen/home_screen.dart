@@ -94,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                // const Coupe(),
                 const SizedBox(height: 20),
                 const ListExam(),
                 Text('Last exam done', style: TxtStyle.title),
@@ -124,40 +123,6 @@ class _reusableMenuText extends StatelessWidget {
         borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
       ),
       child: Text(text, style: TxtStyle.p),
-    );
-  }
-}
-
-class Coupe extends StatelessWidget {
-  const Coupe({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 120,
-      margin: const EdgeInsetsDirectional.symmetric(vertical: 18),
-      decoration: BoxDecoration(
-        color: AppColors.main,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 200,
-              child: Text('Your beat of 95% of the other student',
-                  style: TxtStyle.titleWhite),
-            ),
-            Expanded(child: Container()),
-            Text('Read more', style: TxtStyle.linkText)
-          ],
-        ),
-      ),
     );
   }
 }
