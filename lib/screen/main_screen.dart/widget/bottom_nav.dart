@@ -39,8 +39,8 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
               ),
               GButton(
                 iconSize: 24,
-                icon: Icons.favorite,
-                text: 'Favorite',
+                icon: Icons.play_arrow,
+                text: 'Watch',
               ),
               GButton(
                 iconSize: 24,

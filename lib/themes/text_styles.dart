@@ -5,6 +5,9 @@ import 'package:quiz_flutter/themes/colors.dart';
 class TxtStyle {
   TxtStyle._();
 
+  static TextStyle pGray = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
+
   static TextStyle labelStyle = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.label);
 
@@ -25,6 +28,12 @@ class TxtStyle {
 
   static TextStyle p = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
+
+  static TextStyle pBold = GoogleFonts.rubik(
+      fontWeight: FontWeight.w500, fontSize: 12, color: AppColors.white);
+
+  static TextStyle pMainColor = GoogleFonts.rubik(
+      fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.main);
 
   static TextStyle textMsg = GoogleFonts.rubik(
     fontWeight: FontWeight.w400,

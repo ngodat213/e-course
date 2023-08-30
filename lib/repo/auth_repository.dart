@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_flutter/configs/api_path.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/models/auth.dart';
 import 'package:quiz_flutter/models/custom_error.dart';
+import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
 class AuthRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth;
@@ -70,10 +72,17 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      var user = credential.user;
+      if (user != null) {
+        String? assetToken = user.uid;
+        BaseSharedPreferences.saveStringValue(
+            ManagerKeyStorage.accessToken, assetToken);
+        BaseSharedPreferences.savedBoolValue(ManagerKeyStorage.keepLogin, true);
+      }
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw CustomError(
         code: e.code,
