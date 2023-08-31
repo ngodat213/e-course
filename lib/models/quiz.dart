@@ -9,8 +9,8 @@ class Quiz extends Equatable {
   final String title;
   final String image;
   final String description;
-  final double price;
-  final double? discount;
+  final int price;
+  final int? discount;
   final List<String> lessons;
 
   const Quiz({
@@ -33,7 +33,7 @@ class Quiz extends Equatable {
       description: quizData['description'],
       price: quizData['price'],
       discount: quizData['discount'],
-      lessons: quizData['lessons'],
+      lessons: List.from(quizData['lessons']),
     );
   }
 
@@ -67,8 +67,8 @@ class Quiz extends Equatable {
     String? title,
     String? image,
     String? description,
-    double? price,
-    double? discount,
+    int? price,
+    int? discount,
     List<String>? lessons,
   }) {
     return Quiz(
@@ -94,22 +94,7 @@ class Quiz extends Equatable {
     };
   }
 
-  factory Quiz.fromMap(Map<String, dynamic> map) {
-    return Quiz(
-      uid: map['uid'] as String,
-      title: map['title'] as String,
-      image: map['image'] as String,
-      description: map['description'] as String,
-      price: map['price'] as double,
-      discount: map['discount'] != null ? map['discount'] as double : null,
-      lessons: List<String>.from((map['lessons'] as List<String>)),
-    );
-  }
-
   String toJson() => json.encode(toMap());
-
-  factory Quiz.fromJson(String source) =>
-      Quiz.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

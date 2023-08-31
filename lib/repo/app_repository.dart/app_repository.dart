@@ -7,7 +7,9 @@ import 'package:quiz_flutter/repo/app_repository.dart/app_base.dart';
 class AppRepository implements AppBase {
   final FirebaseFirestore firebaseFirestore;
 
-  AppRepository({required this.firebaseFirestore});
+  AppRepository({FirebaseFirestore? firebaseFirestore})
+      : firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+
   @override
   Future<List<Quiz>> getQuizByLimit(int limit) async {
     List<Quiz> list = [];

@@ -41,6 +41,7 @@ dependencies:
   flow_builder: ^0.0.9
   cloud_firestore: ^4.9.0
   flutter_svg_provider: ^1.0.6
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
