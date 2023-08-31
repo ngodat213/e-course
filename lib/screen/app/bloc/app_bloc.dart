@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:quiz_flutter/models/auth.dart';
+import 'package:quiz_flutter/models/user.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 
 part 'app_event.dart';

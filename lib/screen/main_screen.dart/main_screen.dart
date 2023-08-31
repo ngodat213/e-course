@@ -26,7 +26,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        print(state.pageIndex);
         return Scaffold(
           bottomNavigationBar: const BuildBottomNavBar(),
           body: pages[state.pageIndex],

@@ -8,7 +8,11 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 class CardExam extends StatelessWidget {
   const CardExam({
     super.key,
+    required this.title,
+    required this.lesson,
   });
+  final String title;
+  final int lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class CardExam extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Math Final Exam', style: TxtStyle.labelWhite),
+                    Text(title, style: TxtStyle.labelWhite),
                     Expanded(child: Container()),
                     Row(
                       children: [
@@ -53,7 +57,7 @@ class CardExam extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '45 Minutes',
+                          '$lesson Lessons',
                           style: TxtStyle.p,
                         )
                       ],

@@ -15,7 +15,7 @@ class ExamDone extends StatelessWidget {
     return Container(
       height: 65,
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(vertical: 16),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
           boxShadow: AppColors.shadow,

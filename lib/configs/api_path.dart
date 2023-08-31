@@ -3,9 +3,9 @@ class ApiPath {
 
   /*------------------------------- FireStore --------------------------------*/
   static const String USER = 'user';
-  static const String PRODUCT = 'product';
-  static const String CATEGORY = 'category';
-  static const String MY_LEARNING = 'my_learning';
+  static const String QUIZ = 'quiz';
+  static const String QUESTION = 'question';
+  static const String LESSON = 'lesson';
 
   /*-------------------------------- Storage ---------------------------------*/
   static String USER_IMAGES = 'user_images';

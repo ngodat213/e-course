@@ -14,4 +14,10 @@ class Images {
   static const String iconGptLogo = '$iconPath/gpt_logo.svg';
 
   static const String imageSplash = '$imagePath/splash.png';
+  static const String imageFlutterBanner = '$imagePath/flutter_banner.png';
+  static const String imageCourse = '$imagePath/read_image.svg';
+  static const String imageCourse1 = '$imagePath/read_image1.svg';
+  static const String imageCourse2 = '$imagePath/read_image2.svg';
+  static const String imageCourse3 = '$imagePath/read_image3.svg';
+  static const String imageCourse4 = '$imagePath/read_image4.svg';
 }
