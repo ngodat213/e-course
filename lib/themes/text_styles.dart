@@ -11,6 +11,12 @@ class TxtStyle {
   static TextStyle labelStyle = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.label);
 
+  static TextStyle lineThrough = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      color: AppColors.label,
+      decoration: TextDecoration.lineThrough);
+
   static TextStyle inputStyle = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.input);
 
@@ -49,6 +55,9 @@ class TxtStyle {
 
   static TextStyle labelWhite = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 18, color: AppColors.white);
+
+  static TextStyle labelMain = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400, fontSize: 18, color: AppColors.main);
 
   static TextStyle text = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.input);

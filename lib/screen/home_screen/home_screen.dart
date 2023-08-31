@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/search_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -75,21 +77,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   childrenDelegate: SliverChildBuilderDelegate(
                     childCount: 4,
-                    (context, index) => Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: AppColors.main,
-                        borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Flutter for begginer',
-                              style: TxtStyle.textWhite),
-                          Text('Hydra', style: TxtStyle.p),
-                        ],
+                    (context, index) => GestureDetector(
+                      onTap: () {
+                        BaseNavigation.push(context,
+                            routeName: ManagerRoutes.courseDetailScreen);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.main,
+                          borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Flutter for begginer',
+                                style: TxtStyle.textWhite),
+                            Text('Hydra', style: TxtStyle.p),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -142,35 +150,47 @@ class CourseContinue extends StatelessWidget {
         color: AppColors.main,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hydra', style: TxtStyle.p),
-            const SizedBox(height: 25),
-            SizedBox(
-              width: 200,
-              child: Text('Flutter for begginer', style: TxtStyle.titleWhite),
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            child: SvgPicture.asset(
+              Images.imageCourse,
+              height: 150,
             ),
-            Text('20/25 Lesson', style: TxtStyle.p),
-            Expanded(child: Container()),
-            Container(
-              width: 100,
-              height: 25,
-              decoration: BoxDecoration(
-                color: AppColors.colorTw,
-                borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-              ),
-              child: Center(
-                child: Text(
-                  "Continue",
-                  style: TxtStyle.pBold,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Hydra', style: TxtStyle.p),
+                const SizedBox(height: 25),
+                SizedBox(
+                  width: 200,
+                  child:
+                      Text('Flutter for begginer', style: TxtStyle.titleWhite),
                 ),
-              ),
-            )
-          ],
-        ),
+                Text('20/25 Lesson', style: TxtStyle.p),
+                Expanded(child: Container()),
+                Container(
+                  width: 100,
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: AppColors.colorTw,
+                    borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Continue",
+                      style: TxtStyle.pBold,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

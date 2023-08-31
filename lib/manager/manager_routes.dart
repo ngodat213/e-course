@@ -12,6 +12,7 @@ class ManagerRoutes {
   static String favoriteScreen = '/favorite_screen';
   static String communityScreen = '/community_screen';
   static String settingScreen = '/setting_screen';
+  static String courseDetailScreen = '/course_detail';
 
   static Map<String, Widget Function(BuildContext context)> manager = {
     splashScreen: (context) => const SplashScreen(),
@@ -23,5 +24,6 @@ class ManagerRoutes {
     favoriteScreen: (context) => const FavoriteScreen(),
     communityScreen: (context) => const CommunityScreen(),
     settingScreen: (context) => const SettingScreen(),
+    courseDetailScreen: (context) => const CourseDetailScreen(),
   };
 }
