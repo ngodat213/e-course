@@ -15,7 +15,7 @@ class Images {
 
   static const String imageSplash = '$imagePath/splash.png';
   static const String imageFlutterBanner = '$imagePath/flutter_banner.png';
-  static const String imageCourse = '$imagePath/read_image.svg';
+  static const String imageCourse0 = '$imagePath/read_image0.svg';
   static const String imageCourse1 = '$imagePath/read_image1.svg';
   static const String imageCourse2 = '$imagePath/read_image2.svg';
   static const String imageCourse3 = '$imagePath/read_image3.svg';

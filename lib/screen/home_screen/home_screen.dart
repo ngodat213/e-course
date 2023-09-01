@@ -1,12 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
-import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
-import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -28,114 +25,110 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          HomeCubit(appRepository: context.read<AppRepository>()),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 18, 25, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const HomeHeader(),
-                      const SearchView(),
-                      Text('Hi, HydraCoder', style: TxtStyle.title),
-                      const SizedBox(height: 8),
-                      Text('Here you progress last week',
-                          style: TxtStyle.hintStyle),
-                    ],
-                  ),
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.fromLTRB(25, 18, 25, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const HomeHeader(),
+                    const SearchView(),
+                    Text('Hi, HydraCoder', style: TxtStyle.title),
+                    const SizedBox(height: 8),
+                    Text('Here you progress last week',
+                        style: TxtStyle.hintStyle),
+                  ],
                 ),
-                const CourseContinue(),
-                Center(
-                  child: DotsIndicator(
-                    dotsCount: 3,
-                    decorator: DotsDecorator(
-                        color: AppColors.grey,
-                        activeColor: AppColors.main,
-                        size: const Size.square(5),
-                        activeSize: const Size(20, 5),
-                        activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5))),
-                  ),
+              ),
+              const CourseContinue(),
+              Center(
+                child: DotsIndicator(
+                  dotsCount: 3,
+                  decorator: DotsDecorator(
+                      color: AppColors.grey,
+                      activeColor: AppColors.main,
+                      size: const Size.square(5),
+                      activeSize: const Size(20, 5),
+                      activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5))),
                 ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Choice your course', style: TxtStyle.title),
-                          Text('All', style: TxtStyle.pMainColor),
-                        ],
+              ),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Choice your course', style: TxtStyle.title),
+                        Text('All', style: TxtStyle.pMainColor),
+                      ],
+                    ),
+                    const Row(
+                      children: [
+                        _reusableMenuText('All'),
+                        _reusableMenuText("Math"),
+                        _reusableMenuText('Hacker'),
+                      ],
+                    ),
+                    GridView.custom(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 15,
+                        childAspectRatio: 1.6,
                       ),
-                      const Row(
-                        children: [
-                          _reusableMenuText('All'),
-                          _reusableMenuText("Math"),
-                          _reusableMenuText('Hacker'),
-                        ],
-                      ),
-                      GridView.custom(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 15,
-                          childAspectRatio: 1.6,
-                        ),
-                        childrenDelegate: SliverChildBuilderDelegate(
-                          childCount: 4,
-                          (context, index) => GestureDetector(
-                            onTap: () {
-                              BaseNavigation.push(context,
-                                  routeName: ManagerRoutes.courseDetailScreen);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: AppColors.main,
-                                borderRadius:
-                                    BorderRadius.circular(Dimens.RADIUS_8),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Flutter for begginer',
-                                      style: TxtStyle.textWhite),
-                                  Text('Hydra', style: TxtStyle.p),
-                                ],
-                              ),
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        childCount: 4,
+                        (context, index) => GestureDetector(
+                          onTap: () {
+                            BaseNavigation.push(context,
+                                routeName: ManagerRoutes.courseDetailScreen);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: AppColors.main,
+                              borderRadius:
+                                  BorderRadius.circular(Dimens.RADIUS_8),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Flutter for begginer',
+                                    style: TxtStyle.textWhite),
+                                Text('Hydra', style: TxtStyle.p),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      const ListExam(),
-                      const SizedBox(height: 20),
-                      Text('Last exam done', style: TxtStyle.title),
-                      const SizedBox(height: 8),
-                      const ExamDone(),
-                      const ExamDone(),
-                      const ExamDone()
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                    const SizedBox(height: 20),
+                    const ListExam(),
+                    const SizedBox(height: 20),
+                    Text('Last exam done', style: TxtStyle.title),
+                    const SizedBox(height: 8),
+                    const ExamDone(),
+                    const ExamDone(),
+                    const ExamDone()
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -214,7 +207,7 @@ class CardSliderContinue extends StatelessWidget {
           Positioned(
             right: 0,
             child: SvgPicture.asset(
-              Images.imageCourse,
+              Images.imageCourse0,
               height: 150,
             ),
           ),

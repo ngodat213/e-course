@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -8,11 +9,11 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 class CardExam extends StatelessWidget {
   const CardExam({
     super.key,
-    required this.title,
-    required this.lesson,
+    required this.quiz,
+    required this.image,
   });
-  final String title;
-  final int lesson;
+  final Quiz quiz;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +22,26 @@ class CardExam extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 150,
-            height: 180,
+            width: 160,
+            height: 200,
             decoration: BoxDecoration(
               color: AppColors.colorFb,
               borderRadius: BorderRadius.circular(10),
             ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SvgPicture.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Positioned(
             right: 0,
-            bottom: 20,
+            bottom: 10,
             child: Container(
               width: 130,
-              height: 110,
+              height: 100,
               decoration: const BoxDecoration(
                 color: AppColors.main,
                 borderRadius: BorderRadius.only(
@@ -47,7 +55,7 @@ class CardExam extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: TxtStyle.labelWhite),
+                    Text(quiz.title, style: TxtStyle.labelWhite),
                     Expanded(child: Container()),
                     Row(
                       children: [
@@ -57,7 +65,7 @@ class CardExam extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '$lesson Lessons',
+                          '${quiz.lessons.length} Lessons',
                           style: TxtStyle.p,
                         )
                       ],

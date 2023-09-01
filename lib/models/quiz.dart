@@ -9,6 +9,7 @@ class Quiz extends Equatable {
   final String title;
   final String image;
   final String description;
+  final String type;
   final int price;
   final int? discount;
   final List<String> lessons;
@@ -18,6 +19,7 @@ class Quiz extends Equatable {
     required this.title,
     required this.image,
     required this.description,
+    required this.type,
     required this.price,
     this.discount,
     required this.lessons,
@@ -31,18 +33,20 @@ class Quiz extends Equatable {
       title: quizData!['title'],
       image: quizData['image'],
       description: quizData['description'],
+      type: quizData['type'],
       price: quizData['price'],
       discount: quizData['discount'],
       lessons: List.from(quizData['lessons']),
     );
   }
 
-  factory Quiz.initialUser() {
+  factory Quiz.initialQuiz() {
     return const Quiz(
       uid: '',
       title: '',
       image: '',
       description: '',
+      type: '',
       price: 0,
       discount: 0,
       lessons: [],
@@ -67,6 +71,7 @@ class Quiz extends Equatable {
     String? title,
     String? image,
     String? description,
+    String? type,
     int? price,
     int? discount,
     List<String>? lessons,
@@ -76,6 +81,7 @@ class Quiz extends Equatable {
       title: title ?? this.title,
       image: image ?? this.image,
       description: description ?? this.description,
+      type: type ?? this.type,
       price: price ?? this.price,
       discount: discount ?? this.discount,
       lessons: lessons ?? this.lessons,

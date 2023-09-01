@@ -23,6 +23,7 @@ class BuildBackButton extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
+            boxShadow: AppColors.shadow,
             color: AppColors.white,
             borderRadius: BorderRadius.circular(10),
           ),

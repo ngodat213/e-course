@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_flutter/configs/api_path.dart';
-import 'package:quiz_flutter/models/custom_error.dart';
-import 'package:quiz_flutter/models/quiz.dart';
+import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_base.dart';
 
 class AppRepository implements AppBase {
@@ -32,6 +31,28 @@ class AppRepository implements AppBase {
     } catch (e) {
       throw CustomError(
         code: 'Exception',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<QuizLesson> getLesson(String lessonId) async {
+    try {
+      final lessonDoc = await firebaseFirestore
+          .collection(ApiPath.LESSON)
+          .doc(lessonId)
+          .get();
+      if (lessonDoc.exists) {
+        return QuizLesson.fromDoc(lessonDoc);
+      }
+      throw ("Lesson is empty!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception get Lesson',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

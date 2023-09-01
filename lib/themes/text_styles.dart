@@ -74,6 +74,11 @@ class TxtStyle {
   static TextStyle buttonBlack = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.input);
 
+  static TextStyle description = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400,
+      fontSize: 16,
+      color: const Color(0xFF404653));
+
   static TextStyle linkText = GoogleFonts.rubik(
     fontWeight: FontWeight.w500,
     fontSize: 12,

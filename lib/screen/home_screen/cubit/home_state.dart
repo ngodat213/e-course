@@ -2,25 +2,23 @@ part of 'home_cubit.dart';
 
 enum QuizStatus { isEmpty, isLoading, isNotEmpty }
 
-class HomeState extends Equatable {
-  const HomeState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class LoadingState extends HomeState {
-  @override
-  List<Object> get props => [];
-}
-
-class LoadedQuizState extends HomeState {
-  const LoadedQuizState({required this.quizs, required this.status});
+class HomeState {
+  const HomeState({required this.quizs, required this.status});
   final List<Quiz> quizs;
   final QuizStatus status;
 
-  factory LoadedQuizState.initial() {
-    return const LoadedQuizState(
+  HomeState copyWith({
+    List<Quiz>? quizs,
+    QuizStatus? status,
+  }) {
+    return HomeState(
+      quizs: quizs ?? this.quizs,
+      status: status ?? this.status,
+    );
+  }
+
+  factory HomeState.initial() {
+    return const HomeState(
       quizs: [],
       status: QuizStatus.isLoading,
     );
@@ -28,5 +26,3 @@ class LoadedQuizState extends HomeState {
   @override
   List<Object> get props => [quizs];
 }
-
-final class HomeInitial extends HomeState {}

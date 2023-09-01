@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 class QuizLesson extends Equatable {
   final String uid;
-  final int lesson;
+  final String lesson;
   final String title;
   final List<String> questions;
   final int hour;
@@ -22,7 +23,7 @@ class QuizLesson extends Equatable {
 
   QuizLesson copyWith({
     String? uid,
-    int? lesson,
+    String? lesson,
     String? title,
     List<String>? questions,
     int? hour,
@@ -38,6 +39,19 @@ class QuizLesson extends Equatable {
     );
   }
 
+  factory QuizLesson.fromDoc(DocumentSnapshot lessonDoc) {
+    final quizLessonData = lessonDoc.data() as Map<String, dynamic>?;
+
+    return QuizLesson(
+      uid: lessonDoc.id,
+      lesson: quizLessonData!['lesson'],
+      title: quizLessonData['title'],
+      questions: List.from(quizLessonData['questions']),
+      hour: quizLessonData['hour'],
+      minute: quizLessonData['minute'],
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
@@ -49,21 +63,7 @@ class QuizLesson extends Equatable {
     };
   }
 
-  factory QuizLesson.fromMap(Map<String, dynamic> map) {
-    return QuizLesson(
-      uid: map['uid'] as String,
-      lesson: map['lesson'] as int,
-      title: map['title'] as String,
-      questions: List<String>.from((map['questions'] as List<String>)),
-      hour: map['hour'] as int,
-      minute: map['minute'] as int,
-    );
-  }
-
   String toJson() => json.encode(toMap());
-
-  factory QuizLesson.fromJson(String source) =>
-      QuizLesson.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -93,5 +93,17 @@ class QuizLesson extends Equatable {
   }
 
   @override
-  List<Object?> get props => [uid, lesson, title, questions, hour, minute];
+  List<Object> get props {
+    return [
+      uid,
+      lesson,
+      title,
+      questions,
+      hour,
+      minute,
+    ];
+  }
+
+  @override
+  bool get stringify => true;
 }
