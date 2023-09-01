@@ -5,15 +5,19 @@ import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class BuildBackButton extends StatelessWidget {
-  const BuildBackButton({
+  BuildBackButton({
+    this.left,
+    this.top,
     super.key,
   });
+  double? top;
+  double? left;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 60,
-      left: 25,
+      top: top ?? 60,
+      left: left ?? 25,
       child: GestureDetector(
         onTap: () {
           BaseNavigation.pop(context);

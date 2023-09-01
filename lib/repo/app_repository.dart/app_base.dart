@@ -4,5 +4,7 @@ abstract class AppBase {
   /*--------------------------------- Product --------------------------------*/
   Future<List<Quiz>> getQuizByLimit(int limit);
 
-  Future<QuizLesson> getLesson(String lessonId);
+  Future<QuizLesson> getLessonById(String lessonId);
+
+  Future<Question> getQuestionById(String questionId);
 }

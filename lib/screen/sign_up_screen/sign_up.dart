@@ -71,7 +71,7 @@ class SignUpForm extends StatelessWidget {
                   )
                 ],
               ),
-              const BuildBackButton()
+              BuildBackButton()
             ],
           ),
         ),

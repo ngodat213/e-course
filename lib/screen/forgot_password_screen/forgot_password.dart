@@ -61,7 +61,7 @@ class ForgotPasswordForm extends StatelessWidget {
               ),
             ],
           ),
-          const BuildBackButton()
+          BuildBackButton()
         ]),
       ),
     );

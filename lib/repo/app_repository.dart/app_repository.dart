@@ -38,7 +38,7 @@ class AppRepository implements AppBase {
   }
 
   @override
-  Future<QuizLesson> getLesson(String lessonId) async {
+  Future<QuizLesson> getLessonById(String lessonId) async {
     try {
       final lessonDoc = await firebaseFirestore
           .collection(ApiPath.LESSON)
@@ -53,6 +53,28 @@ class AppRepository implements AppBase {
     } catch (e) {
       throw CustomError(
         code: 'Exception get Lesson',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<Question> getQuestionById(String questionId) async {
+    try {
+      final lessonDoc = await firebaseFirestore
+          .collection(ApiPath.QUESTION)
+          .doc(questionId)
+          .get();
+      if (lessonDoc.exists) {
+        return Question.fromDoc(lessonDoc);
+      }
+      throw ("Question is empty!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getQuestion',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

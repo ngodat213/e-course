@@ -24,7 +24,7 @@ class QuizCubit extends Cubit<QuizState> {
     try {
       List<QuizLesson> lessons = [];
       for (var element in state.quiz.lessons) {
-        lessons.add(await appRepository.getLesson(element));
+        lessons.add(await appRepository.getLessonById(element));
       }
       if (lessons.isNotEmpty) {
         lesson = lessons;

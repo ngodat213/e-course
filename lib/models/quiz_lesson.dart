@@ -39,6 +39,17 @@ class QuizLesson extends Equatable {
     );
   }
 
+  factory QuizLesson.initialQuiz() {
+    return const QuizLesson(
+      uid: '',
+      lesson: '',
+      title: '',
+      questions: [],
+      hour: 0,
+      minute: 0,
+    );
+  }
+
   factory QuizLesson.fromDoc(DocumentSnapshot lessonDoc) {
     final quizLessonData = lessonDoc.data() as Map<String, dynamic>?;
 
