@@ -10,16 +10,26 @@ class QuizPlayCubit extends Cubit<QuizPlayState> {
   final AppRepository appRepository;
   QuizPlayCubit(this.appRepository) : super(QuizPlayState.initial());
 
+  void lessonChanged(QuizLesson lesson) {
+    emit(
+      state.copyWith(
+        lesson: lesson,
+        status: QuestionStatus.isLoading,
+      ),
+    );
+  }
+
   List<Question>? questions;
   void getQuestion() async {
     try {
-      List<Question> lessonData = [];
+      List<Question> questionData = [];
       for (var element in state.lesson.questions) {
-        lessonData.add(await appRepository.getQuestionById(element));
+        questionData.add(await appRepository.getQuestionById(element));
       }
-      if (lessonData.isNotEmpty) {
-        questions = lessonData;
+      if (questionData.isNotEmpty) {
+        questions = questionData;
       }
+      print("cubit quiz: $questions");
       emit(state.copyWith(
           questions: questions, status: QuestionStatus.isNotEmpty));
     } on FirebaseException catch (e) {

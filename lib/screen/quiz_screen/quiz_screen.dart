@@ -4,6 +4,7 @@ import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/quiz.dart';
 import 'package:quiz_flutter/models/quiz_lesson.dart';
+import 'package:quiz_flutter/screen/quiz_play_screen/cubit/quiz_play_cubit.dart';
 import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
@@ -85,7 +86,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   SliverToBoxAdapter(
                     child: BuildContent(quiz: quiz, lesson: lesson),
-                  )
+                  ),
                 ],
               ),
               BuildBackButton(),
@@ -160,6 +161,7 @@ class _lessonQuiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        context.read<QuizPlayCubit>().lessonChanged(lesson);
         BaseNavigation.push(context, routeName: ManagerRoutes.quizPlayScreen);
       },
       child: Container(

@@ -23,7 +23,7 @@ class Question extends Equatable {
     return Question(
       uid: questionDoc.id,
       question: questionData!['question'],
-      options: questionData['options'],
+      options: List.from(questionData['options']),
       answer: questionData['answer'],
     );
   }

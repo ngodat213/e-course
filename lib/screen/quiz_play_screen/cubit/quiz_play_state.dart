@@ -10,12 +10,12 @@ class QuizPlayState extends Equatable {
   final QuestionStatus status;
 
   QuizPlayState copyWith({
-    QuizLesson? quiz,
+    QuizLesson? lesson,
     List<Question>? questions,
     QuestionStatus? status,
   }) {
     return QuizPlayState(
-      lesson: quiz ?? lesson,
+      lesson: lesson ?? this.lesson,
       questions: questions ?? this.questions,
       status: status ?? this.status,
     );
