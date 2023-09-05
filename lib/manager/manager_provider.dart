@@ -23,6 +23,8 @@ class ManagerProvider {
     BlocProvider(create: (context) => MainCubit()),
     BlocProvider(create: (context) => QuizCubit(context.read<AppRepository>())),
     BlocProvider(
-        create: (context) => QuizPlayCubit(context.read<AppRepository>())),
+      create: (context) => QuizPlayCubit(context.read<AppRepository>()),
+      lazy: false,
+    ),
   ];
 }

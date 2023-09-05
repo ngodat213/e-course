@@ -19,6 +19,15 @@ class QuizPlayCubit extends Cubit<QuizPlayState> {
     );
   }
 
+  void indexChanged(int index) {
+    emit(
+      state.copyWith(
+        index: index,
+        status: QuestionStatus.isNotEmpty,
+      ),
+    );
+  }
+
   List<Question>? questions;
   void getQuestion() async {
     try {

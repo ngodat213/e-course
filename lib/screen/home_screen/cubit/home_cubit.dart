@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   void getQuiz() async {
     try {
       quizs = await appRepository.getQuizByLimit(5);
-      emit(state.copyWith(quizs: quizs, status: QuizStatus.isNotEmpty));
+      emit(state.copyWith(quizs: quizs, status: HomeStatus.isNotEmpty));
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

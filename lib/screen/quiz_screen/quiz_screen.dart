@@ -33,65 +33,68 @@ class _QuizScreenState extends State<QuizScreen> {
         builder: (context, state) {
           var quiz = state.quiz;
           var lesson = state.lessons;
-          return Stack(
-            children: [
-              CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    pinned: true,
-                    expandedHeight: 230,
-                    elevation: 0,
-                    bottom: PreferredSize(
-                      preferredSize: const Size.fromHeight(0),
-                      child: Container(
-                        height: 20,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimens.RADIUS_8),
-                            topLeft: Radius.circular(Dimens.RADIUS_8),
+          if (state.status == QuizStatus.isNotEmpty) {
+            return Stack(
+              children: [
+                CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      pinned: true,
+                      expandedHeight: 230,
+                      elevation: 0,
+                      bottom: PreferredSize(
+                        preferredSize: const Size.fromHeight(0),
+                        child: Container(
+                          height: 20,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: const BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimens.RADIUS_8),
+                              topLeft: Radius.circular(Dimens.RADIUS_8),
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: Container(
-                            width: 30,
-                            height: 3,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: AppColors.main),
+                          child: Center(
+                            child: Container(
+                              width: 30,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.main),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: quiz.image == ''
-                          ? Container(
-                              height: 230,
-                              width: MediaQuery.of(context).size.width,
-                              color: AppColors.main,
-                            )
-                          : Container(
-                              height: 230,
-                              width: MediaQuery.of(context).size.width,
-                              decoration:
-                                  BoxDecoration(boxShadow: AppColors.shadow),
-                              child: Image.network(
-                                quiz.image,
-                                fit: BoxFit.cover,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: quiz.image == ''
+                            ? Container(
+                                height: 230,
+                                width: MediaQuery.of(context).size.width,
+                                color: AppColors.main,
+                              )
+                            : Container(
+                                height: 230,
+                                width: MediaQuery.of(context).size.width,
+                                decoration:
+                                    BoxDecoration(boxShadow: AppColors.shadow),
+                                child: Image.network(
+                                  quiz.image,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
+                      ),
                     ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: BuildContent(quiz: quiz, lesson: lesson),
-                  ),
-                ],
-              ),
-              BuildBackButton(),
-            ],
-          );
+                    SliverToBoxAdapter(
+                      child: BuildContent(quiz: quiz, lesson: lesson),
+                    ),
+                  ],
+                ),
+                BuildBackButton(),
+              ],
+            );
+          }
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

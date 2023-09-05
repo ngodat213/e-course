@@ -1,15 +1,15 @@
 part of 'home_cubit.dart';
 
-enum QuizStatus { isEmpty, isLoading, isNotEmpty }
+enum HomeStatus { isEmpty, isLoading, isNotEmpty }
 
 class HomeState {
   const HomeState({required this.quizs, required this.status});
   final List<Quiz> quizs;
-  final QuizStatus status;
+  final HomeStatus status;
 
   HomeState copyWith({
     List<Quiz>? quizs,
-    QuizStatus? status,
+    HomeStatus? status,
   }) {
     return HomeState(
       quizs: quizs ?? this.quizs,
@@ -20,7 +20,7 @@ class HomeState {
   factory HomeState.initial() {
     return const HomeState(
       quizs: [],
-      status: QuizStatus.isLoading,
+      status: HomeStatus.isLoading,
     );
   }
   @override

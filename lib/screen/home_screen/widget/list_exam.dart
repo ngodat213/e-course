@@ -29,20 +29,22 @@ class _ListExamState extends State<ListExam> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         List<Quiz> quizs = state.quizs;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Today test', style: TxtStyle.title),
-            const SizedBox(height: 8),
-            Text('Here is your test list for today', style: TxtStyle.hintStyle),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                itemCount: quizs.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
+        if (state.status == HomeStatus.isNotEmpty) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Today test', style: TxtStyle.title),
+              const SizedBox(height: 8),
+              Text('Here is your test list for today',
+                  style: TxtStyle.hintStyle),
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: quizs.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
                       onTap: () {
                         context.read<QuizCubit>().quizChanged(quizs[index]);
                         BaseNavigation.push(context,
@@ -51,12 +53,15 @@ class _ListExamState extends State<ListExam> {
                       child: CardExam(
                         quiz: quizs[index],
                         image: 'lib/res/images/read_image$index.svg',
-                      ));
-                },
-              ),
-            )
-          ],
-        );
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          );
+        }
+        return Container();
       },
     );
   }

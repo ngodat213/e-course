@@ -28,100 +28,155 @@ class _QuizPlayScreenState extends State<QuizPlayScreen> {
         builder: (context, state) {
           List<Question> question = state.questions;
           var lesson = state.lesson;
-          print(question.toString());
-          return SingleChildScrollView(
-            child: SafeArea(
-              child: Stack(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          decoration:
-                              const BoxDecoration(color: AppColors.main),
-                          child: Center(
-                            child: Text('Question 25/${question.length}',
-                                style: TxtStyle.p),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 10,
-                          color: const Color.fromARGB(255, 2, 9, 61),
-                        ),
-                        const SizedBox(height: 18),
-                        const Text('30m Remaining'),
-                        Container(
-                          margin: const EdgeInsets.all(25),
-                          child: Text(
-                            question[0].question,
-                            // "",
-                            style: TxtStyle.text,
-                          ),
-                        ),
-                        ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 4,
-                          itemBuilder: (context, index) {
-                            print("option: ${question[0].options[0]}");
-                            return BuildOptionQuiz(
-                              isSellect: true,
-                              option: question[0].options[0],
-                            );
-                            return Container();
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                  BuildBackButton(top: 10, left: 10),
-                  Positioned(
-                    right: 0,
-                    top: 70,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 2, 9, 61),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(Dimens.RADIUS_8),
-                            bottomLeft: Radius.circular(Dimens.RADIUS_8),
-                          ),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: AppColors.white,
-                          size: 15,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 50,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 25),
-                      width: MediaQuery.of(context).size.width - 50,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          if (state.status == QuestionStatus.isNotEmpty) {
+            return SingleChildScrollView(
+              child: SafeArea(
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
                         children: [
-                          _btnPrevQuestion(),
-                          _btnNextQuestion(),
+                          CurrentQuestion(question: question),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 10,
+                            color: const Color.fromARGB(255, 2, 9, 61),
+                          ),
+                          const SizedBox(height: 18),
+                          const Text('30m Remaining'),
+                          QuestionTitle(question: question),
+                          ListQuestion(question: question)
                         ],
                       ),
                     ),
-                  )
-                ],
+                    BuildBackButton(top: 10, left: 10),
+                    Positioned(
+                      right: 0,
+                      top: 70,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 2, 9, 61),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(Dimens.RADIUS_8),
+                              bottomLeft: Radius.circular(Dimens.RADIUS_8),
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: AppColors.white,
+                            size: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 50,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _btnPrevQuestion(),
+                            _btnNextQuestion(),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         },
       ),
+    );
+  }
+}
+
+class CurrentQuestion extends StatelessWidget {
+  const CurrentQuestion({
+    super.key,
+    required this.question,
+  });
+
+  final List<Question> question;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<QuizPlayCubit, QuizPlayState>(
+      builder: (context, state) {
+        var index = state.index;
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          height: 50,
+          decoration: const BoxDecoration(color: AppColors.main),
+          child: Center(
+            child:
+                Text('Question $index/${question.length}', style: TxtStyle.p),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class QuestionTitle extends StatelessWidget {
+  const QuestionTitle({
+    super.key,
+    required this.question,
+  });
+
+  final List<Question> question;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<QuizPlayCubit, QuizPlayState>(
+      builder: (context, state) {
+        var index = state.index;
+        return Container(
+          margin: const EdgeInsets.all(25),
+          child: Text(
+            question[index].question,
+            style: TxtStyle.text,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ListQuestion extends StatelessWidget {
+  const ListQuestion({
+    super.key,
+    required this.question,
+  });
+
+  final List<Question> question;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<QuizPlayCubit, QuizPlayState>(
+      builder: (context, state) {
+        var indexQuestion = state.index;
+        return ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: question[indexQuestion].options.length,
+          itemBuilder: (context, index) {
+            return BuildOptionQuiz(
+              isSellect: true,
+              option: question[indexQuestion].options[index],
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -131,57 +186,76 @@ class _btnNextQuestion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: AppColors.main,
-        borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-      ),
-      height: 50,
-      width: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Prev',
-            style: TxtStyle.buttonWhite,
+    return BlocBuilder<QuizPlayCubit, QuizPlayState>(
+      builder: (context, state) {
+        var index = state.index;
+        return GestureDetector(
+          onTap: () {
+            context.read<QuizPlayCubit>().indexChanged(index + 1);
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: AppColors.main,
+              borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+            ),
+            height: 50,
+            width: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Prev',
+                  style: TxtStyle.buttonWhite,
+                ),
+                const Icon(
+                  Icons.keyboard_arrow_right_rounded,
+                  color: AppColors.white,
+                ),
+              ],
+            ),
           ),
-          const Icon(
-            Icons.keyboard_arrow_right_rounded,
-            color: AppColors.white,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
 class _btnPrevQuestion extends StatelessWidget {
   const _btnPrevQuestion();
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: AppColors.main,
-        borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-      ),
-      height: 50,
-      width: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            color: AppColors.white,
+    return BlocBuilder<QuizPlayCubit, QuizPlayState>(
+      builder: (context, state) {
+        var index = state.index;
+        return GestureDetector(
+          onTap: () {
+            context.read<QuizPlayCubit>().indexChanged(index + 1);
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: AppColors.main,
+              borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+            ),
+            height: 50,
+            width: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(
+                  Icons.keyboard_arrow_left_rounded,
+                  color: AppColors.white,
+                ),
+                Text(
+                  'Prev',
+                  style: TxtStyle.buttonWhite,
+                ),
+              ],
+            ),
           ),
-          Text(
-            'Prev',
-            style: TxtStyle.buttonWhite,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -229,7 +303,7 @@ class BuildOptionQuiz extends StatelessWidget {
                   ),
                 ),
           Text(
-            'int age = x.getAge();',
+            option,
             style: isSellect == true ? TxtStyle.p : TxtStyle.text,
           )
         ],
