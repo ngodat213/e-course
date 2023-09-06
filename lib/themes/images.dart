@@ -20,4 +20,6 @@ class Images {
   static const String imageCourse2 = '$imagePath/read_image2.svg';
   static const String imageCourse3 = '$imagePath/read_image3.svg';
   static const String imageCourse4 = '$imagePath/read_image4.svg';
+  static const String imageGoldCup = '$imagePath/gold_cup.png';
+  static const String imageConfetti = '$imagePath/confetti.png';
 }

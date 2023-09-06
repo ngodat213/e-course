@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class QuizLesson extends Equatable {
   final String uid;
@@ -12,6 +10,7 @@ class QuizLesson extends Equatable {
   final List<String> questions;
   final int hour;
   final int minute;
+  final int point;
   const QuizLesson({
     required this.uid,
     required this.lesson,
@@ -19,6 +18,7 @@ class QuizLesson extends Equatable {
     required this.questions,
     required this.hour,
     required this.minute,
+    required this.point,
   });
 
   QuizLesson copyWith({
@@ -28,6 +28,7 @@ class QuizLesson extends Equatable {
     List<String>? questions,
     int? hour,
     int? minute,
+    int? point,
   }) {
     return QuizLesson(
       uid: uid ?? this.uid,
@@ -36,6 +37,7 @@ class QuizLesson extends Equatable {
       questions: questions ?? this.questions,
       hour: hour ?? this.hour,
       minute: minute ?? this.minute,
+      point: point ?? this.point,
     );
   }
 
@@ -47,6 +49,7 @@ class QuizLesson extends Equatable {
       questions: [],
       hour: 0,
       minute: 0,
+      point: 0,
     );
   }
 
@@ -60,47 +63,8 @@ class QuizLesson extends Equatable {
       questions: List.from(quizLessonData['questions']),
       hour: quizLessonData['hour'],
       minute: quizLessonData['minute'],
+      point: quizLessonData['point'],
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'uid': uid,
-      'lesson': lesson,
-      'title': title,
-      'questions': questions,
-      'hour': hour,
-      'minute': minute,
-    };
-  }
-
-  String toJson() => json.encode(toMap());
-
-  @override
-  String toString() {
-    return 'QuizLesson(uid: $uid, lesson: $lesson, title: $title, questions: $questions, hour: $hour, minute: $minute)';
-  }
-
-  @override
-  bool operator ==(covariant QuizLesson other) {
-    if (identical(this, other)) return true;
-
-    return other.uid == uid &&
-        other.lesson == lesson &&
-        other.title == title &&
-        listEquals(other.questions, questions) &&
-        other.hour == hour &&
-        other.minute == minute;
-  }
-
-  @override
-  int get hashCode {
-    return uid.hashCode ^
-        lesson.hashCode ^
-        title.hashCode ^
-        questions.hashCode ^
-        hour.hashCode ^
-        minute.hashCode;
   }
 
   @override
@@ -114,7 +78,4 @@ class QuizLesson extends Equatable {
       minute,
     ];
   }
-
-  @override
-  bool get stringify => true;
 }

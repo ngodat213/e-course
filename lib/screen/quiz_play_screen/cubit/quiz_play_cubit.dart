@@ -19,11 +19,73 @@ class QuizPlayCubit extends Cubit<QuizPlayState> {
     );
   }
 
+  void nextChanged() {
+    if (state.index < state.questions.length - 1) {
+      emit(
+        state.copyWith(index: state.index + 1),
+      );
+    }
+  }
+
+  void prevChanged() {
+    if (state.index > 0) {
+      emit(
+        state.copyWith(index: state.index - 1),
+      );
+    }
+  }
+
   void indexChanged(int index) {
     emit(
+      state.copyWith(index: index),
+    );
+  }
+
+  void optionChanged(List<int> userChooise) {
+    emit(
+      state.copyWith(userChooise: userChooise),
+    );
+  }
+
+  void commit() {
+    emit(
+      state.copyWith(status: QuestionStatus.isLoading),
+    );
+    List<int> res = state.userChooise;
+    int userCorrect = 0;
+    for (int i = 0; i < state.questions.length; i++) {
+      if (res[i] == questions![i].answer) {
+        res[i] = 5;
+        userCorrect++;
+      }
+    }
+    emit(
       state.copyWith(
-        index: index,
-        status: QuestionStatus.isNotEmpty,
+        index: 0,
+        userChooise: res,
+        userCorrect: userCorrect,
+        status: QuestionStatus.commit,
+      ),
+    );
+  }
+
+  void checkResult() {
+    emit(
+      state.copyWith(
+        status: QuestionStatus.result,
+      ),
+    );
+  }
+
+  void goHome() {
+    emit(
+      state.copyWith(
+        lesson: QuizLesson.initialQuiz(),
+        index: 0,
+        questions: const [],
+        userChooise: const [],
+        userCorrect: 0,
+        status: QuestionStatus.isLoading,
       ),
     );
   }
@@ -39,8 +101,12 @@ class QuizPlayCubit extends Cubit<QuizPlayState> {
         questions = questionData;
       }
       print("cubit quiz: $questions");
-      emit(state.copyWith(
-          questions: questions, status: QuestionStatus.isNotEmpty));
+      emit(
+        state.copyWith(
+            questions: questions,
+            userChooise: List.filled(questionData.length, -1),
+            status: QuestionStatus.isNotEmpty),
+      );
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

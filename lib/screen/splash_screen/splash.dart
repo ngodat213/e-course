@@ -26,9 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
         () async => Timer(const Duration(seconds: DELAY_SPLASH_SCREEN), () {
               keepLogin
                   ? BaseNavigation.push(context,
-                      routeName: ManagerRoutes.mainScreen)
+                      routeName: ManagerRoutes.mainScreen, clearStack: true)
                   : BaseNavigation.push(context,
-                      routeName: ManagerRoutes.signInScreen);
+                      routeName: ManagerRoutes.signInScreen, clearStack: true);
             }));
     super.initState();
   }
