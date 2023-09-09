@@ -43,6 +43,7 @@ dependencies:
   flutter_svg_provider: ^1.0.6
   carousel_slider: ^4.2.1
   confetti: ^0.7.0
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:

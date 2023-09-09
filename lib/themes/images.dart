@@ -12,6 +12,17 @@ class Images {
   static const String iconClock = '$iconPath/clock.svg';
   static const String iconCheck = '$iconPath/check.svg';
   static const String iconGptLogo = '$iconPath/gpt_logo.svg';
+  static const String iconStar = '$iconPath/star.svg';
+  static const String iconCheckMark = '$iconPath/check_mark.svg';
+  static const String iconCheckPadding = '$iconPath/check_padding.svg';
+  static const String iconChat = '$iconPath/chat.svg';
+  static const String iconGlobal = '$iconPath/global.svg';
+  static const String iconInfo = '$iconPath/info.svg';
+  static const String iconLogout = '$iconPath/logout.svg';
+  static const String iconNotification = '$iconPath/notification.svg';
+  static const String iconSetting = '$iconPath/setting.svg';
+  static const String iconLesson = '$iconPath/lesson.svg';
+  static const String iconTime = '$iconPath/time.svg';
 
   static const String imageSplash = '$imagePath/splash.png';
   static const String imageFlutterBanner = '$imagePath/flutter_banner.png';

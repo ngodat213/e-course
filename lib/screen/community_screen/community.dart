@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
-import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/search_view.dart';
 
@@ -23,6 +21,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
             child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommunityHeader(),
                 SearchView(),
@@ -47,7 +46,7 @@ class ChatBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 48,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.only(bottom: 20),
       child: Row(
@@ -57,8 +56,8 @@ class ChatBox extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimens.RADIUS_CIRCLE),
                     image: const DecorationImage(
@@ -77,25 +76,26 @@ class ChatBox extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Dimens.RADIUS_CIRCLE),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("CatMeo", style: TxtStyle.buttonBlack),
-              const Spacer(),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Nó ăn mì cay!!", style: TxtStyle.textMsg),
+                  Text("CatMeo", style: TxtStyle.buttonBlack),
                   Container(
                       margin: const EdgeInsets.only(left: 16),
                       child: Text('1m ago', style: TxtStyle.textMsg)),
                 ],
               ),
+              const Spacer(),
+              Text("Nó ăn mì cay!!", style: TxtStyle.textMsg),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -109,24 +109,6 @@ class CommunityHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text('Community', style: TxtStyle.h2),
-        Expanded(child: Container()),
-        Container(
-          padding: const EdgeInsets.all(8),
-          margin: const EdgeInsets.only(right: 8),
-          decoration: BoxDecoration(
-              color: AppColors.colorGpt,
-              borderRadius: BorderRadius.circular(Dimens.RADIUS_8)),
-          child: SvgPicture.asset(
-            Images.iconGptLogo,
-            color: AppColors.white,
-            width: 20,
-          ),
-        ),
-        Text('ChatGPT', style: TxtStyle.text),
-      ],
-    );
+    return Text('Community', style: TxtStyle.h2);
   }
 }

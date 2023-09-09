@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -17,131 +19,190 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                const AccountUser(),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 30),
-                  child: const Divider(height: 1, color: AppColors.grey),
+          child: Stack(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 36),
+                    Center(
+                      child: Text(
+                        'Profile',
+                        style: TxtStyle.buttonBlack
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    const ProfileUser(),
+                    const _SettingMenu(),
+                    const _Logout(),
+                  ],
                 ),
-                const BuildTile(
-                  icon: Icons.person_outline,
-                  color: AppColors.main,
-                  text: 'Personal data',
-                ),
-                const BuildTile(
-                  icon: Icons.dark_mode_outlined,
-                  color: AppColors.colorTw,
-                  text: 'Dark mode',
-                ),
-                const BuildTile(
-                  icon: Icons.settings_outlined,
-                  color: AppColors.orage,
-                  text: 'Setting',
-                ),
-                const BuildTile(
-                  icon: Icons.credit_card,
-                  color: AppColors.emerald,
-                  text: 'Payment',
-                ),
-                const BuildTile(
-                  icon: Icons.favorite_border,
-                  color: Colors.pink,
-                  text: 'Refferal code',
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const Divider(height: 1, color: AppColors.grey),
-                ),
-                const BuildTile(
-                  icon: Icons.info_outline,
-                  color: AppColors.input,
-                  text: 'FAQs',
-                ),
-                const BuildTile(
-                  icon: Icons.textsms_outlined,
-                  color: AppColors.input,
-                  text: 'Community',
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const Divider(height: 1, color: AppColors.grey),
-                ),
-                const BuildTile(
-                  icon: Icons.login_outlined,
-                  color: AppColors.main,
-                  text: 'Logout',
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _Logout extends StatelessWidget {
+  const _Logout();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: const BuildTile(
+        svgPath: Images.iconLogout,
+        text: 'Notification',
+        description: 'Log out the account',
+        color: Color(0xFFEA3434),
+      ),
+    );
+  }
+}
+
+class _SettingMenu extends StatelessWidget {
+  const _SettingMenu();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration: const BoxDecoration(
+        border: Border.symmetric(
+          horizontal: BorderSide(width: 4, color: Color(0xFFF6F6F6)),
+        ),
+      ),
+      child: const Column(
+        children: [
+          BuildTile(
+            svgPath: Images.iconNotification,
+            text: 'Notification',
+            description: 'Ringtone, message, notification',
+          ),
+          _CustomDivider(),
+          BuildTile(
+            svgPath: Images.iconGlobal,
+            text: 'Language',
+            description: 'English',
+          ),
+          _CustomDivider(),
+          BuildTile(
+            svgPath: Images.iconChat,
+            text: 'Help',
+            description: 'Contact us',
+          ),
+          _CustomDivider(),
+          BuildTile(
+            svgPath: Images.iconInfo,
+            text: 'About',
+            description: 'About the application',
+          ),
+          _CustomDivider(),
+          BuildTile(
+            svgPath: Images.iconSetting,
+            text: 'Preferences',
+            description: 'Theme, Settings',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomDivider extends StatelessWidget {
+  const _CustomDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 12),
+        child: const Divider(height: 1, color: AppColors.grey));
   }
 }
 
 class BuildTile extends StatelessWidget {
   const BuildTile({
     super.key,
-    required this.icon,
+    required this.svgPath,
     required this.text,
-    required this.color,
+    required this.description,
+    this.color,
   });
-  final IconData icon;
+  final String svgPath;
   final String text;
-  final Color color;
+  final String description;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.all(0),
-      leading: Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-          color: AppColors.main.withOpacity(0.09),
-          borderRadius: BorderRadius.circular(Dimens.RADIUS_18),
-        ),
-        child: Icon(icon, color: color),
-      ),
-      title: Text(text, style: TxtStyle.inputStyle),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        color: AppColors.input,
-        size: 16,
+    return SizedBox(
+      height: 38,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset(svgPath),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(text,
+                  style: TxtStyle.inputStyle.copyWith(
+                      fontWeight: FontWeight.w600, color: color ?? color)),
+              Text(description, style: TxtStyle.time)
+            ],
+          )
+        ],
       ),
     );
   }
 }
 
-class AccountUser extends StatelessWidget {
-  const AccountUser({
+class ProfileUser extends StatelessWidget {
+  const ProfileUser({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(right: 16),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(DEFAULT_AVATAR),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 30),
+      height: 99,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: CircleAvatar(
+              radius: 23,
+              backgroundImage: NetworkImage(DEFAULT_AVATAR),
+            ),
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hydra Coder', style: TxtStyle.title),
-            Text('ngodat.it213@gmail.com', style: TxtStyle.labelStyle)
-          ],
-        )
-      ],
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Hydra Coder', style: TxtStyle.h3),
+              const Spacer(),
+              Text('ngodat.it213@gmail.com', style: TxtStyle.labelStyle),
+              Container(
+                margin: const EdgeInsets.only(top: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+                    border:
+                        Border.all(width: 1, color: const Color(0xFFEDEDED))),
+                child: Text('Edit profile', style: TxtStyle.inputStyle),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

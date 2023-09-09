@@ -24,13 +24,16 @@ class TxtStyle {
       fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.label);
 
   static TextStyle rating = GoogleFonts.rubik(
-      fontWeight: FontWeight.w400, fontSize: 10, color: AppColors.input);
+      fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.input);
 
   static TextStyle h1 = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 30, color: AppColors.white);
 
   static TextStyle h2 = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 24, color: AppColors.input);
+
+  static TextStyle h3 = GoogleFonts.rubik(
+      fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.input);
 
   static TextStyle p = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
@@ -61,6 +64,9 @@ class TxtStyle {
 
   static TextStyle text = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.input);
+
+  static TextStyle time = GoogleFonts.rubik(
+      fontWeight: FontWeight.w400, fontSize: 10, color: AppColors.input);
 
   static TextStyle textWhite = GoogleFonts.rubik(
       fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.white);

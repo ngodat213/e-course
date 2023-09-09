@@ -53,11 +53,11 @@ class QuizLesson extends Equatable {
     );
   }
 
-  factory QuizLesson.fromDoc(DocumentSnapshot lessonDoc) {
-    final quizLessonData = lessonDoc.data() as Map<String, dynamic>?;
+  factory QuizLesson.fromDoc(DocumentSnapshot lessonQuizDoc) {
+    final quizLessonData = lessonQuizDoc.data() as Map<String, dynamic>?;
 
     return QuizLesson(
-      uid: lessonDoc.id,
+      uid: lessonQuizDoc.id,
       lesson: quizLessonData!['lesson'],
       title: quizLessonData['title'],
       questions: List.from(quizLessonData['questions']),
