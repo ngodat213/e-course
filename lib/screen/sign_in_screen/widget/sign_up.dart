@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
@@ -10,7 +11,7 @@ class BuildSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: Dimens.PADDING_20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

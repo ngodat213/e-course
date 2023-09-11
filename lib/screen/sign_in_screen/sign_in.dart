@@ -9,6 +9,7 @@ import 'package:quiz_flutter/screen/sign_in_screen/widget/login_btn.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/widget/remenber_me.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/widget/sign_up.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/widget/thirty_part_login.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
 import 'package:quiz_flutter/widgets/build_textfield.dart';
@@ -58,16 +59,17 @@ class LoginForm extends StatelessWidget {
             children: [
               BuildHeader(
                 text: S.of(context).login,
-                title: S.of(context).hi,
+                title: S.of(context).hiTitle,
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: Dimens.HEIGHT_25),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 25),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: Dimens.PADDING_SCREEN),
                 child: Column(
                   children: [
                     _textField(context),
                     const BuildRememberMe(),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: Dimens.HEIGHT_20),
                     const LoginButton(),
                     const ThirtyPartLogin(),
                     const BuildSignUp()
@@ -96,7 +98,7 @@ class LoginForm extends StatelessWidget {
                 context.read<SignInCubit>().emailChanged(value);
               },
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: Dimens.HEIGHT_20),
             BuildTextField(
               label: S.of(context).password,
               hintText: S.of(context).passwordExample,

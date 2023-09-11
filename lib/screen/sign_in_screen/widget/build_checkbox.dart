@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/themes/colors.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class BuildCheckBox extends StatefulWidget {
@@ -24,25 +25,25 @@ class _BuildCheckBoxState extends State<BuildCheckBox> {
           },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 500),
-            width: 24,
-            height: 25,
+            width: Dimens.HEIGHT_24,
+            height: Dimens.HEIGHT_25,
             curve: Curves.fastLinearToSlowEaseIn,
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
               boxShadow: AppColors.shadow,
             ),
             child: isCheck
                 ? const Icon(
                     Icons.check,
                     color: AppColors.main,
-                    size: 14,
+                    size: Dimens.SIZE_14,
                   )
                 : null,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: Dimens.PADDING_10),
           child: Text(
             S.of(context).rememberMe,
             style: TxtStyle.text,

@@ -10,7 +10,6 @@ class CourseVideo extends Equatable {
   final String video;
   final int hour;
   final int minute;
-  final bool view;
 
   const CourseVideo({
     required this.uid,
@@ -19,7 +18,6 @@ class CourseVideo extends Equatable {
     required this.video,
     required this.hour,
     required this.minute,
-    required this.view,
   });
 
   factory CourseVideo.fromDoc(DocumentSnapshot videoCourseDoc) {
@@ -32,7 +30,6 @@ class CourseVideo extends Equatable {
       video: videoCourseData['video'],
       hour: videoCourseData['hour'],
       minute: videoCourseData['minute'],
-      view: videoCourseData['view'],
     );
   }
 
@@ -44,7 +41,6 @@ class CourseVideo extends Equatable {
       video: '',
       hour: 0,
       minute: 0,
-      view: false,
     );
   }
   CourseVideo copyWith({
@@ -65,7 +61,6 @@ class CourseVideo extends Equatable {
       video: video ?? this.video,
       hour: hour ?? this.hour,
       minute: minute ?? this.minute,
-      view: view ?? this.view,
     );
   }
 
@@ -78,7 +73,6 @@ class CourseVideo extends Equatable {
       video,
       hour,
       minute,
-      view,
     ];
   }
 }

@@ -41,12 +41,13 @@ class _QuizScreenState extends State<QuizScreen> {
                     SliverAppBar(
                       automaticallyImplyLeading: false,
                       pinned: true,
-                      expandedHeight: 230,
+                      expandedHeight: Dimens.HEIGHT_230,
                       elevation: 0,
                       bottom: PreferredSize(
-                        preferredSize: const Size.fromHeight(0),
+                        preferredSize:
+                            const Size.fromHeight(Dimens.HEIGHT_ZERO),
                         child: Container(
-                          height: 20,
+                          height: Dimens.HEIGHT_20,
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
                             color: AppColors.white,
@@ -57,8 +58,8 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                           child: Center(
                             child: Container(
-                              width: 30,
-                              height: 3,
+                              width: Dimens.HEIGHT_30,
+                              height: Dimens.HEIGHT_3,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: AppColors.main),
@@ -69,12 +70,12 @@ class _QuizScreenState extends State<QuizScreen> {
                       flexibleSpace: FlexibleSpaceBar(
                         background: quiz.image == ''
                             ? Container(
-                                height: 230,
+                                height: Dimens.HEIGHT_230,
                                 width: MediaQuery.of(context).size.width,
                                 color: AppColors.main,
                               )
                             : Container(
-                                height: 230,
+                                height: Dimens.HEIGHT_230,
                                 width: MediaQuery.of(context).size.width,
                                 decoration:
                                     BoxDecoration(boxShadow: AppColors.shadow),
@@ -114,29 +115,29 @@ class BuildContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 25),
+      margin: const EdgeInsets.symmetric(horizontal: Dimens.PADDING_SCREEN),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8),
+          const SizedBox(height: Dimens.RADIUS_8),
           Text(quiz.title, style: TxtStyle.h2),
-          const SizedBox(height: 6),
+          const SizedBox(height: Dimens.HEIGHT_6),
           Row(
             children: [
               Container(
-                  width: 20,
-                  height: 20,
-                  margin: const EdgeInsets.only(right: 8),
+                  width: Dimens.HEIGHT_20,
+                  height: Dimens.HEIGHT_20,
+                  margin: const EdgeInsets.only(right: Dimens.PADDING_8),
                   child: const CircleAvatar(
                       backgroundImage: NetworkImage(DEFAULT_AVATAR))),
               Text('HydraCoder', style: TxtStyle.labelStyle),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: Dimens.HEIGHT_16),
           Text('Overview', style: TxtStyle.title),
-          const SizedBox(height: 6),
+          const SizedBox(height: Dimens.HEIGHT_6),
           Text(quiz.description),
-          const SizedBox(height: 16),
+          const SizedBox(height: Dimens.HEIGHT_16),
           Text('Lessons', style: TxtStyle.title),
           ListView.builder(
             shrinkWrap: true,

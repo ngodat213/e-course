@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
@@ -31,15 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(25, 18, 25, 0),
+                margin: const EdgeInsets.fromLTRB(
+                  Dimens.PADDING_SCREEN,
+                  Dimens.PADDING_18,
+                  Dimens.PADDING_SCREEN,
+                  Dimens.PADDING_ZERO,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const HomeHeader(),
                     const SearchView(),
-                    Text('Hi, HydraCoder', style: TxtStyle.title),
-                    const SizedBox(height: 8),
-                    Text('Here you progress last week',
+                    Text('${S.of(context).hi}, HydraCoder',
+                        style: TxtStyle.title),
+                    const SizedBox(height: Dimens.HEIGHT_8),
+                    Text(S.of(context).progressTitle,
                         style: TxtStyle.hintStyle),
                   ],
                 ),
@@ -51,32 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   decorator: DotsDecorator(
                       color: AppColors.grey,
                       activeColor: AppColors.main,
-                      size: const Size.square(5),
-                      activeSize: const Size(20, 5),
+                      size: const Size.square(Dimens.SIZE_5),
+                      activeSize: const Size(Dimens.HEIGHT_20, Dimens.HEIGHT_5),
                       activeShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5))),
+                          borderRadius:
+                              BorderRadius.circular(Dimens.RADIUS_5))),
                 ),
               ),
               Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: Dimens.PADDING_SCREEN,
+                    vertical: Dimens.PADDING_16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 8),
+                    const SizedBox(height: Dimens.HEIGHT_8),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Choice your course', style: TxtStyle.title),
-                        Text('All', style: TxtStyle.pMainColor),
+                        Text(S.of(context).choiceYourCourse,
+                            style: TxtStyle.title),
+                        Text(S.of(context).all, style: TxtStyle.pMainColor),
                       ],
                     ),
-                    const Row(
+                    Row(
                       children: [
-                        _reusableMenuText('All'),
-                        _reusableMenuText("Math"),
-                        _reusableMenuText('Hacker'),
+                        _reusableMenuText(S.of(context).all),
+                        _reusableMenuText(S.of(context).cpp),
+                        _reusableMenuText(S.of(context).python),
+                        _reusableMenuText(S.of(context).cs),
                       ],
                     ),
                     GridView.custom(
@@ -98,7 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
+                                horizontal: Dimens.PADDING_12,
+                                vertical: Dimens.PADDING_8),
                             decoration: BoxDecoration(
                               color: AppColors.main,
                               borderRadius:
@@ -117,11 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: Dimens.HEIGHT_20),
                     const ListExam(),
-                    const SizedBox(height: 20),
-                    Text('Last exam done', style: TxtStyle.title),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: Dimens.HEIGHT_20),
+                    Text(S.current.lastExamDone, style: TxtStyle.title),
+                    const SizedBox(height: Dimens.HEIGHT_8),
                     const ExamDone(),
                     const ExamDone(),
                     const ExamDone()
@@ -145,8 +157,12 @@ class _reusableMenuText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 12, top: 18, bottom: 18),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      margin: const EdgeInsets.only(
+          right: Dimens.PADDING_12,
+          top: Dimens.PADDING_18,
+          bottom: Dimens.PADDING_18),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Dimens.PADDING_20, vertical: Dimens.PADDING_6),
       decoration: BoxDecoration(
         color: AppColors.main,
         borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
@@ -196,11 +212,14 @@ class CardSliderContinue extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 150,
-      margin: const EdgeInsets.only(top: 18, left: 25, right: 25),
+      height: Dimens.HEIGHT_150,
+      margin: const EdgeInsets.only(
+          top: Dimens.PADDING_18,
+          left: Dimens.PADDING_SCREEN,
+          right: Dimens.PADDING_SCREEN),
       decoration: BoxDecoration(
         color: AppColors.main,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
       ),
       child: Stack(
         children: [
@@ -208,33 +227,36 @@ class CardSliderContinue extends StatelessWidget {
             right: 0,
             child: SvgPicture.asset(
               Images.imageCourse0,
-              height: 150,
+              height: Dimens.HEIGHT_150,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Dimens.PADDING_16,
+              vertical: Dimens.PADDING_16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Hydra', style: TxtStyle.p),
-                const SizedBox(height: 25),
+                const SizedBox(height: Dimens.HEIGHT_25),
                 SizedBox(
-                  width: 200,
+                  width: Dimens.HEIGHT_200,
                   child:
                       Text('Flutter for begginer', style: TxtStyle.titleWhite),
                 ),
-                Text('20/25 Lesson', style: TxtStyle.p),
+                Text('20/25 ${S.of(context).lesson}', style: TxtStyle.p),
                 Expanded(child: Container()),
                 Container(
-                  width: 100,
-                  height: 25,
+                  width: Dimens.HEIGHT_100,
+                  height: Dimens.HEIGHT_25,
                   decoration: BoxDecoration(
                     color: AppColors.colorTw,
                     borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
                   ),
                   child: Center(
                     child: Text(
-                      "Continue",
+                      S.of(context).continueText,
                       style: TxtStyle.pBold,
                     ),
                   ),
@@ -257,13 +279,13 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(Images.iconMenu, width: 16),
+        SvgPicture.asset(Images.iconMenu, width: Dimens.HEIGHT_16),
         Expanded(child: Container()),
         const Icon(Icons.notifications_none_sharp),
         Container(
-          width: 32,
-          height: 32,
-          margin: const EdgeInsets.only(left: 16),
+          width: Dimens.HEIGHT_32,
+          height: Dimens.HEIGHT_32,
+          margin: const EdgeInsets.only(left: Dimens.PADDING_16),
           child: const CircleAvatar(
             radius: Dimens.RADIUS_CIRCLE,
             backgroundImage: NetworkImage(DEFAULT_AVATAR),

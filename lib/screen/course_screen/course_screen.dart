@@ -4,6 +4,7 @@ import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/widgets/search_view.dart';
 
 class CourseScreen extends StatefulWidget {
   const CourseScreen({super.key});
@@ -24,6 +25,7 @@ class _CourseScreenState extends State<CourseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Course List', style: TxtStyle.h2),
+                const SearchView(),
                 Text('Best sell course', style: TxtStyle.h3),
                 const SizedBox(height: 10),
                 const _courseContinute(),

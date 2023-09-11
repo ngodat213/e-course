@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/card_exam.dart';
 import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
@@ -33,13 +35,13 @@ class _ListExamState extends State<ListExam> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Today test', style: TxtStyle.title),
-              const SizedBox(height: 8),
+              Text(S.of(context).todayTest, style: TxtStyle.title),
+              const SizedBox(height: Dimens.HEIGHT_8),
               Text('Here is your test list for today',
                   style: TxtStyle.hintStyle),
-              const SizedBox(height: 8),
+              const SizedBox(height: Dimens.HEIGHT_8),
               SizedBox(
-                height: 200,
+                height: Dimens.HEIGHT_200,
                 child: ListView.builder(
                   itemCount: quizs.length,
                   scrollDirection: Axis.horizontal,

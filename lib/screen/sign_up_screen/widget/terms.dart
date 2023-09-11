@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class Terms extends StatelessWidget {
@@ -9,9 +11,9 @@ class Terms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 33),
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.PADDING_33),
       child: Text(
-        'By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app',
+        S.of(context).terms,
         textAlign: TextAlign.center,
         style: TxtStyle.labelStyle,
       ),

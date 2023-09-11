@@ -23,20 +23,13 @@ class _SettingScreenState extends State<SettingScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 36),
-                    Center(
-                      child: Text(
-                        'Profile',
-                        style: TxtStyle.buttonBlack
-                            .copyWith(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    const ProfileUser(),
-                    const _SettingMenu(),
-                    const _Logout(),
+                    SizedBox(height: 36),
+                    ProfileUser(),
+                    _SettingMenu(),
+                    _Logout(),
                   ],
                 ),
               ),

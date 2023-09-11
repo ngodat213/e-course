@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Search exam test`
+  /// `Search course, exam test`
   String get searchTitle {
     return Intl.message(
-      'Search exam test',
+      'Search course, exam test',
       name: 'searchTitle',
       desc: '',
       args: [],
@@ -161,10 +161,10 @@ class S {
   }
 
   /// `Hi, Welcome back!`
-  String get hi {
+  String get hiTitle {
     return Intl.message(
       'Hi, Welcome back!',
-      name: 'hi',
+      name: 'hiTitle',
       desc: '',
       args: [],
     );
@@ -385,6 +385,136 @@ class S {
     return Intl.message(
       'See All',
       name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app`
+  String get terms {
+    return Intl.message(
+      'By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app',
+      name: 'terms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi`
+  String get hi {
+    return Intl.message(
+      'Hi',
+      name: 'hi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you progress last week`
+  String get progressTitle {
+    return Intl.message(
+      'Here you progress last week',
+      name: 'progressTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choice your course`
+  String get choiceYourCourse {
+    return Intl.message(
+      'Choice your course',
+      name: 'choiceYourCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `C/C++`
+  String get cpp {
+    return Intl.message(
+      'C/C++',
+      name: 'cpp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Python`
+  String get python {
+    return Intl.message(
+      'Python',
+      name: 'python',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `C#`
+  String get cs {
+    return Intl.message(
+      'C#',
+      name: 'cs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last exam done`
+  String get lastExamDone {
+    return Intl.message(
+      'Last exam done',
+      name: 'lastExamDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson`
+  String get lesson {
+    return Intl.message(
+      'Lesson',
+      name: 'lesson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continueText {
+    return Intl.message(
+      'Continue',
+      name: 'continueText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message(
+      'Minutes',
+      name: 'minutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today test`
+  String get todayTest {
+    return Intl.message(
+      'Today test',
+      name: 'todayTest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remaining`
+  String get remaining {
+    return Intl.message(
+      'Remaining',
+      name: 'remaining',
       desc: '',
       args: [],
     );

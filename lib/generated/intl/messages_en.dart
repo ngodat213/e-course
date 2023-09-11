@@ -24,11 +24,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "app_name": MessageLookupByLibrary.simpleMessage("Quiz"),
+        "choiceYourCourse":
+            MessageLookupByLibrary.simpleMessage("Choice your course"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("ConfirmPassword"),
+        "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "cpp": MessageLookupByLibrary.simpleMessage("C/C++"),
         "createYourAccount":
             MessageLookupByLibrary.simpleMessage("Let’s create your account!"),
+        "cs": MessageLookupByLibrary.simpleMessage("C#"),
         "destination": MessageLookupByLibrary.simpleMessage("Destination"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
@@ -45,11 +50,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "You’ll get messages soon on your e-mail address"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
-        "hi": MessageLookupByLibrary.simpleMessage("Hi, Welcome back!"),
+        "hi": MessageLookupByLibrary.simpleMessage("Hi"),
+        "hiTitle": MessageLookupByLibrary.simpleMessage("Hi, Welcome back!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "lastExamDone": MessageLookupByLibrary.simpleMessage("Last exam done"),
+        "lesson": MessageLookupByLibrary.simpleMessage("Lesson"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginWith": MessageLookupByLibrary.simpleMessage("or log in with"),
+        "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -58,11 +67,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "popularDestination":
             MessageLookupByLibrary.simpleMessage("Populra Destination"),
+        "progressTitle":
+            MessageLookupByLibrary.simpleMessage("Here you progress last week"),
+        "python": MessageLookupByLibrary.simpleMessage("Python"),
+        "remaining": MessageLookupByLibrary.simpleMessage("Remaining"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
-        "searchTitle": MessageLookupByLibrary.simpleMessage("Search exam test"),
+        "searchTitle":
+            MessageLookupByLibrary.simpleMessage("Search course, exam test"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
-        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up")
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "terms": MessageLookupByLibrary.simpleMessage(
+            "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
+        "todayTest": MessageLookupByLibrary.simpleMessage("Today test")
       };
 }

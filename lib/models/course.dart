@@ -12,7 +12,6 @@ class Course extends Equatable {
   final List<String> listLesson;
   final String category;
   final double ratting;
-  final int register;
   final List<String> listFeedBack;
 
   const Course({
@@ -24,7 +23,6 @@ class Course extends Equatable {
     required this.listLesson,
     required this.category,
     required this.ratting,
-    required this.register,
     required this.listFeedBack,
   });
 
@@ -40,7 +38,6 @@ class Course extends Equatable {
       listLesson: List.from(courseData['list_lesson']),
       category: courseData['category'],
       ratting: courseData['ratting'],
-      register: courseData['register'],
       listFeedBack: List.from(courseData['feed_back']),
     );
   }
@@ -54,7 +51,6 @@ class Course extends Equatable {
       listLesson: [],
       category: '',
       ratting: 0,
-      register: 0,
       listFeedBack: [],
     );
   }
@@ -70,7 +66,6 @@ class Course extends Equatable {
       listLesson,
       category,
       ratting,
-      register,
       listFeedBack,
     ];
   }
@@ -96,7 +91,6 @@ class Course extends Equatable {
       listLesson: listLesson ?? this.listLesson,
       category: category ?? this.category,
       ratting: ratting ?? this.ratting,
-      register: register ?? this.register,
       listFeedBack: feedBack ?? listFeedBack,
     );
   }
