@@ -21,12 +21,6 @@ class ListExam extends StatefulWidget {
 
 class _ListExamState extends State<ListExam> {
   @override
-  void initState() {
-    super.initState();
-    context.read<HomeCubit>().getQuiz();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {

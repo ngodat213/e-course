@@ -3,8 +3,11 @@ part of 'quiz_cubit.dart';
 enum QuizStatus { isEmpty, isLoading, isNotEmpty }
 
 class QuizState extends Equatable {
-  const QuizState(
-      {required this.quiz, required this.lessons, required this.status});
+  const QuizState({
+    required this.quiz,
+    required this.lessons,
+    required this.status,
+  });
   final Quiz quiz;
   final List<QuizLesson> lessons;
   final QuizStatus status;

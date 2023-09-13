@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 class Course extends Equatable {
   final String uid;
   final String teacherId;
+  final String thumb;
   final String title;
   final String description;
   final String time;
@@ -13,10 +14,12 @@ class Course extends Equatable {
   final String category;
   final double ratting;
   final List<String> listFeedBack;
+  final int register;
 
   const Course({
     required this.uid,
     required this.teacherId,
+    required this.thumb,
     required this.title,
     required this.description,
     required this.time,
@@ -24,27 +27,30 @@ class Course extends Equatable {
     required this.category,
     required this.ratting,
     required this.listFeedBack,
+    required this.register,
   });
 
   factory Course.fromDoc(DocumentSnapshot courseDoc) {
     final courseData = courseDoc.data() as Map<String, dynamic>?;
 
     return Course(
-      uid: courseDoc.id,
-      teacherId: courseData!['teacher_id'],
-      title: courseData['title'],
-      time: courseData['time'],
-      description: courseData['description'],
-      listLesson: List.from(courseData['list_lesson']),
-      category: courseData['category'],
-      ratting: courseData['ratting'],
-      listFeedBack: List.from(courseData['feed_back']),
-    );
+        uid: courseDoc.id,
+        teacherId: courseData!['teacherId'],
+        thumb: courseData['thumb'],
+        title: courseData['title'],
+        time: courseData['time'],
+        description: courseData['description'],
+        listLesson: List.from(courseData['list_lesson']),
+        category: courseData['category'],
+        ratting: courseData['ratting'],
+        listFeedBack: List.from(courseData['feed_back']),
+        register: courseData['register']);
   }
   factory Course.initialCourse() {
     return const Course(
       uid: '',
       teacherId: '',
+      thumb: '',
       title: '',
       time: '',
       description: '',
@@ -52,6 +58,7 @@ class Course extends Equatable {
       category: '',
       ratting: 0,
       listFeedBack: [],
+      register: 0,
     );
   }
 
@@ -60,6 +67,7 @@ class Course extends Equatable {
     return [
       uid,
       teacherId,
+      thumb,
       title,
       description,
       time,
@@ -67,31 +75,34 @@ class Course extends Equatable {
       category,
       ratting,
       listFeedBack,
+      register,
     ];
   }
 
   Course copyWith({
     String? uid,
     String? teacherId,
+    String? thumb,
     String? title,
     String? description,
     String? time,
     List<String>? listLesson,
     String? category,
     double? ratting,
+    List<String>? listFeedBack,
     int? register,
-    List<String>? feedBack,
   }) {
     return Course(
-      uid: uid ?? this.uid,
-      teacherId: teacherId ?? this.teacherId,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      time: time ?? this.time,
-      listLesson: listLesson ?? this.listLesson,
-      category: category ?? this.category,
-      ratting: ratting ?? this.ratting,
-      listFeedBack: feedBack ?? listFeedBack,
-    );
+        uid: uid ?? this.uid,
+        teacherId: teacherId ?? this.teacherId,
+        thumb: thumb ?? this.thumb,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        time: time ?? this.time,
+        listLesson: listLesson ?? this.listLesson,
+        category: category ?? this.category,
+        ratting: ratting ?? this.ratting,
+        listFeedBack: listFeedBack ?? this.listFeedBack,
+        register: register ?? this.register);
   }
 }

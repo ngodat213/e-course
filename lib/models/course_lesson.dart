@@ -37,7 +37,7 @@ class CourseLesson extends Equatable {
       uid: lessonCourseDoc.id,
       title: lessonCourseData!['title'],
       selection: lessonCourseData['selection'],
-      listCourseVideo: List.from(lessonCourseData['video']),
+      listCourseVideo: List.from(lessonCourseData['listCourseVideo']),
     );
   }
 

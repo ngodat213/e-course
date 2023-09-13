@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/models/course_lesson.dart';
+import 'package:quiz_flutter/models/course_video.dart';
+import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -14,67 +18,120 @@ class TabLesson extends StatefulWidget {
 
 class _TabLessonState extends State<TabLesson> {
   @override
+  void initState() {
+    super.initState();
+    context.read<CourseDetailCubit>().getCourseLesson();
+    context.read<CourseDetailCubit>().getCourseVideo();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.symmetric(vertical: 28),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Lesson(),
-            Lesson(),
-            Lesson(),
-          ],
-        ),
-      ),
+    return BlocBuilder<CourseDetailCubit, CourseDetailState>(
+      builder: (context, state) {
+        print(state.courseLesson.toString());
+        if (state.status == CourseDetail.isNotEmpty) {
+          return Scaffold(
+            body: Container(
+              margin: const EdgeInsets.symmetric(vertical: 28),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: state.courseLesson.length,
+                itemBuilder: (context, index) {
+                  final lesson = state.courseLesson[index];
+                  return LessonWidget(lesson: lesson, video: state.courseVideo);
+                },
+              ),
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
 
-class Lesson extends StatelessWidget {
-  const Lesson({
+class LessonWidget extends StatefulWidget {
+  const LessonWidget({
     super.key,
+    required this.lesson,
+    required this.video,
   });
 
+  final CourseLesson lesson;
+  final List<CourseVideo> video;
+  @override
+  State<LessonWidget> createState() => _LessonWidgetState();
+}
+
+class _LessonWidgetState extends State<LessonWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Section 1 - Introductions',
-          style: TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          height: 70,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-              boxShadow: AppColors.shadow),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<CourseDetailCubit, CourseDetailState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Section ${widget.lesson.selection} - ${widget.lesson.title}',
+              style: TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: state.courseVideo.length,
+              itemBuilder: (context, index) {
+                return LessonContent(video: state.courseVideo[index]);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class LessonContent extends StatefulWidget {
+  const LessonContent({
+    super.key,
+    required this.video,
+  });
+  final CourseVideo video;
+
+  @override
+  State<LessonContent> createState() => _LessonContentState();
+}
+
+class _LessonContentState extends State<LessonContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 70,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+          boxShadow: AppColors.shadow),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(widget.video.part,
+              style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('01',
+              Text(widget.video.title,
                   style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Introducing to The Class',
-                      style:
-                          TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
-                  const Expanded(child: SizedBox()),
-                  Text('10min 34s',
-                      style: TxtStyle.p.copyWith(color: AppColors.label)),
-                ],
-              ),
-              SvgPicture.asset(Images.iconCheckPadding),
+              const Expanded(child: SizedBox()),
+              Text('${widget.video.hour}hour ${widget.video.minute}min',
+                  style: TxtStyle.p.copyWith(color: AppColors.label)),
             ],
           ),
-        ),
-        const SizedBox(height: 12)
-      ],
+          SvgPicture.asset(Images.iconCheckPadding),
+        ],
+      ),
     );
   }
 }
