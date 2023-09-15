@@ -20,33 +20,29 @@ class _TabLessonState extends State<TabLesson> {
   @override
   void initState() {
     super.initState();
-    context.read<CourseDetailCubit>().getCourseLesson();
-    context.read<CourseDetailCubit>().getCourseVideo();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
       builder: (context, state) {
-        print(state.courseLesson.toString());
         if (state.status == CourseDetail.isNotEmpty) {
-          return Scaffold(
-            body: Container(
-              margin: const EdgeInsets.symmetric(vertical: 28),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: state.courseLesson.length,
-                itemBuilder: (context, index) {
-                  final lesson = state.courseLesson[index];
-                  return LessonWidget(lesson: lesson, video: state.courseVideo);
-                },
-              ),
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 28),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.courseLesson.length,
+              itemBuilder: (context, index) {
+                final lesson = state.courseLesson[index];
+                return LessonWidget(lesson: lesson, video: state.courseVideo);
+              },
             ),
           );
-        } else {
+        } else if (state.status == CourseDetail.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }
@@ -70,24 +66,32 @@ class _LessonWidgetState extends State<LessonWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
       builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Section ${widget.lesson.selection} - ${widget.lesson.title}',
-              style: TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
+        if (state.status == CourseDetail.isNotEmpty) {
+          return Container(
+            margin: const EdgeInsets.only(top: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Section ${widget.lesson.selection} - ${widget.lesson.title}',
+                  style:
+                      TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.courseVideo.length,
+                  itemBuilder: (context, index) {
+                    return LessonContent(video: state.courseVideo[index]);
+                  },
+                ),
+              ],
             ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: state.courseVideo.length,
-              itemBuilder: (context, index) {
-                return LessonContent(video: state.courseVideo[index]);
-              },
-            ),
-          ],
-        );
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
       },
     );
   }
@@ -107,30 +111,44 @@ class LessonContent extends StatefulWidget {
 class _LessonContentState extends State<LessonContent> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-          boxShadow: AppColors.shadow),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(widget.video.part,
-              style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.video.title,
-                  style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
-              const Expanded(child: SizedBox()),
-              Text('${widget.video.hour}hour ${widget.video.minute}min',
-                  style: TxtStyle.p.copyWith(color: AppColors.label)),
-            ],
-          ),
-          SvgPicture.asset(Images.iconCheckPadding),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.read<CourseDetailCubit>().videoChanged(widget.video.video);
+      },
+      child: Container(
+        height: 70,
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
+            boxShadow: AppColors.shadow),
+        child: Row(
+          children: [
+            SizedBox(
+              width: Dimens.HEIGHT_30,
+              height: Dimens.HEIGHT_30,
+              child: Center(
+                child: Text(widget.video.part,
+                    style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.video.title,
+                    style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
+                const Expanded(child: SizedBox()),
+                Text('${widget.video.hour}hour ${widget.video.minute}min',
+                    style: TxtStyle.p.copyWith(color: AppColors.label)),
+              ],
+            ),
+            const Spacer(),
+            SvgPicture.asset(Images.iconCheckPadding),
+          ],
+        ),
       ),
     );
   }

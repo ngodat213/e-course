@@ -23,44 +23,42 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
     );
   }
 
-  List<CourseVideo>? video;
-  void getCourseVideo() async {
+  void videoChanged(String video) {
+    emit(
+      state.copyWith(
+        video: video,
+        status: CourseDetail.isNotEmpty,
+      ),
+    );
+  }
+
+  List<CourseVideo>? listVideo;
+  List<CourseLesson>? lesson;
+  void getCourseLesson() async {
     emit(state.copyWith(status: CourseDetail.isLoading));
     try {
+      List<CourseLesson> lessons = [];
       List<CourseVideo> videos = [];
+      for (var element in state.course.listLesson) {
+        lessons.add(await appRepository.getCourseLessonById(element));
+      }
+      if (lessons.isNotEmpty) {
+        lesson = lessons;
+        emit(state.copyWith(
+            courseLesson: lesson, status: CourseDetail.isNotEmpty));
+      }
       for (var element in state.courseLesson) {
         for (var i in element.listCourseVideo) {
           videos.add(await appRepository.getCourseVideoById(i));
         }
       }
       if (videos.isNotEmpty) {
-        video = videos;
+        listVideo = videos;
+        emit(state.copyWith(
+            courseVideo: listVideo,
+            video: listVideo![0].video,
+            status: CourseDetail.isNotEmpty));
       }
-      emit(state.copyWith(courseVideo: video, status: CourseDetail.isNotEmpty));
-    } on FirebaseException catch (e) {
-      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
-    } catch (e) {
-      throw CustomError(
-        code: 'Exception QuizCubit',
-        msg: e.toString(),
-        plugin: 'flutter_error/server_error',
-      );
-    }
-  }
-
-  List<CourseLesson>? lesson;
-  void getCourseLesson() async {
-    emit(state.copyWith(status: CourseDetail.isLoading));
-    try {
-      List<CourseLesson> lessons = [];
-      for (var element in state.course.listLesson) {
-        lessons.add(await appRepository.getCourseLessonById(element));
-      }
-      if (lessons.isNotEmpty) {
-        lesson = lessons;
-      }
-      emit(state.copyWith(
-          courseLesson: lesson, status: CourseDetail.isNotEmpty));
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

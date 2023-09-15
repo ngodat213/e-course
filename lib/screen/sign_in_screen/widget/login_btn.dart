@@ -13,7 +13,10 @@ class LoginButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status == LoginStatus.submitting
-            ? const CircularProgressIndicator()
+            ? BuildButton(
+                text: S.of(context).login,
+                isLoading: true,
+              )
             : BuildButton(
                 text: S.of(context).login,
                 onTap: () {

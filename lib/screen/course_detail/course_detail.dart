@@ -12,6 +12,8 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_button.dart';
 import 'package:readmore/readmore.dart';
+import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -23,25 +25,37 @@ class CourseDetailScreen extends StatefulWidget {
 class CourseDetailScreenState extends State<CourseDetailScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late VideoPlayerController _videoPlayerController;
+  late Future<void> _initializeVideoPlayerFuture;
+  late ChewieController _chewieController;
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     context.read<CourseDetailCubit>().getCourseLesson();
+    _videoPlayerController = VideoPlayerController.networkUrl(
+        Uri.parse(context.read<CourseDetailCubit>().state.course.video));
+    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
+    _chewieController = ChewieController(
+        videoPlayerController: _videoPlayerController,
+        autoPlay: true,
+        looping: true);
   }
 
   @override
   void dispose() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
     super.dispose();
-    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
+      
       builder: (context, state) {
         final course = state.course;
-        final lesson = state.courseLesson;
         return Scaffold(
           bottomNavigationBar: Container(
             color: Colors.white.withOpacity(0.1),
@@ -61,18 +75,36 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 60),
-                        Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width - 50,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(course.thumb),
-                              fit: BoxFit.cover,
-                            ),
-                            color: AppColors.main,
-                            borderRadius:
-                                BorderRadius.circular(Dimens.RADIUS_8),
-                          ),
+                        FutureBuilder(
+                          future: _initializeVideoPlayerFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(Dimens.RADIUS_8),
+                                child: AspectRatio(
+                                  aspectRatio:
+                                      _videoPlayerController.value.aspectRatio,
+                                  child: Chewie(controller: _chewieController),
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                height: 200,
+                                width: MediaQuery.of(context).size.width - 50,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(course.thumb),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  color: AppColors.main,
+                                  borderRadius:
+                                      BorderRadius.circular(Dimens.RADIUS_8),
+                                ),
+                              );
+                            }
+                          },
                         ),
                         const SizedBox(height: 32),
                         Text(course.title, style: TxtStyle.h3),
@@ -86,7 +118,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                         ),
                         const SizedBox(height: 32),
                         SizedBox(
-                          height: 500,
+                          height: 1000,
                           child: Column(
                             children: [
                               TabBar(

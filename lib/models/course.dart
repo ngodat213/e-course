@@ -15,6 +15,7 @@ class Course extends Equatable {
   final double ratting;
   final List<String> listFeedBack;
   final int register;
+  final String video;
 
   const Course({
     required this.uid,
@@ -28,6 +29,7 @@ class Course extends Equatable {
     required this.ratting,
     required this.listFeedBack,
     required this.register,
+    required this.video,
   });
 
   factory Course.fromDoc(DocumentSnapshot courseDoc) {
@@ -44,22 +46,23 @@ class Course extends Equatable {
         category: courseData['category'],
         ratting: courseData['ratting'],
         listFeedBack: List.from(courseData['feed_back']),
-        register: courseData['register']);
+        register: courseData['register'],
+        video: courseData['video']);
   }
   factory Course.initialCourse() {
     return const Course(
-      uid: '',
-      teacherId: '',
-      thumb: '',
-      title: '',
-      time: '',
-      description: '',
-      listLesson: [],
-      category: '',
-      ratting: 0,
-      listFeedBack: [],
-      register: 0,
-    );
+        uid: '',
+        teacherId: '',
+        thumb: '',
+        title: '',
+        time: '',
+        description: '',
+        listLesson: [],
+        category: '',
+        ratting: 0,
+        listFeedBack: [],
+        register: 0,
+        video: '');
   }
 
   @override
@@ -76,6 +79,7 @@ class Course extends Equatable {
       ratting,
       listFeedBack,
       register,
+      video,
     ];
   }
 
@@ -91,18 +95,21 @@ class Course extends Equatable {
     double? ratting,
     List<String>? listFeedBack,
     int? register,
+    String? video,
   }) {
     return Course(
-        uid: uid ?? this.uid,
-        teacherId: teacherId ?? this.teacherId,
-        thumb: thumb ?? this.thumb,
-        title: title ?? this.title,
-        description: description ?? this.description,
-        time: time ?? this.time,
-        listLesson: listLesson ?? this.listLesson,
-        category: category ?? this.category,
-        ratting: ratting ?? this.ratting,
-        listFeedBack: listFeedBack ?? this.listFeedBack,
-        register: register ?? this.register);
+      uid: uid ?? this.uid,
+      teacherId: teacherId ?? this.teacherId,
+      thumb: thumb ?? this.thumb,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      time: time ?? this.time,
+      listLesson: listLesson ?? this.listLesson,
+      category: category ?? this.category,
+      ratting: ratting ?? this.ratting,
+      listFeedBack: listFeedBack ?? this.listFeedBack,
+      register: register ?? this.register,
+      video: video ?? this.video,
+    );
   }
 }

@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const CourseContinue(),
+              const CourseSlider(),
               Center(
                 child: DotsIndicator(
                   dotsCount: 3,
@@ -234,26 +234,22 @@ class _reusableMenuText extends StatelessWidget {
   }
 }
 
-class CourseContinue extends StatefulWidget {
-  const CourseContinue({
+class CourseSlider extends StatefulWidget {
+  const CourseSlider({
     super.key,
   });
 
   @override
-  State<CourseContinue> createState() => _CourseContinueState();
+  State<CourseSlider> createState() => _CourseSliderState();
 }
 
-class _CourseContinueState extends State<CourseContinue> {
+class _CourseSliderState extends State<CourseSlider> {
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      items: const [
-        CardSliderContinue(),
-        CardSliderContinue(),
-        CardSliderContinue()
-      ],
+      items: const [CardSlider(), CardSlider(), CardSlider()],
       carouselController: carouselController,
       options: CarouselOptions(
         autoPlay: true,
@@ -265,8 +261,8 @@ class _CourseContinueState extends State<CourseContinue> {
   }
 }
 
-class CardSliderContinue extends StatelessWidget {
-  const CardSliderContinue({
+class CardSlider extends StatelessWidget {
+  const CardSlider({
     super.key,
   });
 
@@ -308,21 +304,6 @@ class CardSliderContinue extends StatelessWidget {
                       Text('Flutter for begginer', style: TxtStyle.titleWhite),
                 ),
                 Text('20/25 ${S.of(context).lesson}', style: TxtStyle.p),
-                Expanded(child: Container()),
-                Container(
-                  width: Dimens.HEIGHT_100,
-                  height: Dimens.HEIGHT_25,
-                  decoration: BoxDecoration(
-                    color: AppColors.colorTw,
-                    borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-                  ),
-                  child: Center(
-                    child: Text(
-                      S.of(context).continueText,
-                      style: TxtStyle.pBold,
-                    ),
-                  ),
-                )
               ],
             ),
           ),

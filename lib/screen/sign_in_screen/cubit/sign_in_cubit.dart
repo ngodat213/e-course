@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
@@ -37,6 +38,12 @@ class SignInCubit extends Cubit<SignInState> {
       );
       toastInfo(msg: 'Login successfull');
       emit(state.copyWith(status: LoginStatus.success));
-    } catch (_) {}
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+        ),
+      );
+    }
   }
 }
