@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -70,33 +74,43 @@ class _SettingMenu extends StatelessWidget {
           horizontal: BorderSide(width: 4, color: Color(0xFFF6F6F6)),
         ),
       ),
-      child: const Column(
+      child: Column(
         children: [
-          BuildTile(
+          const BuildTile(
             svgPath: Images.iconNotification,
             text: 'Notification',
             description: 'Ringtone, message, notification',
           ),
-          _CustomDivider(),
-          BuildTile(
+          const _CustomDivider(),
+          const BuildTile(
             svgPath: Images.iconGlobal,
             text: 'Language',
             description: 'English',
           ),
-          _CustomDivider(),
+          const _CustomDivider(),
+          BuildTile(
+            svgPath: Images.iconInfo,
+            text: 'About',
+            description: 'About us',
+            onTap: () {
+              context.read<CommoInfoCubit>().indexChanged(0);
+              BaseNavigation.push(context,
+                  routeName: ManagerRoutes.commoInfoScreen);
+            },
+          ),
+          const _CustomDivider(),
           BuildTile(
             svgPath: Images.iconChat,
             text: 'Help',
             description: 'Contact us',
+            onTap: () {
+              context.read<CommoInfoCubit>().indexChanged(1);
+              BaseNavigation.push(context,
+                  routeName: ManagerRoutes.commoInfoScreen);
+            },
           ),
-          _CustomDivider(),
-          BuildTile(
-            svgPath: Images.iconInfo,
-            text: 'About',
-            description: 'About the application',
-          ),
-          _CustomDivider(),
-          BuildTile(
+          const _CustomDivider(),
+          const BuildTile(
             svgPath: Images.iconSetting,
             text: 'Preferences',
             description: 'Theme, Settings',
@@ -112,9 +126,7 @@ class _CustomDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 12),
-        child: const Divider(height: 1, color: AppColors.grey));
+    return const Divider(height: 1, color: AppColors.grey);
   }
 }
 
@@ -124,32 +136,39 @@ class BuildTile extends StatelessWidget {
     required this.svgPath,
     required this.text,
     required this.description,
+    this.onTap,
     this.color,
   });
   final String svgPath;
   final String text;
   final String description;
   final Color? color;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 38,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SvgPicture.asset(svgPath),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(text,
-                  style: TxtStyle.inputStyle.copyWith(
-                      fontWeight: FontWeight.w600, color: color ?? color)),
-              Text(description, style: TxtStyle.time)
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SvgPicture.asset(svgPath),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text,
+                    style: TxtStyle.inputStyle.copyWith(
+                        fontWeight: FontWeight.w600, color: color ?? color)),
+                Text(description, style: TxtStyle.labelStyle)
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

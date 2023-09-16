@@ -23,6 +23,7 @@ class Images {
   static const String iconSetting = '$iconPath/setting.svg';
   static const String iconLesson = '$iconPath/lesson.svg';
   static const String iconTime = '$iconPath/time.svg';
+  static const String iconLogo = '$iconPath/logo.svg';
 
   static const String imageSplash = '$imagePath/splash.png';
   static const String imageFlutterBanner = '$imagePath/flutter_banner.png';

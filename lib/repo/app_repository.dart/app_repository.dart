@@ -153,4 +153,25 @@ class AppRepository implements AppBase {
       );
     }
   }
+
+  @override
+  Future<void> setContactUs(
+      String fullName, String mail, String topic, String text) async {
+    try {
+      await FirebaseFirestore.instance.collection(ApiPath.CONTACT).doc().set({
+        'fullName': fullName,
+        'mail': mail,
+        'topic': topic,
+        'text': text,
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getQuestion',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

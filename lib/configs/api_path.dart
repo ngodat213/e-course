@@ -12,6 +12,8 @@ class ApiPath {
   static const String QUESTION = 'question';
   static const String LESSON = 'lesson';
 
+  static const String CONTACT = 'contact';
+
   /*-------------------------------- Storage ---------------------------------*/
   static String USER_IMAGES = 'user_images';
   static String COURSE_AVATAR = 'course_avatar';

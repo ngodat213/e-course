@@ -51,9 +51,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
-      
       builder: (context, state) {
         final course = state.course;
         return Scaffold(

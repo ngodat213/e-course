@@ -14,4 +14,7 @@ abstract class AppBase {
   Future<CourseLesson> getCourseLessonById(String lessonId);
 
   Future<CourseVideo> getCourseVideoById(String lessonId);
+
+  Future<void> setContactUs(
+      String fullName, String mail, String topic, String text);
 }

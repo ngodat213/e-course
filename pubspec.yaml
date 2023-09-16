@@ -53,6 +53,14 @@ dependencies:
   cloudinary_flutter: ^1.0.0
   cloudinary_url_gen: ^1.0.0
   chewie: ^1.7.1
+  #APP ICONS
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "lib/res/images/logo.png"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:

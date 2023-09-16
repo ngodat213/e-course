@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/screen/common_info_screen/common_info_screen.dart';
 import 'package:quiz_flutter/screen/course_detail/course_detail.dart';
 import 'package:quiz_flutter/screen/favorite_screen/favorite.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/forgot_password.dart';

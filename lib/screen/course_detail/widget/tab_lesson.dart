@@ -18,11 +18,6 @@ class TabLesson extends StatefulWidget {
 
 class _TabLessonState extends State<TabLesson> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
       builder: (context, state) {
