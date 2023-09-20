@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:quiz_flutter/configs/api_path.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/models/models.dart';
@@ -7,10 +8,14 @@ import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
 class UserRepository extends UserBase {
   final FirebaseFirestore _firebaseFirestore;
+  final firebase_auth.FirebaseAuth _firebaseAuth;
 
   UserRepository({
     FirebaseFirestore? firebaseFirestore,
-  }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+    firebase_auth.FirebaseAuth? firebaseAuth,
+  })  : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
+        _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
+
   @override
   Future<User> getProfile() async {
     try {
@@ -24,12 +29,72 @@ class UserRepository extends UserBase {
       if (userDoc.exists) {
         return User.fromDoc(userDoc);
       }
-      throw ("Lesson is empty!");
+      throw ("Get user is empty!");
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
         code: 'Exception get Lesson',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<void> updateUserName(String value) async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      _firebaseFirestore
+          .collection(ApiPath.USER)
+          .doc(userToken)
+          .update({"displayName": value});
+      throw ("Update username fail!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception update user name',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<void> updateEmail(String newEmail) async {
+    try {
+      await _firebaseAuth.currentUser!
+          .updateEmail(newEmail)
+          .then((value) => updateEmailCollection(newEmail))
+          .catchError(throw ("Update username fail!"));
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception update user name',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<void> updateEmailCollection(String newEmail) async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      _firebaseFirestore
+          .collection(ApiPath.USER)
+          .doc(userToken)
+          .update({"email": newEmail});
+      throw ("Update email fail!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception update email',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

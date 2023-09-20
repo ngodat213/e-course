@@ -9,6 +9,7 @@ import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart
 import 'package:quiz_flutter/screen/forgot_password_screen/cubit/forgot_password_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
+import 'package:quiz_flutter/screen/profile_screen/cubit/profile_cubit.dart';
 import 'package:quiz_flutter/screen/quiz_play_screen/cubit/quiz_play_cubit.dart';
 import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
@@ -46,6 +47,9 @@ class ManagerProvider {
     BlocProvider(
       create: (context) => SettingCubit(
           context.read<AuthRepository>(), context.read<UserRepository>()),
+    ),
+    BlocProvider(
+      create: (context) => ProfileCubit(context.read<UserRepository>()),
     ),
   ];
 }
