@@ -46,7 +46,7 @@ class _ContactUsTabState extends State<ContactUsTab> {
             },
           ),
           const SizedBox(height: Dimens.HEIGHT_20),
-          _textField(
+          _TextField(
             func: (value) {
               context.read<CommoInfoCubit>().textChanged(value);
             },
@@ -64,8 +64,8 @@ class _ContactUsTabState extends State<ContactUsTab> {
   }
 }
 
-class _textField extends StatelessWidget {
-  _textField({required this.func});
+class _TextField extends StatelessWidget {
+  _TextField({required this.func});
   void Function(String value)? func;
   @override
   Widget build(BuildContext context) {

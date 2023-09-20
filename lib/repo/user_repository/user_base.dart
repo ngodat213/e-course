@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quiz_flutter/models/models.dart';
 
 abstract class UserBase {
   /*--------------------------------- Profile --------------------------------*/
-  Future<User> getProfile({required String uid});
+  Future<User> getProfile();
 }

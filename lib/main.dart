@@ -7,6 +7,7 @@ import 'package:quiz_flutter/bloc_observer.dart';
 import 'package:quiz_flutter/firebase_options.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
+import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 import 'package:quiz_flutter/screen/app/app.dart';
 
 Future<void> main() {
@@ -16,10 +17,16 @@ Future<void> main() {
           Cloudinary.fromCloudName(cloudName: "duhncgkpo");
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform);
+        options: DefaultFirebaseOptions.android,
+      );
       final AuthRepository authRepository = AuthRepository();
       final AppRepository appRepository = AppRepository();
-      runApp(App(authRepository: authRepository, appRepository: appRepository));
+      final UserRepository userRepository = UserRepository();
+      runApp(App(
+        authRepository: authRepository,
+        appRepository: appRepository,
+        userRepository: userRepository,
+      ));
     },
     blocObserver: AppBlocObserver(),
   );

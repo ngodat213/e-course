@@ -47,13 +47,16 @@ class AuthRepository {
           .set({
         'displayName': displayName,
         'email': email,
+        'phoneNumber': phoneNumber,
         'photoUrl': DEFAULT_AVATAR,
         'favorites_course': [],
         'favorites_teacher': [],
         'course': [],
-        'diamond': 1000,
       });
     } on firebase_auth.FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        toastInfo(msg: "Your email address is not valid");
+      }
       throw CustomError(
         code: e.code,
         msg: e.message!,
@@ -92,6 +95,11 @@ class AuthRepository {
       } else if (e.code == 'invalid-email') {
         toastInfo(msg: "Your email format is wrong");
       }
+      throw CustomError(
+        code: e.code,
+        msg: e.message!,
+        plugin: e.plugin,
+      );
     } catch (e) {
       throw CustomError(
         code: 'Exception',
@@ -104,7 +112,6 @@ class AuthRepository {
   Future<void> logout() async {
     try {
       await Future.wait([_firebaseAuth.signOut()]);
-      // toastInfo(msg: 'Logout successfull');
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw CustomError(
         code: e.code,

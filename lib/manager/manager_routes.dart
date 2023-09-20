@@ -16,6 +16,8 @@ class ManagerRoutes {
   static String quizScreen = '/detail_screen';
   static String quizPlayScreen = '/quiz_play_screen';
   static String commoInfoScreen = '/commo_info_screen';
+  static String profileScreen = '/profile_screen';
+  static String editProfileScreen = '/edit_profile_screen';
 
   static Map<String, Widget Function(BuildContext context)> manager = {
     splashScreen: (context) => const SplashScreen(),
@@ -31,5 +33,6 @@ class ManagerRoutes {
     quizScreen: (context) => const QuizScreen(),
     quizPlayScreen: (context) => const QuizPlayScreen(),
     commoInfoScreen: (context) => const CommoInfoScreen(),
+    profileScreen: (context) => const ProfileScreen(),
   };
 }

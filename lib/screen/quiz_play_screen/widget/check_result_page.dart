@@ -51,7 +51,8 @@ class CheckResultPage extends StatelessWidget {
                     onTap: () {
                       context.read<QuizPlayCubit>().goHome();
                       BaseNavigation.push(context,
-                          routeName: ManagerRoutes.homeScreen);
+                          routeName: ManagerRoutes.mainScreen,
+                          clearStack: true);
                     },
                   ),
                   const BottomButton(),

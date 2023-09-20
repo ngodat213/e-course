@@ -15,30 +15,39 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      context.read<SettingCubit>().getUser();
+    });
+
     return BlocBuilder<SettingCubit, SettingState>(
       builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Stack(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 36),
-                        ProfileUser(),
-                        SettingMenu(),
-                        Logout(),
-                      ],
+        if (state.status == SettingStatus.success) {
+          final user = state.user;
+          return Scaffold(
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 25),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 36),
+                          ProfileUser(),
+                          SettingMenu(),
+                          Logout(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
       },
     );
   }

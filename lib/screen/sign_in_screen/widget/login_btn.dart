@@ -12,17 +12,12 @@ class LoginButton extends StatelessWidget {
     return BlocBuilder<SignInCubit, SignInState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.status == LoginStatus.submitting
-            ? BuildButton(
-                text: S.of(context).login,
-                isLoading: true,
-              )
-            : BuildButton(
-                text: S.of(context).login,
-                onTap: () {
-                  context.read<SignInCubit>().logInWithCredentials();
-                },
-              );
+        return BuildButton(
+          text: S.of(context).login,
+          onTap: () {
+            context.read<SignInCubit>().logInWithCredentials();
+          },
+        );
       },
     );
   }

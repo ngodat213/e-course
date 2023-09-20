@@ -7,7 +7,7 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final AppRepository appRepository;
-  HomeCubit({required this.appRepository}) : super(HomeState.initial());
+  HomeCubit(this.appRepository) : super(HomeState.initial());
 
   late var quizs;
   void getQuiz() async {

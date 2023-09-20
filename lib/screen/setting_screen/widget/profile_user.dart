@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flutter/const/const.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
-import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class ProfileUser extends StatelessWidget {
   const ProfileUser({
@@ -11,40 +13,40 @@ class ProfileUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 30),
-      height: 99,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 23,
-              backgroundImage: NetworkImage(DEFAULT_AVATAR),
+    return BlocBuilder<SettingCubit, SettingState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            BaseNavigation.push(context,
+                routeName: ManagerRoutes.profileScreen);
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 30),
+            height: 38,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: CircleAvatar(
+                    radius: 23,
+                    backgroundImage: NetworkImage(state.user.photoUrl!),
+                    backgroundColor: AppColors.white,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(state.user.displayName!, style: TxtStyle.h3),
+                    const Spacer(),
+                    Text(state.user.email!, style: TxtStyle.labelStyle),
+                  ],
+                )
+              ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Hydra Coder', style: TxtStyle.h3),
-              const Spacer(),
-              Text('ngodat.it213@gmail.com', style: TxtStyle.labelStyle),
-              Container(
-                margin: const EdgeInsets.only(top: 12),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-                    border:
-                        Border.all(width: 1, color: const Color(0xFFEDEDED))),
-                child: Text('Edit profile', style: TxtStyle.inputStyle),
-              )
-            ],
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -38,9 +38,11 @@ dependencies:
   #FIREBASE
   firebase_core: ^2.15.1
   firebase_auth: ^4.8.0
+  firebase_database: ^10.2.5
+  firebase_storage: ^11.2.6
+  cloud_firestore: ^4.9.0
   #FLOW BUILDER
   flow_builder: ^0.0.9
-  cloud_firestore: ^4.9.0
   #CAROUSEL SLIDER IMAGE
   carousel_slider: ^4.2.1
   #CONFETTI
@@ -49,12 +51,13 @@ dependencies:
   readmore: ^2.2.0
   #VIDEO PLAYER
   video_player: ^2.7.1
+  chewie: ^1.7.1
   #CLOUD DINARY FOR LOAD VIDEO
   cloudinary_flutter: ^1.0.0
   cloudinary_url_gen: ^1.0.0
-  chewie: ^1.7.1
   #APP ICONS
   flutter_launcher_icons: ^0.13.1
+  image_picker: ^1.0.4
 
 flutter_launcher_icons:
   android: "launcher_icon"

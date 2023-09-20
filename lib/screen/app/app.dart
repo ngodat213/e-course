@@ -7,34 +7,31 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quiz_flutter/manager/manager_provider.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
-import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
-import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
+import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 
 class App extends StatelessWidget {
   const App({
     super.key,
     required AuthRepository authRepository,
     required AppRepository appRepository,
+    required UserRepository userRepository,
   })  : _authRepository = authRepository,
-        _appRepository = appRepository;
+        _appRepository = appRepository,
+        _userRepository = userRepository;
 
   final AuthRepository _authRepository;
   final AppRepository _appRepository;
+  final UserRepository _userRepository;
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(value: _authRepository),
         RepositoryProvider.value(value: _appRepository),
+        RepositoryProvider.value(value: _userRepository),
       ],
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (context) => AppBloc(authRepository: _authRepository)),
-          BlocProvider(
-              create: (context) => HomeCubit(appRepository: _appRepository)),
-          ...ManagerProvider.provider
-        ],
+        providers: [...ManagerProvider.provider],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: ManagerRoutes.splashScreen,

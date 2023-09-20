@@ -5,6 +5,7 @@ import 'package:quiz_flutter/screen/favorite_screen/favorite.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/forgot_password.dart';
 import 'package:quiz_flutter/screen/home_screen/home_screen.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/main_screen.dart';
+import 'package:quiz_flutter/screen/profile_screen/profile_screen.dart';
 import 'package:quiz_flutter/screen/quiz_play_screen/quiz_play_screen.dart';
 import 'package:quiz_flutter/screen/quiz_screen/quiz_screen.dart';
 import 'package:quiz_flutter/screen/setting_screen/setting_screen.dart';

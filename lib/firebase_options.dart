@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,6 +42,16 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAWBTXBQvRhoJxb8SXvkv9MSX_a9PiU8JA',
+    appId: '1:711613143742:web:54a7a891db7c9b9bba5cef',
+    messagingSenderId: '711613143742',
+    projectId: 'quiz-app-4a98f',
+    authDomain: 'quiz-app-4a98f.firebaseapp.com',
+    databaseURL: 'https://quiz-app-4a98f-default-rtdb.firebaseio.com',
+    storageBucket: 'quiz-app-4a98f.appspot.com',
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB_B4N1eLp3S4uGagFfraemqC5KzKwG-k4',
@@ -67,5 +71,16 @@ class DefaultFirebaseOptions {
     storageBucket: 'quiz-app-4a98f.appspot.com',
     iosClientId: '711613143742-42pn6hedkivr8mnpn55vo7hflj49hck2.apps.googleusercontent.com',
     iosBundleId: 'com.example.quizFlutter',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD-2TypOI_20Ifb94udYuBLo170IHT14fs',
+    appId: '1:711613143742:ios:b914abeca06ebc3bba5cef',
+    messagingSenderId: '711613143742',
+    projectId: 'quiz-app-4a98f',
+    databaseURL: 'https://quiz-app-4a98f-default-rtdb.firebaseio.com',
+    storageBucket: 'quiz-app-4a98f.appspot.com',
+    iosClientId: '711613143742-bcoqhef9dh37dg6kdqdf56bmbuqp8j2i.apps.googleusercontent.com',
+    iosBundleId: 'com.example.quizFlutter.RunnerTests',
   );
 }
