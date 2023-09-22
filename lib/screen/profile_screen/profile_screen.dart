@@ -214,10 +214,19 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                          label: 'New email',
-                          hintText: S.of(context).emailExample),
+                        label: 'New email',
+                        hintText: S.of(context).emailExample,
+                        func: (value) {
+                          context.read<ProfileCubit>().emailChanged(value);
+                        },
+                      ),
                       const SizedBox(height: 20),
-                      BuildButton(text: 'Apply'),
+                      BuildButton(
+                        text: 'Apply',
+                        onTap: () {
+                          context.read<ProfileCubit>().updateEmail();
+                        },
+                      ),
                     ],
                   ),
                 );
@@ -244,14 +253,16 @@ class BuildUserSetting extends StatelessWidget {
                         label: 'Phone number',
                         hintText: user.phoneNumber!,
                         func: (value) {
-                          context.read<ProfileCubit>().emailChanged(value);
+                          context
+                              .read<ProfileCubit>()
+                              .phoneNumberChanged(value);
                         },
                       ),
                       const SizedBox(height: 20),
                       BuildButton(
                         text: 'Apply',
                         onTap: () {
-                          context.read<ProfileCubit>().updateEmail();
+                          context.read<ProfileCubit>().updatePhoneNumber();
                         },
                       ),
                     ],
@@ -305,40 +316,45 @@ Future _displayBottomSheet(BuildContext context,
     {required Widget child, double? height}) {
   return showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     backgroundColor: Colors.white,
     barrierColor: AppColors.grey.withOpacity(0.6),
     isDismissible: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
     builder: (context) {
-      return Container(
-        height: height ?? 300,
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: AppColors.shadow,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            Center(
-              child: Container(
-                width: 50,
-                height: 3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.black),
-              ),
+      return Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          height: height ?? 300,
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: AppColors.shadow,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-            const SizedBox(height: 50),
-            child
-          ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10),
+              Center(
+                child: Container(
+                  width: 50,
+                  height: 3,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black),
+                ),
+              ),
+              const SizedBox(height: 50),
+              child
+            ],
+          ),
         ),
       );
     },

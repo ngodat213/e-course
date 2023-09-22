@@ -100,4 +100,25 @@ class UserRepository extends UserBase {
       );
     }
   }
+
+  @override
+  Future<void> updatePhoneNumberCollection(String phoneNumber) async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      _firebaseFirestore
+          .collection(ApiPath.USER)
+          .doc(userToken)
+          .update({"phoneNumber": phoneNumber});
+      throw ("Update phone number fail!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception update phone number',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

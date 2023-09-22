@@ -9,4 +9,6 @@ abstract class UserBase {
   Future<void> updateEmail(String newEmail);
 
   Future<void> updateEmailCollection(String newEmail);
+
+  Future<void> updatePhoneNumberCollection(String phoneNumber);
 }

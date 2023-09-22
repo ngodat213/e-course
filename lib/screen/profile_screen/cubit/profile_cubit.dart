@@ -89,4 +89,22 @@ class ProfileCubit extends Cubit<ProfileState> {
       state.copyWith(status: ProfileStatus.error);
     }
   }
+
+  Future<void> updatePhoneNumber() async {
+    if (state.status == ProfileStatus.submitting) return;
+    if (state.phoneNumber != "") {
+      try {
+        await _userRepository.updatePhoneNumberCollection(state.phoneNumber);
+        toastInfo(msg: 'Update phone number successfull');
+        emit(state.copyWith(status: ProfileStatus.success));
+      } on CustomError {
+        emit(state.copyWith(status: ProfileStatus.error));
+      } catch (e) {
+        emit(state.copyWith(status: ProfileStatus.error));
+      }
+    } else {
+      toastInfo(msg: 'Fill phone number text field');
+      state.copyWith(status: ProfileStatus.error);
+    }
+  }
 }
