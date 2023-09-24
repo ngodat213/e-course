@@ -8,7 +8,6 @@ import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -106,11 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: Dimens.HEIGHT_20),
                     const ListExam(),
                     const SizedBox(height: Dimens.HEIGHT_20),
-                    Text(S.current.lastExamDone, style: TxtStyle.title),
-                    const SizedBox(height: Dimens.HEIGHT_8),
-                    const ExamDone(),
-                    const ExamDone(),
-                    const ExamDone()
                   ],
                 ),
               )
@@ -328,13 +322,19 @@ class HomeHeader extends StatelessWidget {
             SvgPicture.asset(Images.iconMenu, width: Dimens.HEIGHT_16),
             Expanded(child: Container()),
             const Icon(Icons.notifications_none_sharp),
-            Container(
-              width: Dimens.HEIGHT_32,
-              height: Dimens.HEIGHT_32,
-              margin: const EdgeInsets.only(left: Dimens.PADDING_16),
-              child: CircleAvatar(
-                radius: Dimens.RADIUS_CIRCLE,
-                backgroundImage: NetworkImage(state.user.photoUrl!),
+            GestureDetector(
+              onTap: () {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.profileScreen);
+              },
+              child: Container(
+                width: Dimens.HEIGHT_32,
+                height: Dimens.HEIGHT_32,
+                margin: const EdgeInsets.only(left: Dimens.PADDING_16),
+                child: CircleAvatar(
+                  radius: Dimens.RADIUS_CIRCLE,
+                  backgroundImage: NetworkImage(state.user.photoUrl!),
+                ),
               ),
             ),
           ],

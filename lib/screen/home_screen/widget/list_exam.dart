@@ -29,7 +29,13 @@ class _ListExamState extends State<ListExam> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(S.of(context).todayTest, style: TxtStyle.title),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(S.of(context).todayTest, style: TxtStyle.title),
+                  Text(S.of(context).all, style: TxtStyle.pMainColor),
+                ],
+              ),
               const SizedBox(height: Dimens.HEIGHT_8),
               Text('Here is your test list for today',
                   style: TxtStyle.hintStyle),

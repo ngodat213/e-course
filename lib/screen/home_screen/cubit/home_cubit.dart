@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 
