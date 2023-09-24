@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:quiz_flutter/models/models.dart';
+import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
@@ -8,12 +9,32 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository _userRepository;
-  ProfileCubit(this._userRepository) : super(ProfileState.initial());
+  final AuthRepository _authRepository;
+  ProfileCubit(this._userRepository, this._authRepository)
+      : super(ProfileState.initial());
 
   void emailChanged(String value) {
     emit(
       state.copyWith(
-        email: value,
+        newEmail: value,
+        status: ProfileStatus.initial,
+      ),
+    );
+  }
+
+  void oldEmailChanged(String value) {
+    emit(
+      state.copyWith(
+        oldEmail: value,
+        status: ProfileStatus.initial,
+      ),
+    );
+  }
+
+  void passwordChanged(String value) {
+    emit(
+      state.copyWith(
+        password: value,
         status: ProfileStatus.initial,
       ),
     );
@@ -53,40 +74,41 @@ class ProfileCubit extends Cubit<ProfileState> {
         await _userRepository.updateUserName(state.userName);
         toastInfo(msg: 'Update user name successfull');
         emit(state.copyWith(status: ProfileStatus.success));
-      } on CustomError {
-        emit(
-          state.copyWith(status: ProfileStatus.error),
-        );
+      } on CustomError catch (e) {
+        throw CustomError(code: e.code, plugin: e.plugin);
       } catch (e) {
-        emit(
-          state.copyWith(status: ProfileStatus.error),
+        throw CustomError(
+          code: 'Exception QuizCubit',
+          msg: e.toString(),
+          plugin: 'flutter_error/server_error',
         );
       }
     } else {
       toastInfo(msg: 'Fill user name text field');
-      state.copyWith(status: ProfileStatus.error);
+      emit(state.copyWith(status: ProfileStatus.error));
     }
   }
 
   Future<void> updateEmail() async {
     if (state.status == ProfileStatus.submitting) return;
-    if (state.email != "") {
+    if (state.newEmail != "" || state.oldEmail == "" || state.password == "") {
       try {
-        await _userRepository.updateEmail(state.email);
-        toastInfo(msg: 'Update email successfull');
+        await _authRepository.logInWithEmailAndPassword(
+            email: state.oldEmail, password: state.password);
+        await _userRepository.updateEmail(state.newEmail);
         emit(state.copyWith(status: ProfileStatus.success));
-      } on CustomError {
-        emit(
-          state.copyWith(status: ProfileStatus.error),
-        );
+      } on CustomError catch (e) {
+        throw CustomError(code: e.code, plugin: e.plugin);
       } catch (e) {
-        emit(
-          state.copyWith(status: ProfileStatus.error),
+        throw CustomError(
+          code: 'Exception QuizCubit',
+          msg: e.toString(),
+          plugin: 'flutter_error/server_error',
         );
       }
     } else {
       toastInfo(msg: 'Fill email text field');
-      state.copyWith(status: ProfileStatus.error);
+      emit(state.copyWith(status: ProfileStatus.error));
     }
   }
 
@@ -97,14 +119,18 @@ class ProfileCubit extends Cubit<ProfileState> {
         await _userRepository.updatePhoneNumberCollection(state.phoneNumber);
         toastInfo(msg: 'Update phone number successfull');
         emit(state.copyWith(status: ProfileStatus.success));
-      } on CustomError {
-        emit(state.copyWith(status: ProfileStatus.error));
+      } on CustomError catch (e) {
+        throw CustomError(code: e.code, plugin: e.plugin);
       } catch (e) {
-        emit(state.copyWith(status: ProfileStatus.error));
+        throw CustomError(
+          code: 'Exception QuizCubit',
+          msg: e.toString(),
+          plugin: 'flutter_error/server_error',
+        );
       }
     } else {
       toastInfo(msg: 'Fill phone number text field');
-      state.copyWith(status: ProfileStatus.error);
+      emit(state.copyWith(status: ProfileStatus.error));
     }
   }
 }

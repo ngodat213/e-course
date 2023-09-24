@@ -51,7 +51,10 @@ class ManagerProvider {
       ),
     ),
     BlocProvider(
-      create: (context) => ProfileCubit(context.read<UserRepository>()),
+      create: (context) => ProfileCubit(
+        context.read<UserRepository>(),
+        context.read<AuthRepository>(),
+      ),
     ),
   ];
 }

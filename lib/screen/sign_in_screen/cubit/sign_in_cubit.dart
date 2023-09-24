@@ -40,14 +40,9 @@ class SignInCubit extends Cubit<SignInState> {
         toastInfo(msg: 'Login successfull');
         emit(state.copyWith(status: LoginStatus.success));
       } on CustomError {
-        emit(
-          state.copyWith(status: LoginStatus.error),
-        );
+        emit(state.copyWith(status: LoginStatus.error));
       } catch (e) {
-        emit(
-          state.copyWith(status: LoginStatus.error),
-        );
-        print(e.toString());
+        emit(state.copyWith(status: LoginStatus.error));
       }
     } else {
       toastInfo(msg: "Fill in all text fields");

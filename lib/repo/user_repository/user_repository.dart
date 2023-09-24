@@ -50,7 +50,6 @@ class UserRepository extends UserBase {
           .collection(ApiPath.USER)
           .doc(userToken)
           .update({"displayName": value});
-      throw ("Update username fail!");
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
@@ -89,7 +88,6 @@ class UserRepository extends UserBase {
           .collection(ApiPath.USER)
           .doc(userToken)
           .update({"email": newEmail});
-      throw ("Update email fail!");
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
@@ -110,7 +108,6 @@ class UserRepository extends UserBase {
           .collection(ApiPath.USER)
           .doc(userToken)
           .update({"phoneNumber": phoneNumber});
-      throw ("Update phone number fail!");
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

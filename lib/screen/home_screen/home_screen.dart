@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/course.dart';
@@ -11,6 +10,7 @@ import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     context.read<HomeCubit>().getCourse();
     context.read<HomeCubit>().getQuiz();
+    context.read<SettingCubit>().getUser();
   }
 
   @override
@@ -320,21 +321,25 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(Images.iconMenu, width: Dimens.HEIGHT_16),
-        Expanded(child: Container()),
-        const Icon(Icons.notifications_none_sharp),
-        Container(
-          width: Dimens.HEIGHT_32,
-          height: Dimens.HEIGHT_32,
-          margin: const EdgeInsets.only(left: Dimens.PADDING_16),
-          child: const CircleAvatar(
-            radius: Dimens.RADIUS_CIRCLE,
-            backgroundImage: NetworkImage(DEFAULT_AVATAR),
-          ),
-        ),
-      ],
+    return BlocBuilder<SettingCubit, SettingState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            SvgPicture.asset(Images.iconMenu, width: Dimens.HEIGHT_16),
+            Expanded(child: Container()),
+            const Icon(Icons.notifications_none_sharp),
+            Container(
+              width: Dimens.HEIGHT_32,
+              height: Dimens.HEIGHT_32,
+              margin: const EdgeInsets.only(left: Dimens.PADDING_16),
+              child: CircleAvatar(
+                radius: Dimens.RADIUS_CIRCLE,
+                backgroundImage: NetworkImage(state.user.photoUrl!),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

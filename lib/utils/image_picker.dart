@@ -10,12 +10,12 @@ import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
 class ImagePickerProfile with ChangeNotifier {
-  FirebaseFirestore ref = FirebaseFirestore.instance;
+  static FirebaseFirestore ref = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
 
   static XFile? image;
 
-  void uploadImage() async {
+  static uploadImage() async {
     final userToken = await BaseSharedPreferences.getStringValue(
         ManagerKeyStorage.accessToken);
     Reference storageRef =
@@ -28,12 +28,12 @@ class ImagePickerProfile with ChangeNotifier {
     ref
         .collection(ApiPath.USER)
         .doc(userToken)
-        .set({'photoUrl': newUrl})
+        .update({'photoUrl': newUrl})
         .then((value) => {toastInfo(msg: "Profile update"), image = null})
         .onError((error, stackTrace) => toastInfo(msg: error.toString()));
   }
 
-  static pickeImage(ImageSource source) async {
+  static pickImage(ImageSource source) async {
     final ImagePicker imagePicker = ImagePicker();
     XFile? file = await imagePicker.pickImage(source: source);
     if (file != null) {
