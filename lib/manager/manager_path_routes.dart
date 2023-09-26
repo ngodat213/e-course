@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/screen/common_info_screen/common_info_screen.dart';
 import 'package:quiz_flutter/screen/course_detail/course_detail.dart';
-import 'package:quiz_flutter/screen/favorite_screen/favorite.dart';
+import 'package:quiz_flutter/screen/course_list_screen/course_list_screen.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/forgot_password.dart';
 import 'package:quiz_flutter/screen/home_screen/home_screen.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/main_screen.dart';

@@ -6,6 +6,7 @@ import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
+import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_cubit.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/cubit/forgot_password_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
@@ -55,6 +56,9 @@ class ManagerProvider {
         context.read<UserRepository>(),
         context.read<AuthRepository>(),
       ),
+    ),
+    BlocProvider(
+      create: (context) => CourseListCubit(),
     ),
   ];
 }

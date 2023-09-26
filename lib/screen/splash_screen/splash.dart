@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
@@ -26,11 +29,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     checkUserKeepLogin().whenComplete(
         () async => Timer(const Duration(seconds: DELAY_SPLASH_SCREEN), () {
-              keepLogin
-                  ? BaseNavigation.push(context,
-                      routeName: ManagerRoutes.mainScreen, clearStack: true)
-                  : BaseNavigation.push(context,
-                      routeName: ManagerRoutes.signInScreen, clearStack: true);
+              if (keepLogin) {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.mainScreen, clearStack: true);
+                context.read<HomeCubit>().getCourse();
+                context.read<HomeCubit>().getQuiz();
+                context.read<SettingCubit>().getUser();
+              } else {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.signInScreen, clearStack: true);
+              }
             }));
     super.initState();
   }

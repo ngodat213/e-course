@@ -15,6 +15,7 @@ class Dimens {
   static const PADDING_6 = 6.0;
   static const PADDING_ZERO = 0.0;
 
+  static const HEIGHT_296 = 296.0;
   static const HEIGHT_230 = 230.0;
   static const HEIGHT_200 = 200.0;
   static const HEIGHT_160 = 160.0;
