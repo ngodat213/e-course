@@ -58,7 +58,7 @@ class ManagerProvider {
       ),
     ),
     BlocProvider(
-      create: (context) => CourseListCubit(),
+      create: (context) => CourseListCubit(context.read<AppRepository>()),
     ),
   ];
 }

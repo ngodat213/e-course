@@ -15,14 +15,9 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    //   context.read<SettingCubit>().getUser();
-    // });
-
     return BlocBuilder<SettingCubit, SettingState>(
       builder: (context, state) {
         if (state.status == SettingStatus.success) {
-          final user = state.user;
           return Scaffold(
             body: SafeArea(
               child: SingleChildScrollView(

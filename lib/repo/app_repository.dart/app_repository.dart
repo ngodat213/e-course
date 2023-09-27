@@ -111,6 +111,30 @@ class AppRepository implements AppBase {
   }
 
   @override
+  Future<List<Course>> getCourse() async {
+    List<Course> list = [];
+    try {
+      await firebaseFirestore.collection(ApiPath.COURSE).get().then((value) {
+        for (var element in value.docs) {
+          list.add(Course.fromDoc(element));
+        }
+      });
+      if (list.isNotEmpty) {
+        return list;
+      }
+      throw 'Course is empty';
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
   Future<CourseLesson> getCourseLessonById(String lessonId) async {
     try {
       final lessonDoc = await firebaseFirestore

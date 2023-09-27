@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
-import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class CardSlider extends StatelessWidget {
-  const CardSlider({
+  const CardSlider(
+    this.course, {
     super.key,
   });
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +28,50 @@ class CardSlider extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Positioned(
-            right: 0,
-            child: SvgPicture.asset(
-              Images.imageCourse0,
-              height: Dimens.HEIGHT_150,
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: AppColors.main,
+                borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
+                image: DecorationImage(
+                  image: NetworkImage(course.thumb),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Dimens.PADDING_16,
-              vertical: Dimens.PADDING_16,
-            ),
+          Positioned(
+            bottom: 15,
+            left: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Hydra', style: TxtStyle.p),
-                const SizedBox(height: Dimens.HEIGHT_25),
                 SizedBox(
                   width: Dimens.HEIGHT_200,
-                  child:
-                      Text('Flutter for begginer', style: TxtStyle.titleWhite),
+                  child: Text(course.title, style: TxtStyle.titleWhite),
                 ),
-                Text('20/25 ${S.of(context).lesson}', style: TxtStyle.p),
+                Text(
+                    '${course.listLesson.length} Lesson ${S.of(context).lesson}',
+                    style: TxtStyle.p),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 10,
+                      backgroundImage: NetworkImage(DEFAULT_AVATAR),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      'Hydra',
+                      style: TxtStyle.p,
+                    )
+                  ],
+                )
               ],
             ),
-          ),
+          )
         ],
       ),
     );

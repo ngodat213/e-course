@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class CourseCardListView extends StatelessWidget {
-  const CourseCardListView({super.key});
-
+  const CourseCardListView(this.course, {super.key});
+  final Course course;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +28,8 @@ class CourseCardListView extends StatelessWidget {
             margin: const EdgeInsets.only(right: 8),
             decoration: BoxDecoration(
               color: AppColors.main,
+              image: DecorationImage(
+                  image: NetworkImage(course.thumb), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
             ),
           ),
@@ -35,8 +38,7 @@ class CourseCardListView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Learning How To Write As A Professional Author',
-                    style: TxtStyle.buttonBlack),
+                Text(course.title, style: TxtStyle.buttonBlack),
                 const Expanded(child: SizedBox()),
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -45,7 +47,7 @@ class CourseCardListView extends StatelessWidget {
                       bottom: BorderSide(width: 1, color: Color(0xFFEDEDED)),
                     ),
                   ),
-                  child: const _CourseInfo(),
+                  child: _CourseInfo(course),
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -73,7 +75,8 @@ class CourseCardListView extends StatelessWidget {
 }
 
 class _CourseInfo extends StatelessWidget {
-  const _CourseInfo();
+  const _CourseInfo(this.course);
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,7 @@ class _CourseInfo extends StatelessWidget {
           children: [
             SvgPicture.asset(Images.iconLesson),
             const SizedBox(width: 8),
-            Text('9 Lessons',
+            Text('${course.listLesson.length} Lessons',
                 style: TxtStyle.time.copyWith(fontWeight: FontWeight.w500)),
           ],
         ),

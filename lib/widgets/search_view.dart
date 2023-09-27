@@ -14,7 +14,7 @@ class SearchView extends StatelessWidget {
     return Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(vertical: 25),
+      margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
       decoration: BoxDecoration(
         boxShadow: AppColors.shadow,
         color: AppColors.white,

@@ -27,7 +27,7 @@ class _OptionWidgetState extends State<OptionWidget> {
             shrinkWrap: true,
             itemCount: state.questions[state.index].options.length,
             itemBuilder: (context, index) {
-              return _OptionChooice(
+              return OptionChooice(
                 onTap: () {
                   setState(() {
                     widget.userChooise[state.index] = index;
@@ -77,8 +77,9 @@ class _OptionWidgetState extends State<OptionWidget> {
   }
 }
 
-class _OptionChooice extends StatelessWidget {
-  _OptionChooice({
+class OptionChooice extends StatelessWidget {
+  OptionChooice({
+    super.key,
     required this.option,
     this.isSellect,
     this.onTap,

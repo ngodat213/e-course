@@ -13,9 +13,11 @@ class CourseCardGrid extends StatelessWidget {
     return Container(
       width: 210,
       height: 230,
-      margin: const EdgeInsets.only(right: 20),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 2, bottom: 2, right: 20),
       decoration: BoxDecoration(
         color: AppColors.white,
+        boxShadow: AppColors.shadow,
         borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
       ),
       child: Column(
