@@ -3,12 +3,15 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/models.dart';
+import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/card_course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class CourseSlider extends StatefulWidget {
   const CourseSlider({
@@ -33,7 +36,15 @@ class _CourseSliderState extends State<CourseSlider> {
           children: [
             const _courseSliderTitle(),
             CarouselSlider(
-              items: widget.course.map((e) => CardSlider(e)).toList(),
+              items: widget.course
+                  .map((e) => GestureDetector(
+                      onTap: () {
+                        context.read<CourseDetailCubit>().courseChanged(e);
+                        BaseNavigation.push(context,
+                            routeName: ManagerRoutes.courseDetailScreen);
+                      },
+                      child: CardSlider(e)))
+                  .toList(),
               carouselController: carouselController,
               options: CarouselOptions(
                 autoPlay: true,
