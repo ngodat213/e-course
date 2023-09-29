@@ -8,6 +8,7 @@ import 'package:quiz_flutter/screen/quiz_play_screen/widget/current_question.dar
 import 'package:quiz_flutter/screen/quiz_play_screen/widget/option_widget.dart';
 import 'package:quiz_flutter/screen/quiz_play_screen/widget/question_title.dart';
 import 'package:quiz_flutter/screen/quiz_play_screen/widget/time_remaining.dart';
+import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 
 class PlayPage extends StatelessWidget {
@@ -23,6 +24,7 @@ class PlayPage extends StatelessWidget {
     return BlocBuilder<QuizPlayCubit, QuizPlayState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: AppColors.white,
           body: SingleChildScrollView(
             child: SafeArea(
               child: Stack(

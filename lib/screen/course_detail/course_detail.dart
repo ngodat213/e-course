@@ -11,6 +11,7 @@ import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_button.dart';
+import 'package:quiz_flutter/widgets/title_screen.dart';
 import 'package:readmore/readmore.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
@@ -152,15 +153,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                       ],
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 32),
-                    child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                          course.title,
-                          style: TxtStyle.buttonBlack,
-                        )),
-                  ),
+                  TitleScreen(title: course.title),
                   BuildBackButton(top: 24),
                 ],
               ),

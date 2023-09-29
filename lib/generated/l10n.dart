@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Quiz`
+  /// `E-Course`
   String get app_name {
     return Intl.message(
-      'Quiz',
+      'E-Course',
       name: 'app_name',
       desc: '',
       args: [],
@@ -420,11 +420,11 @@ class S {
     );
   }
 
-  /// `Choice your course`
-  String get choiceYourCourse {
+  /// `Populra Course`
+  String get populraCourse {
     return Intl.message(
-      'Choice your course',
-      name: 'choiceYourCourse',
+      'Populra Course',
+      name: 'populraCourse',
       desc: '',
       args: [],
     );

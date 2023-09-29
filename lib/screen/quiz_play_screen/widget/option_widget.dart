@@ -125,7 +125,9 @@ class OptionChooice extends StatelessWidget {
                   ),
             Text(
               option,
-              style: isSellect == true ? TxtStyle.p : TxtStyle.text,
+              style: isSellect == true
+                  ? TxtStyle.text.copyWith(color: AppColors.white)
+                  : TxtStyle.text,
             )
           ],
         ),
@@ -159,6 +161,7 @@ class _OptionResult extends StatelessWidget {
       height: 60,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
+        color: AppColors.white,
         boxShadow: AppColors.shadow,
         borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
       ),

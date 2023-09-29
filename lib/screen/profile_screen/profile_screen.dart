@@ -44,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         if (state.status == SettingStatus.success) {
           final user = state.user;
           return Scaffold(
+            backgroundColor: AppColors.white,
             body: SingleChildScrollView(
               child: SafeArea(
                 child: Stack(

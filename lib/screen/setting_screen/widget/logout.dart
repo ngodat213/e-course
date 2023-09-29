@@ -10,17 +10,17 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
-class Logout extends StatelessWidget {
-  const Logout({super.key});
+class LogoutTile extends StatelessWidget {
+  const LogoutTile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      child: BuildTile(
+      child: SettingTile(
         svgPath: Images.iconLogout,
         text: 'Sign out',
-        description: 'Sign out the account',
+        subtitle: 'Sign out the account',
         color: const Color(0xFFEA3434),
         onTap: () {
           showDialog(

@@ -22,22 +22,22 @@ class SettingMenu extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const BuildTile(
+          const SettingTile(
             svgPath: Images.iconNotification,
             text: 'Notification',
-            description: 'Ringtone, message, notification',
+            subtitle: 'Ringtone, message, notification',
           ),
           const _CustomDivider(),
-          const BuildTile(
+          const SettingTile(
             svgPath: Images.iconGlobal,
             text: 'Language',
-            description: 'English',
+            subtitle: 'English',
           ),
           const _CustomDivider(),
-          BuildTile(
+          SettingTile(
             svgPath: Images.iconInfo,
             text: 'About',
-            description: 'About us',
+            subtitle: 'About us',
             onTap: () {
               context.read<CommoInfoCubit>().indexChanged(0);
               BaseNavigation.push(context,
@@ -45,10 +45,10 @@ class SettingMenu extends StatelessWidget {
             },
           ),
           const _CustomDivider(),
-          BuildTile(
+          SettingTile(
             svgPath: Images.iconChat,
             text: 'Help',
-            description: 'Contact us',
+            subtitle: 'Contact us',
             onTap: () {
               context.read<CommoInfoCubit>().indexChanged(1);
               BaseNavigation.push(context,
@@ -56,10 +56,10 @@ class SettingMenu extends StatelessWidget {
             },
           ),
           const _CustomDivider(),
-          const BuildTile(
+          const SettingTile(
             svgPath: Images.iconSetting,
             text: 'Preferences',
-            description: 'Theme, Settings',
+            subtitle: 'Theme, Settings',
           ),
         ],
       ),
@@ -76,18 +76,18 @@ class _CustomDivider extends StatelessWidget {
   }
 }
 
-class BuildTile extends StatelessWidget {
-  const BuildTile({
+class SettingTile extends StatelessWidget {
+  const SettingTile({
     super.key,
     required this.svgPath,
     required this.text,
-    required this.description,
+    required this.subtitle,
     this.onTap,
     this.color,
   });
   final String svgPath;
   final String text;
-  final String description;
+  final String subtitle;
   final Color? color;
   final VoidCallback? onTap;
 
@@ -95,25 +95,24 @@ class BuildTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SvgPicture.asset(svgPath),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(text,
-                    style: TxtStyle.inputStyle.copyWith(
-                        fontWeight: FontWeight.w600, color: color ?? color)),
-                Text(description, style: TxtStyle.labelStyle)
-              ],
-            )
-          ],
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        leading: CircleAvatar(
+          backgroundColor: Colors.white.withOpacity(0),
+          child: SvgPicture.asset(
+            svgPath,
+            color: color,
+            width: 24,
+          ),
+        ),
+        title: Text(
+          text,
+          style: TxtStyle.inputStyle
+              .copyWith(fontWeight: FontWeight.w600, color: color),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: TxtStyle.labelStyle.copyWith(color: color),
         ),
       ),
     );

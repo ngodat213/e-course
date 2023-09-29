@@ -28,17 +28,13 @@ class CardSlider extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Expanded(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: AppColors.main,
-                borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
-                image: DecorationImage(
-                  image: NetworkImage(course.thumb),
-                  fit: BoxFit.cover,
-                ),
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.main,
+              borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
+              image: DecorationImage(
+                image: NetworkImage(course.thumb),
+                fit: BoxFit.cover,
               ),
             ),
           ),

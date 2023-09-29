@@ -72,11 +72,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-  assets:
-    - lib/res/images/
-    - lib/res/icons/
   uses-material-design: true
   generate: true
+  assets:
+    - lib/res/icons/
+    - lib/res/images/
 
 flutter_intl:
   enabled: true

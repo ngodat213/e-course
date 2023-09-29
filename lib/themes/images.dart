@@ -7,11 +7,8 @@ class Images {
   static const String iconArrowLeft = '$iconPath/arrow_left.svg';
   static const String iconGoogle = '$iconPath/google.svg';
   static const String iconFacebook = '$iconPath/facebook.svg';
-  static const String iconMenu = '$iconPath/menu.svg';
-  static const String iconBell = '$iconPath/bell.svg';
   static const String iconClock = '$iconPath/clock.svg';
   static const String iconCheck = '$iconPath/check.svg';
-  static const String iconGptLogo = '$iconPath/gpt_logo.svg';
   static const String iconStar = '$iconPath/star.svg';
   static const String iconCheckMark = '$iconPath/check_mark.svg';
   static const String iconCheckPadding = '$iconPath/check_padding.svg';

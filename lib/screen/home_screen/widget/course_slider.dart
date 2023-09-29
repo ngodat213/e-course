@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
-import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/card_course.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
@@ -16,9 +16,7 @@ import 'package:quiz_flutter/utils/base_navigation.dart';
 class CourseSlider extends StatefulWidget {
   const CourseSlider({
     super.key,
-    required this.course,
   });
-  final List<Course> course;
 
   @override
   State<CourseSlider> createState() => _CourseSliderState();
@@ -36,7 +34,7 @@ class _CourseSliderState extends State<CourseSlider> {
           children: [
             const _courseSliderTitle(),
             CarouselSlider(
-              items: widget.course
+              items: state.courses
                   .map((e) => GestureDetector(
                       onTap: () {
                         context.read<CourseDetailCubit>().courseChanged(e);
@@ -79,16 +77,21 @@ class _courseSliderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.PADDING_SCREEN),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('${S.of(context).hi}, HydraCoder', style: TxtStyle.title),
-          const SizedBox(height: Dimens.HEIGHT_8),
-          Text(S.of(context).progressTitle, style: TxtStyle.hintStyle),
-        ],
-      ),
+    return BlocBuilder<SettingCubit, SettingState>(
+      builder: (context, state) {
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: Dimens.PADDING_SCREEN),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('${S.of(context).hi}, ${state.user.displayName}',
+                  style: TxtStyle.title),
+              const SizedBox(height: Dimens.HEIGHT_8),
+              Text(S.of(context).progressTitle, style: TxtStyle.hintStyle),
+            ],
+          ),
+        );
+      },
     );
   }
 }

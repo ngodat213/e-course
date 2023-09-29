@@ -9,7 +9,6 @@ import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/reusable_menu_text.dart';
 
 class GridViewCourse extends StatefulWidget {
   const GridViewCourse({
@@ -34,7 +33,7 @@ class _GridViewCourseState extends State<GridViewCourse> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(S.of(context).choiceYourCourse, style: TxtStyle.title),
+                  Text(S.of(context).populraCourse, style: TxtStyle.title),
                   GestureDetector(
                     onTap: () {
                       BaseNavigation.push(context,
@@ -44,14 +43,7 @@ class _GridViewCourseState extends State<GridViewCourse> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  ReusableMenuText(S.of(context).all),
-                  ReusableMenuText(S.of(context).cpp),
-                  ReusableMenuText(S.of(context).python),
-                  ReusableMenuText(S.of(context).cs),
-                ],
-              ),
+              const SizedBox(height: Dimens.HEIGHT_8),
               GridView.custom(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

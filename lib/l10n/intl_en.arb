@@ -1,5 +1,5 @@
 {
-    "app_name": "Quiz",
+    "app_name": "E-Course",
     "next": "Next",
     "getStarted": "Get Started",
     "more": "More",
@@ -36,7 +36,7 @@
     "terms": "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app",
     "hi": "Hi",
     "progressTitle": "Here you progress last week",
-    "choiceYourCourse": "Choice your course",
+    "populraCourse": "Populra Course",
     "cpp": "C/C++",
     "python": "Python",
     "cs": "C#",

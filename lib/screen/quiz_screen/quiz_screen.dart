@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_flutter/const/const.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/quiz.dart';
 import 'package:quiz_flutter/models/quiz_lesson.dart';
@@ -8,9 +8,12 @@ import 'package:quiz_flutter/screen/quiz_play_screen/cubit/quiz_play_cubit.dart'
 import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
+import 'package:quiz_flutter/widgets/title_screen.dart';
+import 'package:readmore/readmore.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -28,76 +31,48 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<QuizCubit, QuizState>(
-        builder: (context, state) {
-          var quiz = state.quiz;
-          var lesson = state.lessons;
-          if (state.status == QuizStatus.isNotEmpty) {
-            return Stack(
-              children: [
-                CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      automaticallyImplyLeading: false,
-                      pinned: true,
-                      expandedHeight: Dimens.HEIGHT_230,
-                      elevation: 0,
-                      bottom: PreferredSize(
-                        preferredSize:
-                            const Size.fromHeight(Dimens.HEIGHT_ZERO),
-                        child: Container(
-                          height: Dimens.HEIGHT_20,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimens.RADIUS_8),
-                              topLeft: Radius.circular(Dimens.RADIUS_8),
+    return BlocBuilder<QuizCubit, QuizState>(
+      builder: (context, state) {
+        var quiz = state.quiz;
+        var lesson = state.lessons;
+        if (state.status == QuizStatus.isNotEmpty) {
+          return Scaffold(
+            backgroundColor: AppColors.white,
+            body: SafeArea(
+              child: Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 70),
+                        Container(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width - 50,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(quiz.image),
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                          child: Center(
-                            child: Container(
-                              width: Dimens.HEIGHT_30,
-                              height: Dimens.HEIGHT_3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.main),
-                            ),
+                            borderRadius:
+                                BorderRadius.circular(Dimens.RADIUS_8),
                           ),
                         ),
-                      ),
-                      flexibleSpace: FlexibleSpaceBar(
-                        background: quiz.image == ''
-                            ? Container(
-                                height: Dimens.HEIGHT_230,
-                                width: MediaQuery.of(context).size.width,
-                                color: AppColors.main,
-                              )
-                            : Container(
-                                height: Dimens.HEIGHT_230,
-                                width: MediaQuery.of(context).size.width,
-                                decoration:
-                                    BoxDecoration(boxShadow: AppColors.shadow),
-                                child: Image.network(
-                                  quiz.image,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                      ),
+                        BuildContent(quiz: quiz, lesson: lesson),
+                      ],
                     ),
-                    SliverToBoxAdapter(
-                      child: BuildContent(quiz: quiz, lesson: lesson),
-                    ),
-                  ],
-                ),
-                BuildBackButton(),
-              ],
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+                  ),
+                  TitleScreen(title: quiz.title),
+                  BuildBackButton(top: 24),
+                ],
+              ),
+            ),
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 }
@@ -114,42 +89,46 @@ class BuildContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.PADDING_SCREEN),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: Dimens.RADIUS_8),
-          Text(quiz.title, style: TxtStyle.h2),
-          const SizedBox(height: Dimens.HEIGHT_6),
-          Row(
-            children: [
-              Container(
-                  width: Dimens.HEIGHT_20,
-                  height: Dimens.HEIGHT_20,
-                  margin: const EdgeInsets.only(right: Dimens.PADDING_8),
-                  child: const CircleAvatar(
-                      backgroundImage: NetworkImage(DEFAULT_AVATAR))),
-              Text('HydraCoder', style: TxtStyle.labelStyle),
-            ],
-          ),
-          const SizedBox(height: Dimens.HEIGHT_16),
-          Text('Overview', style: TxtStyle.title),
-          const SizedBox(height: Dimens.HEIGHT_6),
-          Text(quiz.description),
-          const SizedBox(height: Dimens.HEIGHT_16),
-          Text('Lessons', style: TxtStyle.title),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: lesson.length,
-            itemBuilder: (context, index) {
-              return _lessonQuiz(lesson: lesson[index]);
-            },
-          ),
-          const SizedBox(height: 50)
-        ],
-      ),
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: Dimens.RADIUS_8),
+            Text(quiz.title, style: TxtStyle.h2),
+            const SizedBox(height: Dimens.HEIGHT_6),
+            Row(
+              children: [
+                Text(
+                  "@mftmkkus",
+                  style:
+                      TxtStyle.pBold.copyWith(color: const Color(0xFF93989A)),
+                ),
+                const SizedBox(width: 4),
+                SvgPicture.asset(Images.iconCheckMark),
+              ],
+            ),
+            const SizedBox(height: Dimens.HEIGHT_16),
+            ReadMoreText(
+              quiz.description,
+              trimLines: 2,
+              style: TxtStyle.text.copyWith(color: const Color(0xFF93989A)),
+            ),
+            const SizedBox(height: 32),
+            Text('Lessons', style: TxtStyle.title),
+            const SizedBox(height: 12),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: lesson.length,
+              itemBuilder: (context, index) {
+                return _lessonQuiz(lesson: lesson[index]);
+              },
+            ),
+            const SizedBox(height: 50)
+          ],
+        ),
+      ],
     );
   }
 }
