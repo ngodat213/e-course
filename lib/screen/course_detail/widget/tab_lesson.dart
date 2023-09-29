@@ -10,7 +10,8 @@ import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
 class TabLesson extends StatefulWidget {
-  const TabLesson({super.key});
+  const TabLesson({super.key, required this.onTap});
+  final VoidCallback onTap;
 
   @override
   State<TabLesson> createState() => _TabLessonState();
@@ -30,7 +31,11 @@ class _TabLessonState extends State<TabLesson> {
               itemCount: state.courseLesson.length,
               itemBuilder: (context, index) {
                 final lesson = state.courseLesson[index];
-                return LessonWidget(lesson: lesson, video: state.courseVideo);
+                return LessonWidget(
+                  lesson: lesson,
+                  video: state.courseVideo,
+                  onTap: widget.onTap,
+                );
               },
             ),
           );
@@ -48,10 +53,12 @@ class LessonWidget extends StatefulWidget {
     super.key,
     required this.lesson,
     required this.video,
+    required this.onTap,
   });
 
   final CourseLesson lesson;
   final List<CourseVideo> video;
+  final VoidCallback onTap;
   @override
   State<LessonWidget> createState() => _LessonWidgetState();
 }
@@ -78,7 +85,10 @@ class _LessonWidgetState extends State<LessonWidget> {
                   shrinkWrap: true,
                   itemCount: state.courseVideo.length,
                   itemBuilder: (context, index) {
-                    return LessonContent(video: state.courseVideo[index]);
+                    return LessonContent(
+                      video: state.courseVideo[index],
+                      ontap: widget.onTap,
+                    );
                   },
                 ),
               ],
@@ -96,8 +106,10 @@ class LessonContent extends StatefulWidget {
   const LessonContent({
     super.key,
     required this.video,
+    required this.ontap,
   });
   final CourseVideo video;
+  final VoidCallback ontap;
 
   @override
   State<LessonContent> createState() => _LessonContentState();
@@ -109,6 +121,7 @@ class _LessonContentState extends State<LessonContent> {
     return GestureDetector(
       onTap: () {
         context.read<CourseDetailCubit>().videoChanged(widget.video.video);
+        widget.ontap;
       },
       child: Container(
         height: 70,

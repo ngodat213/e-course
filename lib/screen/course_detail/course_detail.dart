@@ -40,7 +40,21 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController,
         autoPlay: true,
+        looping: true,
+        errorBuilder: (context, errorMessage) {
+          return Center(child: Text(errorMessage, style: TxtStyle.p));
+        });
+  }
+
+  void setUriVideo(String uri) {
+    _videoPlayerController = VideoPlayerController.networkUrl(
+        Uri.parse(context.read<CourseDetailCubit>().state.course.video));
+    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
+    _chewieController = ChewieController(
+        videoPlayerController: _videoPlayerController,
+        autoPlay: true,
         looping: true);
+    setState(() {});
   }
 
   @override
@@ -141,9 +155,11 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                               Expanded(
                                 child: TabBarView(
                                   controller: _tabController,
-                                  children: const [
-                                    TabLesson(),
-                                    TabReview(),
+                                  children: [
+                                    TabLesson(onTap: () {
+                                      setUriVideo(state.video);
+                                    }),
+                                    const TabReview(),
                                   ],
                                 ),
                               )

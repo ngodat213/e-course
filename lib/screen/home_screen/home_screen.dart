@@ -74,70 +74,92 @@ class MenuDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color(0xff1A1C2D),
+      // backgroundColor: const Color(0xff1A1C2D),
+      backgroundColor: AppColors.white,
       child: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                    top: Dimens.PADDING_SCREEN, bottom: Dimens.PADDING_33),
-                child: ListTile(
-                  leading: SvgPicture.asset(
-                    Images.iconLogo,
-                    color: AppColors.white,
-                    height: 32,
-                  ),
-                  title: Text(S.of(context).app_name,
-                      style: TxtStyle.h3.copyWith(color: AppColors.white)),
-                ),
-              ),
-              const MenuDrawerTile(
-                svgPath: Images.iconNotification,
-                title: 'Notification',
-                subtitle: 'Ringtone, message, notification',
-              ),
-              const MenuDrawerTile(
-                svgPath: Images.iconGlobal,
-                title: 'Language',
-                subtitle: 'English',
-              ),
-              const MenuDrawerTile(
-                svgPath: Images.iconSetting,
-                title: 'Preferences',
-                subtitle: 'Theme, Settings',
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
-                  leading: Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - 120,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                      top: Dimens.PADDING_SCREEN, bottom: Dimens.PADDING_33),
+                  child: ListTile(
+                    leading: SvgPicture.asset(
+                      Images.iconLogo,
+                      height: 32,
                       color: AppColors.main,
-                      borderRadius: BorderRadius.circular(Dimens.RADIUS_6),
-                      image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/quiz-app-4a98f.appspot.com/o/profileImageeZFxkvClu0e7HL152fnOZmuFYl82?alt=media&token=8babf39b-59d2-4764-b962-104a88c1c1a8')),
                     ),
-                  ),
-                  trailing: SvgPicture.asset(Images.iconLogout),
-                  title: Text(
-                    'HydraCoder',
-                    style: TxtStyle.inputStyle.copyWith(
-                        fontWeight: FontWeight.w600, color: Colors.white),
-                  ),
-                  subtitle: Text(
-                    '@ngodat.it213',
-                    style: TxtStyle.labelStyle.copyWith(color: Colors.white70),
+                    title: Text(S.of(context).app_name, style: TxtStyle.h3),
                   ),
                 ),
-              )
-            ],
+                ExpansionTile(
+                  leading: CircleAvatar(
+                      backgroundColor: Colors.black.withOpacity(0.05),
+                      child: const Icon(
+                        Icons.menu_book_rounded,
+                        color: AppColors.label,
+                      )),
+                  title: Text(
+                    'Course',
+                    style: TxtStyle.inputStyle
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: const Text('Your course'),
+                ),
+                const MenuDrawerTile(
+                  svgPath: Images.iconNotification,
+                  title: 'Favotite course',
+                  subtitle: '',
+                ),
+                const MenuDrawerTile(
+                  svgPath: Images.iconNotification,
+                  title: 'Notification',
+                  subtitle: 'Ringtone, message, notification',
+                ),
+                const MenuDrawerTile(
+                  svgPath: Images.iconGlobal,
+                  title: 'Language',
+                  subtitle: 'English',
+                ),
+                const MenuDrawerTile(
+                  svgPath: Images.iconSetting,
+                  title: 'Preferences',
+                  subtitle: 'Theme, Settings',
+                ),
+                const Spacer(),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                  color: AppColors.label.withOpacity(0.05),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.main,
+                        borderRadius: BorderRadius.circular(Dimens.RADIUS_6),
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://firebasestorage.googleapis.com/v0/b/quiz-app-4a98f.appspot.com/o/profileImageeZFxkvClu0e7HL152fnOZmuFYl82?alt=media&token=8babf39b-59d2-4764-b962-104a88c1c1a8')),
+                      ),
+                    ),
+                    trailing: SvgPicture.asset(
+                      Images.iconLogout,
+                      color: AppColors.label,
+                    ),
+                    title: Text('HydraCoder',
+                        style: TxtStyle.inputStyle
+                            .copyWith(fontWeight: FontWeight.w600)),
+                    subtitle: Text('@ngodat213', style: TxtStyle.labelStyle),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -149,13 +171,13 @@ class MenuDrawerTile extends StatelessWidget {
   const MenuDrawerTile({
     super.key,
     required this.svgPath,
-    required this.title,
     required this.subtitle,
+    this.title,
     this.onTap,
     this.color,
   });
   final String svgPath;
-  final String title;
+  final String? title;
   final String subtitle;
   final Color? color;
   final VoidCallback? onTap;
@@ -164,20 +186,14 @@ class MenuDrawerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-          backgroundColor: AppColors.white.withOpacity(0.05),
-          child: SvgPicture.asset(
-            svgPath,
-            color: AppColors.white,
-          )),
+        backgroundColor: Colors.black.withOpacity(0.05),
+        child: SvgPicture.asset(svgPath),
+      ),
       title: Text(
-        title,
-        style: TxtStyle.inputStyle
-            .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
+        title ?? "",
+        style: TxtStyle.inputStyle.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        subtitle,
-        style: TxtStyle.labelStyle.copyWith(color: Colors.white70),
-      ),
+      subtitle: Text(subtitle, style: TxtStyle.labelStyle),
     );
   }
 }

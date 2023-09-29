@@ -39,34 +39,36 @@ class _QuizScreenState extends State<QuizScreen> {
           return Scaffold(
             backgroundColor: AppColors.white,
             body: SafeArea(
-              child: Stack(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 70),
-                        Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width - 50,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(quiz.image),
-                              fit: BoxFit.cover,
+              child: SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 70),
+                          Container(
+                            height: 200,
+                            width: MediaQuery.of(context).size.width - 50,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(quiz.image),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(Dimens.RADIUS_8),
                             ),
-                            borderRadius:
-                                BorderRadius.circular(Dimens.RADIUS_8),
                           ),
-                        ),
-                        BuildContent(quiz: quiz, lesson: lesson),
-                      ],
+                          BuildContent(quiz: quiz, lesson: lesson),
+                        ],
+                      ),
                     ),
-                  ),
-                  TitleScreen(title: quiz.title),
-                  BuildBackButton(top: 24),
-                ],
+                    TitleScreen(title: quiz.title),
+                    BuildBackButton(top: 24),
+                  ],
+                ),
               ),
             ),
           );
