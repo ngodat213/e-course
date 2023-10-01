@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/course_video.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
+import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class TabLesson extends StatefulWidget {
-  const TabLesson({super.key, required this.onTap});
-  final VoidCallback onTap;
+  const TabLesson({super.key});
 
   @override
   State<TabLesson> createState() => _TabLessonState();
@@ -34,7 +36,6 @@ class _TabLessonState extends State<TabLesson> {
                 return LessonWidget(
                   lesson: lesson,
                   video: state.courseVideo,
-                  onTap: widget.onTap,
                 );
               },
             ),
@@ -53,12 +54,10 @@ class LessonWidget extends StatefulWidget {
     super.key,
     required this.lesson,
     required this.video,
-    required this.onTap,
   });
 
   final CourseLesson lesson;
   final List<CourseVideo> video;
-  final VoidCallback onTap;
   @override
   State<LessonWidget> createState() => _LessonWidgetState();
 }
@@ -87,7 +86,6 @@ class _LessonWidgetState extends State<LessonWidget> {
                   itemBuilder: (context, index) {
                     return LessonContent(
                       video: state.courseVideo[index],
-                      ontap: widget.onTap,
                     );
                   },
                 ),
@@ -106,10 +104,8 @@ class LessonContent extends StatefulWidget {
   const LessonContent({
     super.key,
     required this.video,
-    required this.ontap,
   });
   final CourseVideo video;
-  final VoidCallback ontap;
 
   @override
   State<LessonContent> createState() => _LessonContentState();
@@ -120,8 +116,12 @@ class _LessonContentState extends State<LessonContent> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<CourseDetailCubit>().videoChanged(widget.video.video);
-        widget.ontap;
+        context.read<CourseVideoCubit>().videoUrlChanged(widget.video.video);
+        context
+            .read<CourseVideoCubit>()
+            .courseChanged(context.read<CourseDetailCubit>().state.course);
+        BaseNavigation.push(context,
+            routeName: ManagerRoutes.courseVideoScreen);
       },
       child: Container(
         height: 70,

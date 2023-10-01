@@ -6,13 +6,16 @@ import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/course_video.dart';
 import 'package:quiz_flutter/models/custom_error.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
+import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 
 part 'course_detail_state.dart';
 
 class CourseDetailCubit extends Cubit<CourseDetailState> {
-  final AppRepository appRepository;
+  final AppRepository _appRepository;
+  final UserRepository _userRepository;
 
-  CourseDetailCubit(this.appRepository) : super(CourseDetailState.initial());
+  CourseDetailCubit(this._appRepository, this._userRepository)
+      : super(CourseDetailState.initial());
 
   void courseChanged(Course course) {
     emit(
@@ -40,7 +43,7 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
       List<CourseLesson> lessons = [];
       List<CourseVideo> videos = [];
       for (var element in state.course.listLesson) {
-        lessons.add(await appRepository.getCourseLessonById(element));
+        lessons.add(await _appRepository.getCourseLessonById(element));
       }
       if (lessons.isNotEmpty) {
         lesson = lessons;
@@ -49,7 +52,7 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
       }
       for (var element in state.courseLesson) {
         for (var i in element.listCourseVideo) {
-          videos.add(await appRepository.getCourseVideoById(i));
+          videos.add(await _appRepository.getCourseVideoById(i));
         }
       }
       if (videos.isNotEmpty) {
@@ -64,6 +67,22 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
     } catch (e) {
       throw CustomError(
         code: 'Exception QuizCubit',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  Future<void> updateCourse() async {
+    if (state.status == CourseDetail.isLoading) return;
+    try {
+      await _userRepository.setCourse(state.course.uid);
+      emit(state.copyWith(status: CourseDetail.isNotEmpty));
+    } on CustomError catch (e) {
+      throw CustomError(code: e.code, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception Set course',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_detail/widget/tab_review.dart';
@@ -9,11 +10,11 @@ import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_button.dart';
 import 'package:quiz_flutter/widgets/title_screen.dart';
 import 'package:readmore/readmore.dart';
-import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
 class CourseDetailScreen extends StatefulWidget {
@@ -26,40 +27,16 @@ class CourseDetailScreen extends StatefulWidget {
 class CourseDetailScreenState extends State<CourseDetailScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late VideoPlayerController _videoPlayerController;
-  late Future<void> _initializeVideoPlayerFuture;
   late ChewieController _chewieController;
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     context.read<CourseDetailCubit>().getCourseLesson();
-    _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(context.read<CourseDetailCubit>().state.course.video));
-    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
-    _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        autoPlay: true,
-        looping: true,
-        errorBuilder: (context, errorMessage) {
-          return Center(child: Text(errorMessage, style: TxtStyle.p));
-        });
-  }
-
-  void setUriVideo(String uri) {
-    _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(context.read<CourseDetailCubit>().state.course.video));
-    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
-    _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        autoPlay: true,
-        looping: true);
-    setState(() {});
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
     _chewieController.dispose();
     super.dispose();
   }
@@ -75,7 +52,12 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
             margin: const EdgeInsets.symmetric(
                 horizontal: Dimens.PADDING_SCREEN,
                 vertical: Dimens.PADDING_SCREEN),
-            child: BuildButton(text: 'Register'),
+            child: BuildButton(
+              text: 'Register',
+              onTap: () {
+                context.read<CourseDetailCubit>().updateCourse();
+              },
+            ),
           ),
           body: SingleChildScrollView(
             child: SafeArea(
@@ -88,36 +70,18 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 60),
-                        FutureBuilder(
-                          future: _initializeVideoPlayerFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              return ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(Dimens.RADIUS_8),
-                                child: AspectRatio(
-                                  aspectRatio:
-                                      _videoPlayerController.value.aspectRatio,
-                                  child: Chewie(controller: _chewieController),
-                                ),
-                              );
-                            } else {
-                              return Container(
-                                height: 200,
-                                width: MediaQuery.of(context).size.width - 50,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(course.thumb),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  color: AppColors.main,
-                                  borderRadius:
-                                      BorderRadius.circular(Dimens.RADIUS_8),
-                                ),
-                              );
-                            }
-                          },
+                        Container(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width - 50,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(course.thumb),
+                              fit: BoxFit.cover,
+                            ),
+                            color: AppColors.main,
+                            borderRadius:
+                                BorderRadius.circular(Dimens.RADIUS_8),
+                          ),
                         ),
                         const SizedBox(height: 32),
                         Text(course.title, style: TxtStyle.h3),
@@ -155,11 +119,9 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                               Expanded(
                                 child: TabBarView(
                                   controller: _tabController,
-                                  children: [
-                                    TabLesson(onTap: () {
-                                      setUriVideo(state.video);
-                                    }),
-                                    const TabReview(),
+                                  children: const [
+                                    TabLesson(),
+                                    TabReview(),
                                   ],
                                 ),
                               )
