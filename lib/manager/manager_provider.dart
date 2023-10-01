@@ -7,6 +7,8 @@ import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_cubit.dart';
+import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
+import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
 import 'package:quiz_flutter/screen/forgot_password_screen/cubit/forgot_password_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
@@ -40,7 +42,10 @@ class ManagerProvider {
       create: (context) => QuizPlayCubit(context.read<AppRepository>()),
     ),
     BlocProvider(
-      create: (context) => CourseDetailCubit(context.read<AppRepository>()),
+      create: (context) => CourseDetailCubit(
+        context.read<AppRepository>(),
+        context.read<UserRepository>(),
+      ),
     ),
     BlocProvider(
       create: (context) => CommoInfoCubit(context.read<AppRepository>()),
@@ -59,6 +64,15 @@ class ManagerProvider {
     ),
     BlocProvider(
       create: (context) => CourseListCubit(context.read<AppRepository>()),
+    ),
+    BlocProvider(
+      create: (context) => CourseScreenCubit(
+        context.read<AppRepository>(),
+        context.read<UserRepository>(),
+      ),
+    ),
+    BlocProvider(
+      create: (context) => CourseVideoCubit(),
     ),
   ];
 }

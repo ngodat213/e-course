@@ -31,7 +31,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception',
+        code: 'Exception getQuizByLimit',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -53,7 +53,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception get Lesson',
+        code: 'Exception getLessonById',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -75,7 +75,27 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception getQuestion',
+        code: 'Exception getQuestionById',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<Course> getCourseById(String id) async {
+    try {
+      final courseDoc =
+          await firebaseFirestore.collection(ApiPath.COURSE).doc(id).get();
+      if (courseDoc.exists) {
+        return Course.fromDoc(courseDoc);
+      }
+      throw 'Course is empty';
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getCourseById',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -103,7 +123,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception',
+        code: 'Exception getCourseByLimit',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -127,7 +147,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception',
+        code: 'Exception getCourse',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -149,7 +169,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception getQuestion',
+        code: 'Exception getCourseLessonById',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -171,7 +191,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception getQuestion',
+        code: 'Exception getCourseVideoById',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
@@ -192,7 +212,7 @@ class AppRepository implements AppBase {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception getQuestion',
+        code: 'Exception setContactUs',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

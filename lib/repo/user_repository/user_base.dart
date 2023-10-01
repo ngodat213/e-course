@@ -4,6 +4,8 @@ abstract class UserBase {
   /*--------------------------------- Profile --------------------------------*/
   Future<User> getProfile();
 
+  Future<List<String>> getCourseUser();
+
   Future<void> updateUserName(String value);
 
   Future<void> updateEmail(String newEmail);
@@ -11,4 +13,6 @@ abstract class UserBase {
   Future<void> updateEmailCollection(String newEmail);
 
   Future<void> updatePhoneNumberCollection(String phoneNumber);
+
+  Future<void> setCourse(String courseId);
 }

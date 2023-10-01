@@ -17,6 +17,8 @@ abstract class AppBase {
 
   Future<List<Course>> getCourse();
 
+  Future<Course> getCourseById(String limit);
+
   Future<void> setContactUs(
       String fullName, String mail, String topic, String text);
 }

@@ -25,7 +25,6 @@ class UserRepository extends UserBase {
           .collection(ApiPath.USER)
           .doc(userToken)
           .get();
-      print(userDoc.toString());
       if (userDoc.exists) {
         return User.fromDoc(userDoc);
       }
@@ -113,6 +112,49 @@ class UserRepository extends UserBase {
     } catch (e) {
       throw CustomError(
         code: 'Exception update phone number',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<void> setCourse(String courseId) async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      _firebaseFirestore.collection(ApiPath.USER).doc(userToken).update({
+        "course": FieldValue.arrayUnion([courseId])
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception update course',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<List<String>> getCourseUser() async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      final DocumentSnapshot snapshot = await _firebaseFirestore
+          .collection(ApiPath.USER)
+          .doc(userToken)
+          .get();
+      if (snapshot.exists) {
+        return User.fromDoc(snapshot).course!;
+      }
+      throw "Document does not exist";
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getCourseUser',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
