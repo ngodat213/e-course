@@ -45,9 +45,9 @@ class _CourseScreenState extends State<CourseScreen> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return GestureDetector(
-                                  onTap: () {},
-                                  child:
-                                      CourseCardListView(state.courses[index]));
+                                onTap: () {},
+                                child: CourseCardListView(state.courses[index]),
+                              );
                             },
                           ),
                         ),

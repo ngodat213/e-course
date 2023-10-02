@@ -19,6 +19,8 @@ abstract class AppBase {
 
   Future<Course> getCourseById(String limit);
 
+  Future<void> setCommentCollection(String videoId, String comment);
+
   Future<void> setContactUs(
       String fullName, String mail, String topic, String text);
 }

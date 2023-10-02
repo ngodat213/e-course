@@ -9,6 +9,8 @@ class ApiPath {
   static const String COURSE_LESSON = 'course_lesson';
   static const String COURSE_VIDEO = 'course_video';
 
+  static const String COMMENT = 'comment';
+
   static const String QUESTION = 'question';
   static const String LESSON = 'lesson';
 

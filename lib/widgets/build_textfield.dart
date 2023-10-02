@@ -8,10 +8,10 @@ class BuildTextField extends StatelessWidget {
     this.isPassword,
     this.isNumber,
     this.func,
-    required this.label,
+    this.label,
     required this.hintText,
   });
-  final String label;
+  String? label;
   final String hintText;
   bool? isPassword = false;
   bool? isNumber = false;
@@ -19,7 +19,7 @@ class BuildTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: label == null ? 45 : 60,
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
@@ -31,10 +31,12 @@ class BuildTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 12),
-          Text(
-            label,
-            style: TxtStyle.labelStyle,
-          ),
+          label != null
+              ? Text(
+                  label!,
+                  style: TxtStyle.labelStyle,
+                )
+              : Container(),
           TextFormField(
             onChanged: (value) => func!(value),
             keyboardType: isNumber == true ? TextInputType.number : null,

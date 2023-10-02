@@ -28,7 +28,6 @@ class ManagerRoutes {
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
     mainScreen: (context) => const MainScreen(),
     homeScreen: (context) => const HomeScreen(),
-    communityScreen: (context) => const CommunityScreen(),
     settingScreen: (context) => const SettingScreen(),
     courseDetailScreen: (context) => const CourseDetailScreen(),
     quizScreen: (context) => const QuizScreen(),

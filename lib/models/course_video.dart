@@ -8,6 +8,7 @@ class CourseVideo extends Equatable {
   final String title;
   final String part;
   final String video;
+  final String description;
   final int hour;
   final int minute;
 
@@ -16,6 +17,7 @@ class CourseVideo extends Equatable {
     required this.title,
     required this.part,
     required this.video,
+    required this.description,
     required this.hour,
     required this.minute,
   });
@@ -28,6 +30,7 @@ class CourseVideo extends Equatable {
       title: videoCourseData!['title'],
       part: videoCourseData['part'],
       video: videoCourseData['video'],
+      description: videoCourseData['description'],
       hour: videoCourseData['hour'],
       minute: videoCourseData['minute'],
     );
@@ -39,6 +42,7 @@ class CourseVideo extends Equatable {
       title: '',
       part: '',
       video: '',
+      description: '',
       hour: 0,
       minute: 0,
     );
@@ -46,10 +50,10 @@ class CourseVideo extends Equatable {
   CourseVideo copyWith({
     String? uid,
     String? title,
-    String? description,
     String? imgVideo,
     String? part,
     String? video,
+    String? description,
     int? hour,
     int? minute,
     bool? view,
@@ -60,6 +64,7 @@ class CourseVideo extends Equatable {
       part: part ?? this.part,
       video: video ?? this.video,
       hour: hour ?? this.hour,
+      description: description ?? this.description,
       minute: minute ?? this.minute,
     );
   }
@@ -71,6 +76,7 @@ class CourseVideo extends Equatable {
       title,
       part,
       video,
+      description,
       hour,
       minute,
     ];

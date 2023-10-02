@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/course_video.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
@@ -85,6 +86,7 @@ class _LessonWidgetState extends State<LessonWidget> {
                   itemCount: state.courseVideo.length,
                   itemBuilder: (context, index) {
                     return LessonContent(
+                      lesson: widget.lesson,
                       video: state.courseVideo[index],
                     );
                   },
@@ -104,7 +106,9 @@ class LessonContent extends StatefulWidget {
   const LessonContent({
     super.key,
     required this.video,
+    required this.lesson,
   });
+  final CourseLesson lesson;
   final CourseVideo video;
 
   @override
@@ -117,9 +121,10 @@ class _LessonContentState extends State<LessonContent> {
     return GestureDetector(
       onTap: () {
         context.read<CourseVideoCubit>().videoUrlChanged(widget.video.video);
-        context
-            .read<CourseVideoCubit>()
-            .courseChanged(context.read<CourseDetailCubit>().state.course);
+        Course course = context.read<CourseDetailCubit>().state.course;
+        context.read<CourseVideoCubit>().courseChanged(course);
+        context.read<CourseVideoCubit>().selectionChanged(widget.lesson.title);
+        context.read<CourseVideoCubit>().titleChanged(widget.video.title);
         BaseNavigation.push(context,
             routeName: ManagerRoutes.courseVideoScreen);
       },

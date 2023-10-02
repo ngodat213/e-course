@@ -1,12 +1,17 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
+import 'package:quiz_flutter/widgets/build_textfield.dart';
 import 'package:quiz_flutter/widgets/title_screen.dart';
+import 'package:readmore/readmore.dart';
 import 'package:video_player/video_player.dart';
 
 class CourseVideoScreen extends StatefulWidget {
@@ -91,12 +96,50 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                             }
                           },
                         ),
+                        const SizedBox(height: 32),
+                        Text(state.title, style: TxtStyle.title),
+                        Row(
+                          children: [
+                            Text(
+                              "@mftmkkus",
+                              style: TxtStyle.pBold
+                                  .copyWith(color: const Color(0xFF93989A)),
+                            ),
+                            const SizedBox(width: 4),
+                            SvgPicture.asset(Images.iconCheckMark),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        ReadMoreText(
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                          trimLines: 2,
+                          style: TxtStyle.text
+                              .copyWith(color: const Color(0xFF93989A)),
+                        ),
                         const SizedBox(height: 20),
-                        Text(state.course.title, style: TxtStyle.title)
+                        Text('Comment', style: TxtStyle.inputStyle),
+                        const SizedBox(height: 10),
+                        ListTile(
+                          contentPadding: const EdgeInsets.all(0),
+                          leading: const CircleAvatar(
+                            backgroundImage: NetworkImage(DEFAULT_AVATAR),
+                          ),
+                          title: BuildTextField(hintText: 'Write a comment...'),
+                          trailing: const Icon(Icons.send),
+                        ),
+                        ListView.builder(
+                          itemCount: 3,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return const UserComment();
+                          },
+                        ),
+                        const SizedBox(height: 32),
                       ],
                     ),
                   ),
-                  TitleScreen(title: state.course.title),
+                  TitleScreen(title: state.section),
                   BuildBackButton(top: 24),
                 ],
               ),
@@ -104,6 +147,55 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
           ),
         );
       },
+    );
+  }
+}
+
+class UserComment extends StatelessWidget {
+  const UserComment({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          contentPadding: const EdgeInsets.only(top: 16),
+          leading:
+              const CircleAvatar(backgroundImage: NetworkImage(DEFAULT_AVATAR)),
+          title: Text(
+            'HydraCoder',
+            style: TxtStyle.hintStyle,
+          ),
+          subtitle: Column(
+            children: [
+              ReadMoreText(
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                trimLength: 192,
+                style: TxtStyle.labelStyle
+                    .copyWith(color: const Color(0xFF93989A)),
+              ),
+              const SizedBox(height: 10),
+              const Row(
+                children: [
+                  Icon(
+                    Icons.thumb_up_outlined,
+                    size: 16,
+                  ),
+                  SizedBox(width: 8),
+                  Text('10'),
+                  SizedBox(width: 20),
+                  Icon(
+                    Icons.comment_outlined,
+                    size: 16,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
