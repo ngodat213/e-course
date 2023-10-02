@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_flutter/configs/api_path.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
+import 'package:quiz_flutter/models/comment.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_base.dart';
@@ -222,7 +223,8 @@ class AppRepository implements AppBase {
   }
 
   @override
-  Future<void> setCommentCollection(String videoId, String title) async {
+  Future<void> setCommentCollection(
+      {required String videoId, required String title}) async {
     try {
       final userToken = await BaseSharedPreferences.getStringValue(
           ManagerKeyStorage.accessToken);
@@ -231,7 +233,7 @@ class AppRepository implements AppBase {
         'userId': userToken,
         'title': title,
         'like': 0,
-        'comment': [],
+        'feedback': [],
       }).then((_) {
         var documentId = commentRef.id;
         _firebaseFirestore
@@ -248,6 +250,30 @@ class AppRepository implements AppBase {
     } catch (e) {
       throw CustomError(
         code: 'Exception update course',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<List<Comment>> getComment() async {
+    List<Comment> list = [];
+    try {
+      await _firebaseFirestore.collection(ApiPath.COMMENT).get().then((value) {
+        for (var element in value.docs) {
+          list.add(Comment.fromDoc(element));
+        }
+      });
+      if (list.isNotEmpty) {
+        return list;
+      }
+      throw 'Comment is empty';
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getComment',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );

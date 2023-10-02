@@ -72,7 +72,7 @@ class ManagerProvider {
       ),
     ),
     BlocProvider(
-      create: (context) => CourseVideoCubit(),
+      create: (context) => CourseVideoCubit(context.read<AppRepository>()),
     ),
   ];
 }

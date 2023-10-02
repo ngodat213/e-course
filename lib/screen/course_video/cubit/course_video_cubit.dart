@@ -1,17 +1,24 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:quiz_flutter/models/comment.dart';
 import 'package:quiz_flutter/models/course.dart';
+import 'package:quiz_flutter/models/course_video.dart';
+import 'package:quiz_flutter/models/custom_error.dart';
+import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
+import 'package:quiz_flutter/widgets/custom_toast.dart';
 
 part 'course_video_state.dart';
 
 class CourseVideoCubit extends Cubit<CourseVideoState> {
-  CourseVideoCubit() : super(CourseVideoState.initial());
+  final AppRepository _appRepository;
+  CourseVideoCubit(this._appRepository) : super(CourseVideoState.initial());
 
-  void videoUrlChanged(String value) {
+  void videoChanged(CourseVideo value) {
     emit(
       state.copyWith(
-        videoUrl: value,
-        status: CourseVideoStatus.isLoading,
+        video: value,
+        status: VideoStatus.isLoading,
       ),
     );
   }
@@ -20,16 +27,7 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
     emit(
       state.copyWith(
         section: value,
-        status: CourseVideoStatus.isLoading,
-      ),
-    );
-  }
-
-  void titleChanged(String value) {
-    emit(
-      state.copyWith(
-        title: value,
-        status: CourseVideoStatus.isLoading,
+        status: VideoStatus.isLoading,
       ),
     );
   }
@@ -38,17 +36,56 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
     emit(
       state.copyWith(
         course: value,
-        status: CourseVideoStatus.isLoading,
+        status: VideoStatus.isLoading,
       ),
     );
   }
 
-  void commentChanged(Course value) {
+  void commentChanged(String value) {
     emit(
       state.copyWith(
-        course: value,
-        status: CourseVideoStatus.isLoading,
+        comment: value,
+        status: VideoStatus.isLoading,
       ),
     );
+  }
+
+  Future<void> sendCommnet() async {
+    emit(state.copyWith(commentStatus: CommentStatus.isLoading));
+    if (state.comment != "") {
+      try {
+        await _appRepository.setCommentCollection(
+          videoId: state.video.uid,
+          title: state.comment,
+        );
+        print("send oke");
+        toastInfo(msg: 'Send oke!');
+        emit(state.copyWith(commentStatus: CommentStatus.success));
+      } on CustomError {
+        emit(state.copyWith(commentStatus: CommentStatus.error));
+      } catch (e) {
+        emit(state.copyWith(commentStatus: CommentStatus.error));
+      }
+    } else {
+      toastInfo(msg: "Fill in all text fields");
+      emit(state.copyWith(commentStatus: CommentStatus.error));
+    }
+  }
+
+  late var comments;
+  Future<void> getCommnet() async {
+    emit(state.copyWith(status: VideoStatus.isLoading));
+    try {
+      comments = await _appRepository.getComment();
+      emit(state.copyWith(comments: comments, status: VideoStatus.isNotEmpty));
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getCommnet',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
   }
 }

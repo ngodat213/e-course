@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/models/comment.dart';
 import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
@@ -29,17 +30,23 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
   @override
   void initState() {
     super.initState();
+    initVideoPlayer();
+    context.read<CourseVideoCubit>().getCommnet();
+  }
+
+  void initVideoPlayer() {
     _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(context.read<CourseVideoCubit>().state.videoUrl));
+        Uri.parse(context.read<CourseVideoCubit>().state.video.video));
     _initializeVideoPlayerFuture = _videoPlayerController.initialize();
     _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        aspectRatio: 16 / 11,
-        autoPlay: true,
-        looping: false,
-        errorBuilder: (context, errorMessage) {
-          return Center(child: Text(errorMessage, style: TxtStyle.p));
-        });
+      videoPlayerController: _videoPlayerController,
+      aspectRatio: 16 / 11,
+      autoPlay: true,
+      looping: false,
+      errorBuilder: (context, errorMessage) {
+        return Center(child: Text(errorMessage, style: TxtStyle.p));
+      },
+    );
   }
 
   @override
@@ -97,7 +104,7 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                           },
                         ),
                         const SizedBox(height: 32),
-                        Text(state.title, style: TxtStyle.title),
+                        Text(state.selection, style: TxtStyle.title),
                         Row(
                           children: [
                             Text(
@@ -119,27 +126,13 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                         const SizedBox(height: 20),
                         Text('Comment', style: TxtStyle.inputStyle),
                         const SizedBox(height: 10),
-                        ListTile(
-                          contentPadding: const EdgeInsets.all(0),
-                          leading: const CircleAvatar(
-                            backgroundImage: NetworkImage(DEFAULT_AVATAR),
-                          ),
-                          title: BuildTextField(hintText: 'Write a comment...'),
-                          trailing: const Icon(Icons.send),
-                        ),
-                        ListView.builder(
-                          itemCount: 3,
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return const UserComment();
-                          },
-                        ),
+                        const SendComment(),
+                        const ShowComment(),
                         const SizedBox(height: 32),
                       ],
                     ),
                   ),
-                  TitleScreen(title: state.section),
+                  TitleScreen(title: state.selection),
                   BuildBackButton(top: 24),
                 ],
               ),
@@ -151,10 +144,76 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
   }
 }
 
+class ShowComment extends StatelessWidget {
+  const ShowComment({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CourseVideoCubit, CourseVideoState>(
+      builder: (context, state) {
+        if (state.status == VideoStatus.isNotEmpty) {
+          return ListView.builder(
+            itemCount: state.comments.length,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return UserComment(comment: state.comments[index]);
+            },
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+}
+
+class SendComment extends StatefulWidget {
+  const SendComment({
+    super.key,
+  });
+
+  @override
+  State<SendComment> createState() => _SendCommentState();
+}
+
+class _SendCommentState extends State<SendComment> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CourseVideoCubit, CourseVideoState>(
+      builder: (context, state) {
+        return ListTile(
+          contentPadding: const EdgeInsets.all(0),
+          leading: const CircleAvatar(
+            backgroundImage: NetworkImage(DEFAULT_AVATAR),
+          ),
+          title: BuildTextField(
+            hintText: 'Write a comment...',
+            func: (value) {
+              context.read<CourseVideoCubit>().commentChanged(value);
+              context.read<CourseVideoCubit>().getCommnet();
+            },
+          ),
+          trailing: IconButton(
+            onPressed: () {
+              context.read<CourseVideoCubit>().sendCommnet();
+            },
+            icon: const Icon(Icons.send, color: AppColors.colorFb),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class UserComment extends StatelessWidget {
   const UserComment({
     super.key,
+    required this.comment,
   });
+  final Comment comment;
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +230,8 @@ class UserComment extends StatelessWidget {
           subtitle: Column(
             children: [
               ReadMoreText(
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                comment.title,
+                textAlign: TextAlign.start,
                 trimLength: 192,
                 style: TxtStyle.labelStyle
                     .copyWith(color: const Color(0xFF93989A)),

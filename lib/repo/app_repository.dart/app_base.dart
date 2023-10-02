@@ -1,3 +1,4 @@
+import 'package:quiz_flutter/models/comment.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/models.dart';
 
@@ -19,7 +20,10 @@ abstract class AppBase {
 
   Future<Course> getCourseById(String limit);
 
-  Future<void> setCommentCollection(String videoId, String comment);
+  Future<void> setCommentCollection(
+      {required String videoId, required String title});
+
+  Future<List<Comment>> getComment();
 
   Future<void> setContactUs(
       String fullName, String mail, String topic, String text);

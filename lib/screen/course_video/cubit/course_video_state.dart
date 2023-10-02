@@ -1,48 +1,59 @@
 part of 'course_video_cubit.dart';
 
-enum CourseVideoStatus { isEmpty, isLoading, isNotEmpty }
+enum VideoStatus { isEmpty, isLoading, isNotEmpty }
+
+enum CommentStatus { success, error, isLoading }
 
 class CourseVideoState extends Equatable {
   const CourseVideoState({
-    required this.videoUrl,
-    required this.section,
-    required this.title,
+    required this.video,
+    required this.selection,
     required this.course,
     required this.status,
+    required this.comment,
+    required this.comments,
+    required this.commentStatus,
   });
-  final String videoUrl;
-  final String section;
-  final String title;
+  final CourseVideo video;
+  final String selection;
   final Course course;
-  final CourseVideoStatus status;
+  final VideoStatus status;
+  final String comment;
+  final List<Comment> comments;
+  final CommentStatus commentStatus;
 
-  CourseVideoState copyWith({
-    String? videoUrl,
-    String? section,
-    String? title,
-    String? comment,
-    Course? course,
-    CourseVideoStatus? status,
-  }) {
+  CourseVideoState copyWith(
+      {CourseVideo? video,
+      String? section,
+      String? selection,
+      String? comment,
+      Course? course,
+      VideoStatus? status,
+      List<Comment>? comments,
+      CommentStatus? commentStatus}) {
     return CourseVideoState(
-      videoUrl: videoUrl ?? this.videoUrl,
-      section: section ?? this.section,
-      title: title ?? this.title,
+      video: video ?? this.video,
+      selection: selection ?? this.selection,
       course: course ?? this.course,
       status: status ?? this.status,
+      comment: comment ?? this.comment,
+      comments: comments ?? this.comments,
+      commentStatus: commentStatus ?? this.commentStatus,
     );
   }
 
   factory CourseVideoState.initial() {
     return CourseVideoState(
-      videoUrl: "",
-      section: "",
-      title: "",
-      course: Course.initialCourse(),
-      status: CourseVideoStatus.isLoading,
-    );
+        video: CourseVideo.initialCourseVideo(),
+        selection: "",
+        comment: "",
+        comments: const [],
+        course: Course.initialCourse(),
+        status: VideoStatus.isLoading,
+        commentStatus: CommentStatus.isLoading);
   }
 
   @override
-  List<Object> get props => [videoUrl, section, title, status];
+  List<Object> get props =>
+      [video, selection, status, comment, comments, commentStatus];
 }

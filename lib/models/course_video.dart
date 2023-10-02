@@ -36,7 +36,7 @@ class CourseVideo extends Equatable {
     );
   }
 
-  factory CourseVideo.initialUser() {
+  factory CourseVideo.initialCourseVideo() {
     return const CourseVideo(
       uid: '',
       title: '',

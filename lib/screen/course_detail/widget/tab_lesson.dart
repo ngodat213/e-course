@@ -120,11 +120,10 @@ class _LessonContentState extends State<LessonContent> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<CourseVideoCubit>().videoUrlChanged(widget.video.video);
+        context.read<CourseVideoCubit>().videoChanged(widget.video);
         Course course = context.read<CourseDetailCubit>().state.course;
         context.read<CourseVideoCubit>().courseChanged(course);
         context.read<CourseVideoCubit>().selectionChanged(widget.lesson.title);
-        context.read<CourseVideoCubit>().titleChanged(widget.video.title);
         BaseNavigation.push(context,
             routeName: ManagerRoutes.courseVideoScreen);
       },
