@@ -45,7 +45,8 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
     emit(
       state.copyWith(
         comment: value,
-        status: VideoStatus.isLoading,
+        status: VideoStatus.isNotEmpty,
+        commentStatus: CommentStatus.isLoading,
       ),
     );
   }

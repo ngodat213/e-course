@@ -153,18 +153,14 @@ class ShowComment extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CourseVideoCubit, CourseVideoState>(
       builder: (context, state) {
-        if (state.status == VideoStatus.isNotEmpty) {
-          return ListView.builder(
-            itemCount: state.comments.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return UserComment(comment: state.comments[index]);
-            },
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
+        return ListView.builder(
+          itemCount: state.comments.length,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return UserComment(comment: state.comments[index]);
+          },
+        );
       },
     );
   }
@@ -193,14 +189,16 @@ class _SendCommentState extends State<SendComment> {
             hintText: 'Write a comment...',
             func: (value) {
               context.read<CourseVideoCubit>().commentChanged(value);
-              context.read<CourseVideoCubit>().getCommnet();
             },
           ),
-          trailing: IconButton(
-            onPressed: () {
+          trailing: GestureDetector(
+            onTap: () {
               context.read<CourseVideoCubit>().sendCommnet();
+              setState(() {
+                context.read<CourseVideoCubit>().getCommnet();
+              });
             },
-            icon: const Icon(Icons.send, color: AppColors.colorFb),
+            child: const Icon(Icons.send, color: AppColors.colorFb),
           ),
         );
       },
