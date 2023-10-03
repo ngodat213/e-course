@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/course_card_listview.dart';
 import 'package:quiz_flutter/widgets/search_view.dart';
@@ -45,7 +48,17 @@ class _CourseScreenState extends State<CourseScreen> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  context
+                                      .read<CourseDetailCubit>()
+                                      .courseChanged(state.courses[index]);
+                                  context
+                                      .read<CourseDetailCubit>()
+                                      .isFullChanged(true);
+                                  BaseNavigation.push(context,
+                                      routeName:
+                                          ManagerRoutes.courseDetailScreen);
+                                },
                                 child: CourseCardListView(state.courses[index]),
                               );
                             },

@@ -23,7 +23,9 @@ abstract class AppBase {
   Future<void> setCommentCollection(
       {required String videoId, required String title});
 
-  Future<List<Comment>> getComment();
+  Future<List<String>> getCommentVideo(String videoId);
+
+  Future<Comment> getCommentById(String commentId);
 
   Future<void> setContactUs(
       String fullName, String mail, String topic, String text);

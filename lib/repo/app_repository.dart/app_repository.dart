@@ -240,7 +240,7 @@ class AppRepository implements AppBase {
             .collection(ApiPath.COURSE_VIDEO)
             .doc(videoId)
             .update({
-          "course": FieldValue.arrayUnion([documentId])
+          "comment": FieldValue.arrayUnion([documentId])
         });
       }).catchError((error) {
         throw ("setCommentCollection fail!");
@@ -257,18 +257,38 @@ class AppRepository implements AppBase {
   }
 
   @override
-  Future<List<Comment>> getComment() async {
-    List<Comment> list = [];
+  Future<Comment> getCommentById(String commentId) async {
     try {
-      await _firebaseFirestore.collection(ApiPath.COMMENT).get().then((value) {
-        for (var element in value.docs) {
-          list.add(Comment.fromDoc(element));
-        }
-      });
-      if (list.isNotEmpty) {
-        return list;
+      final videoDoc = await _firebaseFirestore
+          .collection(ApiPath.COMMENT)
+          .doc(commentId)
+          .get();
+      if (videoDoc.exists) {
+        return Comment.fromDoc(videoDoc);
       }
-      throw 'Comment is empty';
+      throw ("getCommentById is empty!");
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getCourseVideoById',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<List<String>> getCommentVideo(String videoId) async {
+    try {
+      final DocumentSnapshot snapshot = await _firebaseFirestore
+          .collection(ApiPath.COURSE_VIDEO)
+          .doc(videoId)
+          .get();
+      if (snapshot.exists) {
+        return CourseVideo.fromDoc(snapshot).comment;
+      }
+      throw 'getCommentVideo is empty';
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

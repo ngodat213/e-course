@@ -31,7 +31,7 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
   void initState() {
     super.initState();
     initVideoPlayer();
-    context.read<CourseVideoCubit>().getCommnet();
+    context.read<CourseVideoCubit>().getComment();
   }
 
   void initVideoPlayer() {
@@ -60,6 +60,7 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<CourseVideoCubit, CourseVideoState>(
       builder: (context, state) {
+        print("Selection : ${state.selection}, ${state.video.title}");
         return Scaffold(
           body: SingleChildScrollView(
             child: SafeArea(
@@ -104,7 +105,7 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                           },
                         ),
                         const SizedBox(height: 32),
-                        Text(state.selection, style: TxtStyle.title),
+                        Text(state.video.title, style: TxtStyle.title),
                         Row(
                           children: [
                             Text(
@@ -195,7 +196,7 @@ class _SendCommentState extends State<SendComment> {
             onTap: () {
               context.read<CourseVideoCubit>().sendCommnet();
               setState(() {
-                context.read<CourseVideoCubit>().getCommnet();
+                context.read<CourseVideoCubit>().getComment();
               });
             },
             child: const Icon(Icons.send, color: AppColors.colorFb),

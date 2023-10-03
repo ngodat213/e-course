@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,6 +9,7 @@ class CourseVideo extends Equatable {
   final String description;
   final int hour;
   final int minute;
+  final List<String> comment;
 
   const CourseVideo({
     required this.uid,
@@ -20,6 +19,7 @@ class CourseVideo extends Equatable {
     required this.description,
     required this.hour,
     required this.minute,
+    required this.comment,
   });
 
   factory CourseVideo.fromDoc(DocumentSnapshot videoCourseDoc) {
@@ -33,6 +33,7 @@ class CourseVideo extends Equatable {
       description: videoCourseData['description'],
       hour: videoCourseData['hour'],
       minute: videoCourseData['minute'],
+      comment: List.from(videoCourseData['comment']),
     );
   }
 
@@ -45,18 +46,18 @@ class CourseVideo extends Equatable {
       description: '',
       hour: 0,
       minute: 0,
+      comment: [],
     );
   }
   CourseVideo copyWith({
     String? uid,
     String? title,
-    String? imgVideo,
     String? part,
     String? video,
     String? description,
     int? hour,
     int? minute,
-    bool? view,
+    List<String>? comment,
   }) {
     return CourseVideo(
       uid: uid ?? this.uid,
@@ -66,6 +67,7 @@ class CourseVideo extends Equatable {
       hour: hour ?? this.hour,
       description: description ?? this.description,
       minute: minute ?? this.minute,
+      comment: comment ?? this.comment,
     );
   }
 
@@ -79,6 +81,7 @@ class CourseVideo extends Equatable {
       description,
       hour,
       minute,
+      comment,
     ];
   }
 }

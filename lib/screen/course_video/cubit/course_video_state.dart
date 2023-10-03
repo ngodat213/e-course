@@ -24,7 +24,6 @@ class CourseVideoState extends Equatable {
 
   CourseVideoState copyWith(
       {CourseVideo? video,
-      String? section,
       String? selection,
       String? comment,
       Course? course,

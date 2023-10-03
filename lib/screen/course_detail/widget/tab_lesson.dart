@@ -26,21 +26,24 @@ class _TabLessonState extends State<TabLesson> {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
       builder: (context, state) {
         if (state.status == CourseDetail.isNotEmpty) {
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 28),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: state.courseLesson.length,
-              itemBuilder: (context, index) {
-                final lesson = state.courseLesson[index];
-                return LessonWidget(
-                  lesson: lesson,
-                  video: state.courseVideo,
-                );
-              },
-            ),
-          );
+          if (state.isFull) {
+          } else {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 28),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  final lesson = state.courseLesson[index];
+                  return LessonWidget(
+                    lesson: lesson,
+                    video: state.courseVideo,
+                  );
+                },
+              ),
+            );
+          }
         } else if (state.status == CourseDetail.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -120,10 +123,11 @@ class _LessonContentState extends State<LessonContent> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<CourseVideoCubit>().videoChanged(widget.video);
         Course course = context.read<CourseDetailCubit>().state.course;
+        String selection = widget.lesson.title;
+        context.read<CourseVideoCubit>().videoChanged(widget.video);
         context.read<CourseVideoCubit>().courseChanged(course);
-        context.read<CourseVideoCubit>().selectionChanged(widget.lesson.title);
+        context.read<CourseVideoCubit>().selectionChanged(selection);
         BaseNavigation.push(context,
             routeName: ManagerRoutes.courseVideoScreen);
       },

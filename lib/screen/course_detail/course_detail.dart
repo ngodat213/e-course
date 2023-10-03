@@ -95,7 +95,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                         ),
                         const SizedBox(height: 32),
                         SizedBox(
-                          height: 1000,
+                          height: 500,
                           child: Column(
                             children: [
                               TabBar(

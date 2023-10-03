@@ -35,6 +35,15 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
     );
   }
 
+  void isFullChanged(bool isFull) {
+    emit(
+      state.copyWith(
+        isFull: isFull,
+        status: CourseDetail.isNotEmpty,
+      ),
+    );
+  }
+
   List<CourseVideo>? listVideo;
   List<CourseLesson>? lesson;
   void getCourseLesson() async {

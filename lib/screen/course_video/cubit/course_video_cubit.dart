@@ -26,7 +26,7 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
   void selectionChanged(String value) {
     emit(
       state.copyWith(
-        section: value,
+        selection: value,
         status: VideoStatus.isLoading,
       ),
     );
@@ -74,16 +74,22 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
   }
 
   late var comments;
-  Future<void> getCommnet() async {
+  void getComment() async {
     emit(state.copyWith(status: VideoStatus.isLoading));
     try {
-      comments = await _appRepository.getComment();
+      List<Comment> res = [];
+      List<String> course =
+          await _appRepository.getCommentVideo(state.video.uid);
+      for (String i in course) {
+        res.add(await _appRepository.getCommentById(i));
+      }
+      comments = res;
       emit(state.copyWith(comments: comments, status: VideoStatus.isNotEmpty));
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {
       throw CustomError(
-        code: 'Exception getCommnet',
+        code: 'Exception',
         msg: e.toString(),
         plugin: 'flutter_error/server_error',
       );
