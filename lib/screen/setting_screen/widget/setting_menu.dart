@@ -22,16 +22,25 @@ class SettingMenu extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const SettingTile(
-            svgPath: Images.iconNotification,
-            text: 'Notification',
-            subtitle: 'Ringtone, message, notification',
+          SettingTile(
+            svgPath: Images.iconPerson,
+            text: 'Account',
+            subtitle: 'Account setting',
+            iconColor: AppColors.label,
+            onTap: () {
+              BaseNavigation.push(context,
+                  routeName: ManagerRoutes.profileScreen);
+            },
           ),
           const _CustomDivider(),
-          const SettingTile(
+          SettingTile(
             svgPath: Images.iconGlobal,
             text: 'Language',
             subtitle: 'English',
+            onTap: () {
+              BaseNavigation.push(context,
+                  routeName: ManagerRoutes.changeLanguage);
+            },
           ),
           const _CustomDivider(),
           SettingTile(
@@ -56,11 +65,6 @@ class SettingMenu extends StatelessWidget {
             },
           ),
           const _CustomDivider(),
-          const SettingTile(
-            svgPath: Images.iconSetting,
-            text: 'Preferences',
-            subtitle: 'Theme, Settings',
-          ),
         ],
       ),
     );
@@ -82,9 +86,11 @@ class SettingTile extends StatelessWidget {
     required this.svgPath,
     required this.text,
     required this.subtitle,
+    this.iconColor,
     this.onTap,
     this.color,
   });
+  final Color? iconColor;
   final String svgPath;
   final String text;
   final String subtitle;
@@ -101,7 +107,7 @@ class SettingTile extends StatelessWidget {
           backgroundColor: Colors.white.withOpacity(0),
           child: SvgPicture.asset(
             svgPath,
-            color: color,
+            color: iconColor,
             width: 24,
           ),
         ),

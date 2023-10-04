@@ -4,6 +4,7 @@ import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_cubit.dart';
@@ -73,6 +74,9 @@ class ManagerProvider {
     ),
     BlocProvider(
       create: (context) => CourseVideoCubit(context.read<AppRepository>()),
+    ),
+    BlocProvider(
+      create: (context) => ChangeLanguageCubit(),
     ),
   ];
 }

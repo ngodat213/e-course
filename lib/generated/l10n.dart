@@ -100,16 +100,6 @@ class S {
     );
   }
 
-  /// `Search course, exam test`
-  String get searchTitle {
-    return Intl.message(
-      'Search course, exam test',
-      name: 'searchTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `All`
   String get all {
     return Intl.message(
@@ -410,71 +400,11 @@ class S {
     );
   }
 
-  /// `Here you progress last week`
-  String get progressTitle {
-    return Intl.message(
-      'Here you progress last week',
-      name: 'progressTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Populra Course`
-  String get populraCourse {
-    return Intl.message(
-      'Populra Course',
-      name: 'populraCourse',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `C/C++`
-  String get cpp {
-    return Intl.message(
-      'C/C++',
-      name: 'cpp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Python`
-  String get python {
-    return Intl.message(
-      'Python',
-      name: 'python',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `C#`
-  String get cs {
-    return Intl.message(
-      'C#',
-      name: 'cs',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Last exam done`
   String get lastExamDone {
     return Intl.message(
       'Last exam done',
       name: 'lastExamDone',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lesson`
-  String get lesson {
-    return Intl.message(
-      'Lesson',
-      name: 'lesson',
       desc: '',
       args: [],
     );
@@ -500,6 +430,56 @@ class S {
     );
   }
 
+  /// `Remaining`
+  String get remaining {
+    return Intl.message(
+      'Remaining',
+      name: 'remaining',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course`
+  String get course {
+    return Intl.message(
+      'Course',
+      name: 'course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search course, exam test`
+  String get searchTitle {
+    return Intl.message(
+      'Search course, exam test',
+      name: 'searchTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you progress last week`
+  String get progressTitle {
+    return Intl.message(
+      'Here you progress last week',
+      name: 'progressTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Populra Course`
+  String get populraCourse {
+    return Intl.message(
+      'Populra Course',
+      name: 'populraCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Today test`
   String get todayTest {
     return Intl.message(
@@ -510,11 +490,171 @@ class S {
     );
   }
 
-  /// `Remaining`
-  String get remaining {
+  /// `Here you test list for today`
+  String get todayTestTitle {
     return Intl.message(
-      'Remaining',
-      name: 'remaining',
+      'Here you test list for today',
+      name: 'todayTestTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson`
+  String get lesson {
+    return Intl.message(
+      'Lesson',
+      name: 'lesson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Readmore`
+  String get readmore {
+    return Intl.message(
+      'Readmore',
+      name: 'readmore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review`
+  String get review {
+    return Intl.message(
+      'Review',
+      name: 'review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selection`
+  String get selection {
+    return Intl.message(
+      'Selection',
+      name: 'selection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hour`
+  String get hour {
+    return Intl.message(
+      'hour',
+      name: 'hour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min`
+  String get min {
+    return Intl.message(
+      'min',
+      name: 'min',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commnet`
+  String get comment {
+    return Intl.message(
+      'Commnet',
+      name: 'comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a comment...`
+  String get commentTitle {
+    return Intl.message(
+      'Write a comment...',
+      name: 'commentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AboutUs`
+  String get aboutUs {
+    return Intl.message(
+      'AboutUs',
+      name: 'aboutUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get help {
+    return Intl.message(
+      'Help',
+      name: 'help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Us`
+  String get contactUs {
+    return Intl.message(
+      'Contact Us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ChangeLanguage`
+  String get changeLanguage {
+    return Intl.message(
+      'ChangeLanguage',
+      name: 'changeLanguage',
       desc: '',
       args: [],
     );

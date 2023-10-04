@@ -22,16 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "aboutUs": MessageLookupByLibrary.simpleMessage("AboutUs"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "app_name": MessageLookupByLibrary.simpleMessage("E-Course"),
+        "changeLanguage":
+            MessageLookupByLibrary.simpleMessage("ChangeLanguage"),
+        "comment": MessageLookupByLibrary.simpleMessage("Commnet"),
+        "commentTitle":
+            MessageLookupByLibrary.simpleMessage("Write a comment..."),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("ConfirmPassword"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
-        "cpp": MessageLookupByLibrary.simpleMessage("C/C++"),
+        "course": MessageLookupByLibrary.simpleMessage("Course"),
         "createYourAccount":
             MessageLookupByLibrary.simpleMessage("Let’s create your account!"),
-        "cs": MessageLookupByLibrary.simpleMessage("C#"),
         "destination": MessageLookupByLibrary.simpleMessage("Destination"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
@@ -48,18 +55,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "You’ll get messages soon on your e-mail address"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
+        "help": MessageLookupByLibrary.simpleMessage("Help"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi"),
         "hiTitle": MessageLookupByLibrary.simpleMessage("Hi, Welcome back!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hour": MessageLookupByLibrary.simpleMessage("hour"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lastExamDone": MessageLookupByLibrary.simpleMessage("Last exam done"),
         "lesson": MessageLookupByLibrary.simpleMessage("Lesson"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginWith": MessageLookupByLibrary.simpleMessage("or log in with"),
+        "min": MessageLookupByLibrary.simpleMessage("min"),
         "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordExample": MessageLookupByLibrary.simpleMessage("********"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
@@ -68,17 +80,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "populraCourse": MessageLookupByLibrary.simpleMessage("Populra Course"),
         "progressTitle":
             MessageLookupByLibrary.simpleMessage("Here you progress last week"),
-        "python": MessageLookupByLibrary.simpleMessage("Python"),
+        "readmore": MessageLookupByLibrary.simpleMessage("Readmore"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remaining": MessageLookupByLibrary.simpleMessage("Remaining"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "review": MessageLookupByLibrary.simpleMessage("Review"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchTitle":
             MessageLookupByLibrary.simpleMessage("Search course, exam test"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "selection": MessageLookupByLibrary.simpleMessage("Selection"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
-        "todayTest": MessageLookupByLibrary.simpleMessage("Today test")
+        "todayTest": MessageLookupByLibrary.simpleMessage("Today test"),
+        "todayTestTitle":
+            MessageLookupByLibrary.simpleMessage("Here you test list for today")
       };
 }

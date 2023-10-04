@@ -127,7 +127,7 @@ class MenuDrawer extends StatelessWidget {
                 const MenuDrawerTile(
                   svgPath: Images.iconSetting,
                   title: 'Preferences',
-                  subtitle: 'Theme, Settings',
+                  subtitle: 'Settings',
                 ),
                 const Spacer(),
                 Container(

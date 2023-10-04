@@ -4,7 +4,6 @@
     "getStarted": "Get Started",
     "more": "More",
     "location": "Location",
-    "searchTitle":"Search course, exam test",
     "all": "All",
     "home": "Home",
     "destination": "Destination",
@@ -35,15 +34,35 @@
     "seeAll": "See All",
     "terms": "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app",
     "hi": "Hi",
-    "progressTitle": "Here you progress last week",
-    "populraCourse": "Populra Course",
-    "cpp": "C/C++",
-    "python": "Python",
-    "cs": "C#",
     "lastExamDone": "Last exam done",
-    "lesson": "Lesson",
     "continueText": "Continue",
     "minutes": "Minutes",
+    "remaining": "Remaining",
+    
+    "course": "Course",
+    "searchTitle":"Search course, exam test",
+    "progressTitle": "Here you progress last week",
+    "populraCourse": "Populra Course",
     "todayTest": "Today test",
-    "remaining": "Remaining"
+    "todayTestTitle": "Here you test list for today",
+    "lesson": "Lesson",
+    "readmore": "Readmore",
+    "review": "Review",
+    "selection": "Selection",
+    "hour": "hour",
+    "min": "min",
+    "register":"Register",
+
+    "comment": "Commnet",
+    "commentTitle": "Write a comment...",
+
+    "notification": "Notification",
+    "language": "Language",
+    "about":"About",
+    "aboutUs": "AboutUs",
+    "help": "Help",
+    "contactUs": "Contact Us",
+
+    "changeLanguage": "ChangeLanguage"
+
 }
