@@ -5,7 +5,6 @@ import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart
 import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/course_card_listview.dart';
 import 'package:quiz_flutter/widgets/search_view.dart';
 import 'package:quiz_flutter/widgets/title_screen.dart';
@@ -68,7 +67,6 @@ class _CourseScreenState extends State<CourseScreen> {
                       ],
                     ),
                     const TitleScreen(title: "Course"),
-                    BuildBackButton(top: 24),
                   ],
                 ),
               ),

@@ -15,4 +15,8 @@ abstract class UserBase {
   Future<void> updatePhoneNumberCollection(String phoneNumber);
 
   Future<void> setCourse(String courseId);
+
+  Future<void> setFavorite(String courseId);
+
+  Future<List<String>> getFavoriteCourseUser();
 }

@@ -131,6 +131,31 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                       ],
                     ),
                   ),
+                  Positioned(
+                    top: 24,
+                    right: 25,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<CourseDetailCubit>().updateFavorite();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          boxShadow: AppColors.shadow,
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SvgPicture.asset(
+                          Images.iconFavorite,
+                          color: (state.favorite == true
+                              ? Colors.red
+                              : Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ),
                   TitleScreen(title: course.title),
                   BuildBackButton(top: 24),
                 ],

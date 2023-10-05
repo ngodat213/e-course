@@ -34,6 +34,17 @@ class SettingMenu extends StatelessWidget {
           ),
           const _CustomDivider(),
           SettingTile(
+            svgPath: Images.iconFavorite,
+            text: 'My favorite',
+            subtitle: 'Course favorite',
+            iconColor: AppColors.label,
+            onTap: () {
+              BaseNavigation.push(context,
+                  routeName: ManagerRoutes.favoriteScreen);
+            },
+          ),
+          const _CustomDivider(),
+          SettingTile(
             svgPath: Images.iconGlobal,
             text: 'Language',
             subtitle: 'English',
@@ -64,7 +75,6 @@ class SettingMenu extends StatelessWidget {
                   routeName: ManagerRoutes.commoInfoScreen);
             },
           ),
-          const _CustomDivider(),
         ],
       ),
     );

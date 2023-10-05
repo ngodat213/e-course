@@ -138,6 +138,25 @@ class UserRepository extends UserBase {
   }
 
   @override
+  Future<void> setFavorite(String courseId) async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      _firebaseFirestore.collection(ApiPath.USER).doc(userToken).update({
+        "favorites_course": FieldValue.arrayUnion([courseId])
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception setFavorite',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
   Future<List<String>> getCourseUser() async {
     try {
       final userToken = await BaseSharedPreferences.getStringValue(
@@ -148,6 +167,30 @@ class UserRepository extends UserBase {
           .get();
       if (snapshot.exists) {
         return User.fromDoc(snapshot).course!;
+      }
+      throw "Document does not exist";
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception getCourseUser',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  @override
+  Future<List<String>> getFavoriteCourseUser() async {
+    try {
+      final userToken = await BaseSharedPreferences.getStringValue(
+          ManagerKeyStorage.accessToken);
+      final DocumentSnapshot snapshot = await _firebaseFirestore
+          .collection(ApiPath.USER)
+          .doc(userToken)
+          .get();
+      if (snapshot.exists) {
+        return User.fromDoc(snapshot).favoritesCourse!;
       }
       throw "Document does not exist";
     } on FirebaseException catch (e) {

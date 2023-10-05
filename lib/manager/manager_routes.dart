@@ -38,5 +38,6 @@ class ManagerRoutes {
     courseListScreen: (context) => const CourseListScreen(),
     courseVideoScreen: (context) => const CourseVideoScreen(),
     changeLanguage: (context) => const ChangeLanguageScreen(),
+    favoriteScreen: (context) => const FavoriteScreen(),
   };
 }

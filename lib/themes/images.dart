@@ -22,6 +22,7 @@ class Images {
   static const String iconTime = '$iconPath/time.svg';
   static const String iconLogo = '$iconPath/logo.svg';
   static const String iconPerson = '$iconPath/person_solid.svg';
+  static const String iconFavorite = '$iconPath/heart.svg';
 
   static const String imageSplash = '$imagePath/splash.png';
   static const String imageFlutterBanner = '$imagePath/flutter_banner.png';
@@ -32,4 +33,5 @@ class Images {
   static const String imageCourse4 = '$imagePath/read_image4.svg';
   static const String imageGoldCup = '$imagePath/gold_cup.png';
   static const String imageConfetti = '$imagePath/confetti.png';
+  static const String imageNothing = '$imagePath/nothing.png';
 }

@@ -97,4 +97,20 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
       );
     }
   }
+
+  Future<void> updateFavorite() async {
+    if (state.status == CourseDetail.isLoading) return;
+    try {
+      await _userRepository.setFavorite(state.course.uid);
+      emit(state.copyWith(status: CourseDetail.isNotEmpty, favorite: true));
+    } on CustomError catch (e) {
+      throw CustomError(code: e.code, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception Set course',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }
