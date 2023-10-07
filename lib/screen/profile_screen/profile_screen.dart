@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:quiz_flutter/screen/profile_screen/widget/profile_title.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/screen/profile_screen/widget/user_setting.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -11,6 +11,7 @@ import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/image_picker.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
+import 'package:quiz_flutter/widgets/title_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -68,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ],
                       ),
                     ),
-                    const ProfileTitle(),
+                    TitleScreen(title: S.of(context).profileDetail),
                     BuildBackButton(top: 24),
                   ],
                 ),

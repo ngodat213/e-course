@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
@@ -19,8 +20,8 @@ class LogoutTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: SettingTile(
         svgPath: Images.iconLogout,
-        text: 'Sign out',
-        subtitle: 'Sign out the account',
+        text: S.of(context).logout,
+        subtitle: S.of(context).logOutTitle,
         color: const Color(0xFFEA3434),
         onTap: () {
           showDialog(
@@ -37,20 +38,20 @@ class LogoutTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Log out',
+                      S.of(context).logout,
                       style: TxtStyle.inputStyle.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
                 ),
-                content: const Text('Do you wanna sign out'),
+                content: Text(S.of(context).logout),
                 actions: [
                   TextButton(
                     onPressed: () {
                       BaseNavigation.pop(context);
                     },
-                    child: Text("Cancel", style: TxtStyle.text),
+                    child: Text(S.of(context).cancel, style: TxtStyle.text),
                   ),
                   TextButton(
                     onPressed: () {
@@ -65,7 +66,7 @@ class LogoutTile extends StatelessWidget {
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(AppColors.main),
                     ),
-                    child: Text("Sign out", style: TxtStyle.p),
+                    child: Text(S.of(context).logout, style: TxtStyle.p),
                   )
                 ],
               );

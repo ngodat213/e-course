@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/course_slider.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/grid_course.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/home_header.dart';
@@ -9,6 +10,7 @@ import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/search_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -95,7 +97,20 @@ class MenuDrawer extends StatelessWidget {
                     title: Text(S.of(context).app_name, style: TxtStyle.h3),
                   ),
                 ),
-                ExpansionTile(
+                MenuDrawerTile(
+                  svgPath: Images.iconPerson,
+                  title: 'Account',
+                  subtitle: 'Setting account',
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.profileScreen);
+                  },
+                ),
+                ListTile(
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.courseListScreen);
+                  },
                   leading: CircleAvatar(
                       backgroundColor: Colors.black.withOpacity(0.05),
                       child: const Icon(
@@ -109,25 +124,23 @@ class MenuDrawer extends StatelessWidget {
                   ),
                   subtitle: const Text('Your course'),
                 ),
-                const MenuDrawerTile(
-                  svgPath: Images.iconNotification,
-                  title: 'Favotite course',
-                  subtitle: '',
+                MenuDrawerTile(
+                  svgPath: Images.iconFavorite,
+                  title: 'My favotite',
+                  subtitle: 'Favorite course',
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.favoriteScreen);
+                  },
                 ),
-                const MenuDrawerTile(
-                  svgPath: Images.iconNotification,
-                  title: 'Notification',
-                  subtitle: 'Ringtone, message, notification',
-                ),
-                const MenuDrawerTile(
+                MenuDrawerTile(
                   svgPath: Images.iconGlobal,
                   title: 'Language',
                   subtitle: 'English',
-                ),
-                const MenuDrawerTile(
-                  svgPath: Images.iconSetting,
-                  title: 'Preferences',
-                  subtitle: 'Settings',
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.changeLanguage);
+                  },
                 ),
                 const Spacer(),
                 Container(
@@ -185,9 +198,13 @@ class MenuDrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: CircleAvatar(
         backgroundColor: Colors.black.withOpacity(0.05),
-        child: SvgPicture.asset(svgPath),
+        child: SvgPicture.asset(
+          svgPath,
+          width: 20,
+        ),
       ),
       title: Text(
         title ?? "",

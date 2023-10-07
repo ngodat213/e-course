@@ -36,12 +36,12 @@ class BuildUserSetting extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'User name',
+                        S.of(context).username,
                         style: TxtStyle.h3,
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                        label: 'Username',
+                        label: S.of(context).username,
                         hintText: user.displayName!,
                         func: (value) {
                           context.read<ProfileCubit>().userNameChanged(value);
@@ -49,7 +49,7 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildButton(
-                        text: 'Apply',
+                        text: S.of(context).save,
                         onTap: () {
                           context.read<ProfileCubit>().updateUserName();
                           context.read<MainCubit>().indexChanged(0);
@@ -67,7 +67,7 @@ class BuildUserSetting extends StatelessWidget {
                 );
               },
               child: ChangedProfile(
-                title: 'Personal Infomation',
+                title: S.of(context).username,
                 text: user.displayName!,
               ),
             ),
@@ -81,12 +81,12 @@ class BuildUserSetting extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Email',
+                        S.of(context).email,
                         style: TxtStyle.h3,
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                        label: 'Old Email',
+                        label: S.of(context).oldEmail,
                         hintText: user.email!,
                         func: (value) {
                           context.read<ProfileCubit>().oldEmailChanged(value);
@@ -94,7 +94,7 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                        label: 'New email',
+                        label: S.of(context).newEmail,
                         hintText: S.of(context).emailExample,
                         func: (value) {
                           context.read<ProfileCubit>().emailChanged(value);
@@ -102,7 +102,7 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                        label: 'Password',
+                        label: S.of(context).password,
                         isPassword: true,
                         hintText: S.of(context).passwordExample,
                         func: (value) {
@@ -111,7 +111,7 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildButton(
-                        text: 'Apply',
+                        text: S.of(context).save,
                         onTap: () {
                           context.read<ProfileCubit>().updateEmail();
                           context.read<MainCubit>().indexChanged(0);
@@ -129,7 +129,7 @@ class BuildUserSetting extends StatelessWidget {
                 );
               },
               child: ChangedProfile(
-                title: 'Email Address',
+                title: S.of(context).emailAddress,
                 text: user.email!,
               ),
             ),
@@ -142,12 +142,12 @@ class BuildUserSetting extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Phone number',
+                        S.of(context).phoneNumber,
                         style: TxtStyle.h3,
                       ),
                       const SizedBox(height: 20),
                       BuildTextField(
-                        label: 'Phone number',
+                        label: S.of(context).phoneNumber,
                         hintText: user.phoneNumber!,
                         func: (value) {
                           context
@@ -157,7 +157,7 @@ class BuildUserSetting extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       BuildButton(
-                        text: 'Apply',
+                        text: S.of(context).save,
                         onTap: () {
                           context.read<ProfileCubit>().updatePhoneNumber();
                           context.read<MainCubit>().indexChanged(0);
@@ -175,7 +175,7 @@ class BuildUserSetting extends StatelessWidget {
                 );
               },
               child: ChangedProfile(
-                title: 'Phone number',
+                title: S.of(context).phoneNumber,
                 text: user.phoneNumber!,
               ),
             ),
@@ -189,30 +189,31 @@ class BuildUserSetting extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Reset password',
+                        S.of(context).resetPassword,
                         style: TxtStyle.h3,
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'Enter the email associated with your account and we\'ll send and email with instructions to reset your password',
+                        S.of(context).resetPasswordDescription,
                         style: TxtStyle.text,
                       ),
                       const SizedBox(height: 20),
-                      BuildTextField(label: 'Email', hintText: user.email!),
+                      BuildTextField(
+                          label: S.of(context).email, hintText: user.email!),
                       const SizedBox(height: 20),
                       BuildTextField(
-                          label: 'Password',
+                          label: S.of(context).password,
                           isPassword: true,
                           hintText: S.of(context).passwordExample),
                       const SizedBox(height: 20),
-                      BuildButton(text: 'Send'),
+                      BuildButton(text: S.of(context).send),
                     ],
                   ),
                 );
               },
-              child: const ChangedProfile(
-                title: 'Reset password',
-                text: 'Send email to reset your password',
+              child: ChangedProfile(
+                title: S.of(context).resetPassword,
+                text: S.of(context).resetPasswordTitle,
               ),
             ),
           ],

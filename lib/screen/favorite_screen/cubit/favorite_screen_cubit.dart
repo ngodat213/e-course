@@ -18,7 +18,7 @@ class FavoriteScreenCubit extends Cubit<FavoriteScreenState> {
 
   late var courses;
   void getFavoriteCourse() async {
-    emit(state.copyWith(status: CourseScreenStatus.isLoading));
+    emit(state.copyWith(status: FavoriteScreenStatus.isLoading));
     try {
       List<Course> res = [];
       List<String> course = await _userRepository.getFavoriteCourseUser();
@@ -27,7 +27,7 @@ class FavoriteScreenCubit extends Cubit<FavoriteScreenState> {
       }
       courses = res;
       emit(state.copyWith(
-          courses: courses, status: CourseScreenStatus.isNotEmpty));
+          courses: courses, status: FavoriteScreenStatus.isNotEmpty));
     } on FirebaseException catch (e) {
       throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
     } catch (e) {

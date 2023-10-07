@@ -36,7 +36,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: ManagerRoutes.splashScreen,
           supportedLocales: L10n.support,
-          locale: const Locale('en'),
+          locale: const Locale('vi'),
           routes: {...ManagerRoutes.manager},
           localizationsDelegates: const [
             S.delegate,

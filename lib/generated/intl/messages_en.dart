@@ -24,26 +24,34 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutUs": MessageLookupByLibrary.simpleMessage("AboutUs"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "accountSetting":
+            MessageLookupByLibrary.simpleMessage("Account setting"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "app_name": MessageLookupByLibrary.simpleMessage("E-Course"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeLanguage":
             MessageLookupByLibrary.simpleMessage("ChangeLanguage"),
         "comment": MessageLookupByLibrary.simpleMessage("Commnet"),
         "commentTitle":
             MessageLookupByLibrary.simpleMessage("Write a comment..."),
         "confirmPassword":
-            MessageLookupByLibrary.simpleMessage("ConfirmPassword"),
+            MessageLookupByLibrary.simpleMessage("Confirm password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "course": MessageLookupByLibrary.simpleMessage("Course"),
+        "courseFavorite":
+            MessageLookupByLibrary.simpleMessage("Course favorite"),
         "createYourAccount":
             MessageLookupByLibrary.simpleMessage("Let’s create your account!"),
         "destination": MessageLookupByLibrary.simpleMessage("Destination"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "emailExample": MessageLookupByLibrary.simpleMessage("xyz@example.com"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
@@ -52,8 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPasswordAnswer":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
-            "You’ll get messages soon on your e-mail address"),
-        "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+            "You’ll get a message soon on your e-mail address"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi"),
@@ -63,28 +70,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lastExamDone": MessageLookupByLibrary.simpleMessage("Last exam done"),
         "lesson": MessageLookupByLibrary.simpleMessage("Lesson"),
-        "location": MessageLookupByLibrary.simpleMessage("Location"),
+        "logOutTitle":
+            MessageLookupByLibrary.simpleMessage("Sign out the account"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginWith": MessageLookupByLibrary.simpleMessage("or log in with"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "min": MessageLookupByLibrary.simpleMessage("min"),
         "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
-        "more": MessageLookupByLibrary.simpleMessage("More"),
+        "myFavorite": MessageLookupByLibrary.simpleMessage("My favorite"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
-        "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "newEmail": MessageLookupByLibrary.simpleMessage("New email"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "oldEmail": MessageLookupByLibrary.simpleMessage("Old email"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordExample": MessageLookupByLibrary.simpleMessage("********"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "popularDestination":
             MessageLookupByLibrary.simpleMessage("Populra Destination"),
         "populraCourse": MessageLookupByLibrary.simpleMessage("Populra Course"),
+        "profileDetail":
+            MessageLookupByLibrary.simpleMessage("Profile Details"),
         "progressTitle":
             MessageLookupByLibrary.simpleMessage("Here you progress last week"),
         "readmore": MessageLookupByLibrary.simpleMessage("Readmore"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remaining": MessageLookupByLibrary.simpleMessage("Remaining"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "resetPasswordDescription": MessageLookupByLibrary.simpleMessage(
+            "Enter the email associated with your account and well send and email with instructions to reset your password"),
+        "resetPasswordTitle": MessageLookupByLibrary.simpleMessage(
+            "Send your email to reset your password"),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchTitle":
             MessageLookupByLibrary.simpleMessage("Search course, exam test"),
@@ -95,7 +113,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
         "todayTest": MessageLookupByLibrary.simpleMessage("Today test"),
-        "todayTestTitle":
-            MessageLookupByLibrary.simpleMessage("Here you test list for today")
+        "todayTestTitle": MessageLookupByLibrary.simpleMessage(
+            "Here you test list for today"),
+        "username": MessageLookupByLibrary.simpleMessage("User name"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "wannaSignOut":
+            MessageLookupByLibrary.simpleMessage("Do you wanna sign out")
       };
 }

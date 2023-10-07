@@ -35,7 +35,6 @@ class ManagerRoutes {
     quizPlayScreen: (context) => const QuizPlayScreen(),
     commoInfoScreen: (context) => const CommoInfoScreen(),
     profileScreen: (context) => const ProfileScreen(),
-    courseListScreen: (context) => const CourseListScreen(),
     courseVideoScreen: (context) => const CourseVideoScreen(),
     changeLanguage: (context) => const ChangeLanguageScreen(),
     favoriteScreen: (context) => const FavoriteScreen(),

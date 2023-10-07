@@ -48,8 +48,7 @@ class CardSlider extends StatelessWidget {
                   width: Dimens.HEIGHT_200,
                   child: Text(course.title, style: TxtStyle.titleWhite),
                 ),
-                Text(
-                    '${course.listLesson.length} Lesson ${S.of(context).lesson}',
+                Text('${course.listLesson.length} ${S.of(context).lesson}',
                     style: TxtStyle.p),
                 const SizedBox(height: 5),
                 Row(

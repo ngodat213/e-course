@@ -1,16 +1,16 @@
 part of 'favorite_screen_cubit.dart';
 
-enum CourseScreenStatus { isEmpty, isLoading, isNotEmpty }
+enum FavoriteScreenStatus { isEmpty, isLoading, isNotEmpty }
 
 class FavoriteScreenState extends Equatable {
   const FavoriteScreenState({required this.courses, required this.status});
 
   final List<Course> courses;
-  final CourseScreenStatus status;
+  final FavoriteScreenStatus status;
 
   FavoriteScreenState copyWith({
     List<Course>? courses,
-    CourseScreenStatus? status,
+    FavoriteScreenStatus? status,
   }) {
     return FavoriteScreenState(
       courses: courses ?? this.courses,
@@ -21,7 +21,7 @@ class FavoriteScreenState extends Equatable {
   factory FavoriteScreenState.initial() {
     return const FavoriteScreenState(
       courses: [],
-      status: CourseScreenStatus.isLoading,
+      status: FavoriteScreenStatus.isLoading,
     );
   }
 

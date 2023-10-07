@@ -1,9 +1,5 @@
 {
     "app_name": "E-Course",
-    "next": "Next",
-    "getStarted": "Get Started",
-    "more": "More",
-    "location": "Location",
     "all": "All",
     "home": "Home",
     "destination": "Destination",
@@ -12,7 +8,7 @@
     "hiTitle": "Hi, Welcome back!",
     "email":"Email",
     "password": "Password",
-    "confirmPassword": "ConfirmPassword",
+    "confirmPassword": "Confirm password",
     "rememberMe": "Remember me",
     "forgotPasswordAnswer": "Forgot password?",
     "loginWith": "or log in with",
@@ -28,7 +24,7 @@
     "phoneNumber": "Phone Number",
     "enterPhoneNumber": "Enter phone number",
     "forgotPassword": "Forgot password",
-    "forgotPasswordTitle": "You’ll get messages soon on your e-mail address",
+    "forgotPasswordTitle": "You’ll get a message soon on your e-mail address",
     "send": "Send",
     "popularDestination": "Populra Destination",
     "seeAll": "See All",
@@ -63,6 +59,26 @@
     "help": "Help",
     "contactUs": "Contact Us",
 
-    "changeLanguage": "ChangeLanguage"
+    "changeLanguage": "ChangeLanguage",
+
+    "username": "User name",
+    "emailAddress": "Email Address",
+    "resetPassword": "Reset password",
+    "resetPasswordTitle": "Send your email to reset your password",
+    "profileDetail": "Profile Details",
+    "accountSetting": "Account setting",
+    "account": "Account",
+    "myFavorite": "My favorite",
+    "courseFavorite": "Course favorite",
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "logout": "Logout",
+    "wannaSignOut": "Do you wanna sign out",
+    "cancel": "Cancel",
+    "logOutTitle": "Sign out the account",
+    "save": "Save",
+    "oldEmail": "Old email",
+    "newEmail": "New email",
+    "resetPasswordDescription": "Enter the email associated with your account and well send and email with instructions to reset your password"
 
 }

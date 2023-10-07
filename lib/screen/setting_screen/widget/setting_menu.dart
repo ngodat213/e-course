@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -24,8 +25,8 @@ class SettingMenu extends StatelessWidget {
         children: [
           SettingTile(
             svgPath: Images.iconPerson,
-            text: 'Account',
-            subtitle: 'Account setting',
+            text: S.of(context).account,
+            subtitle: S.of(context).accountSetting,
             iconColor: AppColors.label,
             onTap: () {
               BaseNavigation.push(context,
@@ -35,8 +36,8 @@ class SettingMenu extends StatelessWidget {
           const _CustomDivider(),
           SettingTile(
             svgPath: Images.iconFavorite,
-            text: 'My favorite',
-            subtitle: 'Course favorite',
+            text: S.of(context).myFavorite,
+            subtitle: S.of(context).courseFavorite,
             iconColor: AppColors.label,
             onTap: () {
               BaseNavigation.push(context,
@@ -46,8 +47,8 @@ class SettingMenu extends StatelessWidget {
           const _CustomDivider(),
           SettingTile(
             svgPath: Images.iconGlobal,
-            text: 'Language',
-            subtitle: 'English',
+            text: S.of(context).language,
+            subtitle: S.of(context).vietnamese,
             onTap: () {
               BaseNavigation.push(context,
                   routeName: ManagerRoutes.changeLanguage);
@@ -56,8 +57,8 @@ class SettingMenu extends StatelessWidget {
           const _CustomDivider(),
           SettingTile(
             svgPath: Images.iconInfo,
-            text: 'About',
-            subtitle: 'About us',
+            text: S.of(context).about,
+            subtitle: S.of(context).aboutUs,
             onTap: () {
               context.read<CommoInfoCubit>().indexChanged(0);
               BaseNavigation.push(context,
@@ -67,8 +68,8 @@ class SettingMenu extends StatelessWidget {
           const _CustomDivider(),
           SettingTile(
             svgPath: Images.iconChat,
-            text: 'Help',
-            subtitle: 'Contact us',
+            text: S.of(context).help,
+            subtitle: S.of(context).contactUs,
             onTap: () {
               context.read<CommoInfoCubit>().indexChanged(1);
               BaseNavigation.push(context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
@@ -66,7 +67,7 @@ class _CourseScreenState extends State<CourseScreen> {
                         const SizedBox(height: 70),
                       ],
                     ),
-                    const TitleScreen(title: "Course"),
+                    TitleScreen(title: S.of(context).course),
                   ],
                 ),
               ),

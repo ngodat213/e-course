@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
@@ -87,7 +88,7 @@ class _CourseInfo extends StatelessWidget {
           children: [
             SvgPicture.asset(Images.iconLesson),
             const SizedBox(width: 8),
-            Text('${course.listLesson.length} Lessons',
+            Text('${course.listLesson.length} ${S.of(context).lesson}',
                 style: TxtStyle.time.copyWith(fontWeight: FontWeight.w500)),
           ],
         ),
@@ -95,7 +96,7 @@ class _CourseInfo extends StatelessWidget {
           children: [
             SvgPicture.asset(Images.iconLesson),
             const SizedBox(width: 8),
-            Text('78 hrs 30 mins',
+            Text('78 ${S.of(context).hour} 30 ${S.of(context).min}',
                 style: TxtStyle.time.copyWith(fontWeight: FontWeight.w500)),
           ],
         ),

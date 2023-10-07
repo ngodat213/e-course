@@ -60,46 +60,6 @@ class S {
     );
   }
 
-  /// `Next`
-  String get next {
-    return Intl.message(
-      'Next',
-      name: 'next',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Get Started`
-  String get getStarted {
-    return Intl.message(
-      'Get Started',
-      name: 'getStarted',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `More`
-  String get more {
-    return Intl.message(
-      'More',
-      name: 'more',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Location`
-  String get location {
-    return Intl.message(
-      'Location',
-      name: 'location',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `All`
   String get all {
     return Intl.message(
@@ -180,10 +140,10 @@ class S {
     );
   }
 
-  /// `ConfirmPassword`
+  /// `Confirm password`
   String get confirmPassword {
     return Intl.message(
-      'ConfirmPassword',
+      'Confirm password',
       name: 'confirmPassword',
       desc: '',
       args: [],
@@ -340,10 +300,10 @@ class S {
     );
   }
 
-  /// `You’ll get messages soon on your e-mail address`
+  /// `You’ll get a message soon on your e-mail address`
   String get forgotPasswordTitle {
     return Intl.message(
-      'You’ll get messages soon on your e-mail address',
+      'You’ll get a message soon on your e-mail address',
       name: 'forgotPasswordTitle',
       desc: '',
       args: [],
@@ -655,6 +615,196 @@ class S {
     return Intl.message(
       'ChangeLanguage',
       name: 'changeLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User name`
+  String get username {
+    return Intl.message(
+      'User name',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Address`
+  String get emailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send your email to reset your password`
+  String get resetPasswordTitle {
+    return Intl.message(
+      'Send your email to reset your password',
+      name: 'resetPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile Details`
+  String get profileDetail {
+    return Intl.message(
+      'Profile Details',
+      name: 'profileDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account setting`
+  String get accountSetting {
+    return Intl.message(
+      'Account setting',
+      name: 'accountSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My favorite`
+  String get myFavorite {
+    return Intl.message(
+      'My favorite',
+      name: 'myFavorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course favorite`
+  String get courseFavorite {
+    return Intl.message(
+      'Course favorite',
+      name: 'courseFavorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vietnamese {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vietnamese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you wanna sign out`
+  String get wannaSignOut {
+    return Intl.message(
+      'Do you wanna sign out',
+      name: 'wannaSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out the account`
+  String get logOutTitle {
+    return Intl.message(
+      'Sign out the account',
+      name: 'logOutTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old email`
+  String get oldEmail {
+    return Intl.message(
+      'Old email',
+      name: 'oldEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New email`
+  String get newEmail {
+    return Intl.message(
+      'New email',
+      name: 'newEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the email associated with your account and well send and email with instructions to reset your password`
+  String get resetPasswordDescription {
+    return Intl.message(
+      'Enter the email associated with your account and well send and email with instructions to reset your password',
+      name: 'resetPasswordDescription',
       desc: '',
       args: [],
     );

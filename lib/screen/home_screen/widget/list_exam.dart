@@ -37,8 +37,7 @@ class _ListExamState extends State<ListExam> {
                 ],
               ),
               const SizedBox(height: Dimens.HEIGHT_8),
-              Text('Here is your test list for today',
-                  style: TxtStyle.hintStyle),
+              Text(S.of(context).todayTestTitle, style: TxtStyle.hintStyle),
               const SizedBox(height: Dimens.HEIGHT_8),
               SizedBox(
                 height: Dimens.HEIGHT_200,
