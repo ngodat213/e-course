@@ -44,9 +44,9 @@ class CommitPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(state.lesson.title, style: TxtStyle.h2),
-                    const SizedBox(height: 8),
-                    Text("Your result", style: TxtStyle.text),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
+                    Text("Your result", style: TxtStyle.title),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         BoxResult(res: state.userCorrect, title: "Correct"),
@@ -54,30 +54,32 @@ class CommitPage extends StatelessWidget {
                         BoxResult(res: point.ceil(), title: "Point"),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    Center(child: Text('Your rank', style: TxtStyle.h2)),
-                    Center(child: Text('#12', style: TxtStyle.title)),
-                    Image.asset(Images.imageGoldCup),
-                    _buildButton(
-                      onTap: () {
-                        context.read<QuizPlayCubit>().checkResult();
-                      },
-                      text: "Check Result",
-                      bgColor: AppColors.main,
-                      style: TxtStyle.buttonWhite,
+                    const SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildButton(
+                          onTap: () {
+                            context.read<QuizPlayCubit>().goHome();
+                            BaseNavigation.push(context,
+                                routeName: ManagerRoutes.mainScreen,
+                                clearStack: true);
+                          },
+                          text: 'Go Home',
+                          bgColor: AppColors.grey,
+                          style: TxtStyle.buttonBlack,
+                        ),
+                        _buildButton(
+                          onTap: () {
+                            context.read<QuizPlayCubit>().checkResult();
+                          },
+                          text: "Check Result",
+                          bgColor: AppColors.main,
+                          style: TxtStyle.buttonWhite,
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 8),
-                    _buildButton(
-                      onTap: () {
-                        context.read<QuizPlayCubit>().goHome();
-                        BaseNavigation.push(context,
-                            routeName: ManagerRoutes.mainScreen,
-                            clearStack: true);
-                      },
-                      text: 'Go Home',
-                      bgColor: AppColors.grey,
-                      style: TxtStyle.buttonBlack,
-                    ),
                   ],
                 ),
               ),
@@ -107,7 +109,7 @@ class _buildButton extends StatelessWidget {
       onTap: onTap,
       child: Center(
         child: Container(
-          width: 180,
+          width: 140,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           decoration: BoxDecoration(
             color: bgColor,

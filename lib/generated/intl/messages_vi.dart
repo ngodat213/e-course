@@ -85,9 +85,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileDetail": MessageLookupByLibrary.simpleMessage("Chi tiết hồ sơ"),
         "progressTitle": MessageLookupByLibrary.simpleMessage(
             "Tiến trình của bạn vào tuần trước"),
+        "question": MessageLookupByLibrary.simpleMessage("Câu"),
         "readmore": MessageLookupByLibrary.simpleMessage("Đọc thêm"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng kí"),
-        "remaining": MessageLookupByLibrary.simpleMessage("thời gian còn lại"),
+        "remaining": MessageLookupByLibrary.simpleMessage("Thời gian còn lại"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Lưu thông tin"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "resetPasswordDescription": MessageLookupByLibrary.simpleMessage(

@@ -10,6 +10,7 @@ class QuizLesson extends Equatable {
   final List<String> questions;
   final int hour;
   final int minute;
+  final int second;
   final int point;
   const QuizLesson({
     required this.uid,
@@ -18,6 +19,7 @@ class QuizLesson extends Equatable {
     required this.questions,
     required this.hour,
     required this.minute,
+    required this.second,
     required this.point,
   });
 
@@ -29,6 +31,7 @@ class QuizLesson extends Equatable {
     int? hour,
     int? minute,
     int? point,
+    int? second,
   }) {
     return QuizLesson(
       uid: uid ?? this.uid,
@@ -38,6 +41,7 @@ class QuizLesson extends Equatable {
       hour: hour ?? this.hour,
       minute: minute ?? this.minute,
       point: point ?? this.point,
+      second: second ?? this.second,
     );
   }
 
@@ -50,6 +54,7 @@ class QuizLesson extends Equatable {
       hour: 0,
       minute: 0,
       point: 0,
+      second: 0,
     );
   }
 
@@ -64,6 +69,7 @@ class QuizLesson extends Equatable {
       hour: quizLessonData['hour'],
       minute: quizLessonData['minute'],
       point: quizLessonData['point'],
+      second: quizLessonData['second'],
     );
   }
 
@@ -76,6 +82,7 @@ class QuizLesson extends Equatable {
       questions,
       hour,
       minute,
+      second,
     ];
   }
 }

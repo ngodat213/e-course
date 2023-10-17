@@ -400,6 +400,16 @@ class S {
     );
   }
 
+  /// `Question`
+  String get question {
+    return Intl.message(
+      'Question',
+      name: 'question',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Course`
   String get course {
     return Intl.message(

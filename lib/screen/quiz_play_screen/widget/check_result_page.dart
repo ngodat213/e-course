@@ -23,6 +23,7 @@ class CheckResultPage extends StatelessWidget {
     return BlocBuilder<QuizPlayCubit, QuizPlayState>(
       builder: (context, state) {
         return Scaffold(
+          bottomNavigationBar: const BottomButton(),
           backgroundColor: AppColors.white,
           body: SingleChildScrollView(
             child: SafeArea(
@@ -56,7 +57,6 @@ class CheckResultPage extends StatelessWidget {
                           clearStack: true);
                     },
                   ),
-                  const BottomButton(),
                 ],
               ),
             ),

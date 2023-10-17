@@ -175,7 +175,8 @@ class _lessonQuiz extends StatelessWidget {
                 children: [
                   Text(lesson.title, style: TxtStyle.text),
                   Expanded(child: Container()),
-                  Text('${lesson.minute} Minutes', style: TxtStyle.labelStyle),
+                  Text('${lesson.hour}h ${lesson.minute}m ${lesson.second}s',
+                      style: TxtStyle.labelStyle),
                 ],
               ),
               Expanded(child: Container()),

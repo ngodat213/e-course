@@ -10,6 +10,15 @@ class HomeCubit extends Cubit<HomeState> {
   final AppRepository appRepository;
   HomeCubit(this.appRepository) : super(HomeState.initial());
 
+  void sliderIndexChanged(int value) {
+    emit(
+      state.copyWith(
+        sliderIndex: value,
+        status: HomeStatus.isNotEmpty,
+      ),
+    );
+  }
+
   late var quizs;
   void getQuiz() async {
     emit(state.copyWith(status: HomeStatus.isLoading));

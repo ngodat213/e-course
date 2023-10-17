@@ -31,8 +31,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       builder: (context, state) {
         if (state.status == FavoriteScreenStatus.isNotEmpty) {
           return Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
+            body: SingleChildScrollView(
+              child: SafeArea(
                 child: Stack(
                   children: [
                     Container(

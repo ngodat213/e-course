@@ -34,6 +34,7 @@
     "continueText": "Continue",
     "minutes": "Minutes",
     "remaining": "Remaining",
+    "question": "Question",
     
     "course": "Course",
     "searchTitle":"Search course, exam test",
@@ -80,5 +81,4 @@
     "oldEmail": "Old email",
     "newEmail": "New email",
     "resetPasswordDescription": "Enter the email associated with your account and well send and email with instructions to reset your password"
-
 }

@@ -203,4 +203,30 @@ class UserRepository extends UserBase {
       );
     }
   }
+
+  @override
+  Future<bool> checkCourseUserById(String courseId) async {
+    User user;
+    try {
+      await _firebaseFirestore.collection(ApiPath.USER).get().then((value) {
+        for (var element in value.docs) {
+          user = User.fromDoc(element);
+          for (String i in user.course!) {
+            if (i == courseId) {
+              return true;
+            }
+          }
+        }
+      });
+      return false;
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception checkCourseUserById',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

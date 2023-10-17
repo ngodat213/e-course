@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Profile Details"),
         "progressTitle":
             MessageLookupByLibrary.simpleMessage("Here you progress last week"),
+        "question": MessageLookupByLibrary.simpleMessage("Question"),
         "readmore": MessageLookupByLibrary.simpleMessage("Readmore"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remaining": MessageLookupByLibrary.simpleMessage("Remaining"),

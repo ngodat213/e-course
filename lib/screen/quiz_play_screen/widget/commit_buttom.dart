@@ -129,7 +129,7 @@ class _OptionSelect extends StatelessWidget {
           margin: const EdgeInsets.only(left: 8, bottom: 6),
           decoration: BoxDecoration(
             color: state.userChooise[i] == -1 ? AppColors.grey : AppColors.main,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(Dimens.RADIUS_5),
           ),
           alignment: Alignment.center,
           child: Text(

@@ -24,56 +24,59 @@ class LogoutTile extends StatelessWidget {
         subtitle: S.of(context).logOutTitle,
         color: const Color(0xFFEA3434),
         onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(right: 8),
-                      child: Icon(
-                        Icons.warning_amber_outlined,
-                        color: Color(0xFFEA3434),
-                      ),
-                    ),
-                    Text(
-                      S.of(context).logout,
-                      style: TxtStyle.inputStyle.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                content: Text(S.of(context).logout),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      BaseNavigation.pop(context);
-                    },
-                    child: Text(S.of(context).cancel, style: TxtStyle.text),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      BaseSharedPreferences.remove(
-                          ManagerKeyStorage.accessToken);
-                      BaseSharedPreferences.remove(ManagerKeyStorage.keepLogin);
-                      context.read<SettingCubit>().signOut();
-                      BaseNavigation.push(context,
-                          routeName: ManagerRoutes.signInScreen);
-                    },
-                    style: const ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(AppColors.main),
-                    ),
-                    child: Text(S.of(context).logout, style: TxtStyle.p),
-                  )
-                ],
-              );
-            },
-          );
+          DialogLogout(context);
         },
       ),
+    );
+  }
+
+  Future<dynamic> DialogLogout(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.warning_amber_outlined,
+                  color: Color(0xFFEA3434),
+                ),
+              ),
+              Text(
+                S.of(context).logout,
+                style: TxtStyle.inputStyle.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          content: Text(S.of(context).logout),
+          actions: [
+            TextButton(
+              onPressed: () {
+                BaseNavigation.pop(context);
+              },
+              child: Text(S.of(context).cancel, style: TxtStyle.text),
+            ),
+            TextButton(
+              onPressed: () {
+                BaseSharedPreferences.remove(ManagerKeyStorage.accessToken);
+                BaseSharedPreferences.remove(ManagerKeyStorage.keepLogin);
+                context.read<SettingCubit>().signOut();
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.signInScreen);
+              },
+              style: const ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll<Color>(AppColors.main),
+              ),
+              child: Text(S.of(context).logout, style: TxtStyle.p),
+            )
+          ],
+        );
+      },
     );
   }
 }

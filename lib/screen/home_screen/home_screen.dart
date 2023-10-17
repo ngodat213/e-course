@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/course_slider.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/grid_course.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/home_header.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/search_view.dart';
+import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SearchView(),
               const CourseSlider(),
               Container(
                 margin: const EdgeInsets.symmetric(
@@ -76,7 +78,6 @@ class MenuDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // backgroundColor: const Color(0xff1A1C2D),
       backgroundColor: AppColors.white,
       child: SafeArea(
         child: SingleChildScrollView(
@@ -149,26 +150,44 @@ class MenuDrawer extends StatelessWidget {
                   color: AppColors.label.withOpacity(0.05),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(0),
-                    leading: Container(
-                      height: 45,
-                      width: 45,
-                      decoration: BoxDecoration(
-                        color: AppColors.main,
-                        borderRadius: BorderRadius.circular(Dimens.RADIUS_6),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/quiz-app-4a98f.appspot.com/o/profileImageeZFxkvClu0e7HL152fnOZmuFYl82?alt=media&token=8babf39b-59d2-4764-b962-104a88c1c1a8')),
+                    leading: GestureDetector(
+                      onTap: () {
+                        BaseNavigation.push(context,
+                            routeName: ManagerRoutes.profileScreen);
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          color: AppColors.main,
+                          borderRadius: BorderRadius.circular(Dimens.RADIUS_6),
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/quiz-app-4a98f.appspot.com/o/profileImageeZFxkvClu0e7HL152fnOZmuFYl82?alt=media&token=8babf39b-59d2-4764-b962-104a88c1c1a8')),
+                        ),
                       ),
                     ),
-                    trailing: SvgPicture.asset(
-                      Images.iconLogout,
-                      color: AppColors.label,
+                    trailing: GestureDetector(
+                      onTap: () {
+                        DialogLogout(context);
+                      },
+                      child: SvgPicture.asset(
+                        Images.iconLogout,
+                        color: AppColors.label,
+                      ),
                     ),
-                    title: Text('HydraCoder',
+                    title: GestureDetector(
+                      onTap: () {
+                        BaseNavigation.push(context,
+                            routeName: ManagerRoutes.profileScreen);
+                      },
+                      child: Text(
+                        'HydraCoder',
                         style: TxtStyle.inputStyle
-                            .copyWith(fontWeight: FontWeight.w600)),
-                    subtitle: Text('@ngodat213', style: TxtStyle.labelStyle),
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -176,6 +195,56 @@ class MenuDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> DialogLogout(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.warning_amber_outlined,
+                  color: Color(0xFFEA3434),
+                ),
+              ),
+              Text(
+                S.of(context).logout,
+                style: TxtStyle.inputStyle.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          content: Text(S.of(context).logout),
+          actions: [
+            TextButton(
+              onPressed: () {
+                BaseNavigation.pop(context);
+              },
+              child: Text(S.of(context).cancel, style: TxtStyle.text),
+            ),
+            TextButton(
+              onPressed: () {
+                BaseSharedPreferences.remove(ManagerKeyStorage.accessToken);
+                BaseSharedPreferences.remove(ManagerKeyStorage.keepLogin);
+                context.read<SettingCubit>().signOut();
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.signInScreen);
+              },
+              style: const ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll<Color>(AppColors.main),
+              ),
+              child: Text(S.of(context).logout, style: TxtStyle.p),
+            )
+          ],
+        );
+      },
     );
   }
 }

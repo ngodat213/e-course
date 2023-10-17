@@ -48,12 +48,15 @@ class _CourseSliderState extends State<CourseSlider> {
                 autoPlay: true,
                 aspectRatio: 2,
                 viewportFraction: 1,
-                onPageChanged: (index, reason) {},
+                onPageChanged: (index, reason) {
+                  context.read<HomeCubit>().sliderIndexChanged(index);
+                },
               ),
             ),
             Center(
               child: DotsIndicator(
-                dotsCount: 3,
+                dotsCount: 4,
+                position: context.read<HomeCubit>().state.sliderIndex,
                 decorator: DotsDecorator(
                   color: AppColors.grey,
                   activeColor: AppColors.main,
