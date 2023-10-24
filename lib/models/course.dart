@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 
 class Course extends Equatable {
   final String uid;
-  final String teacherId;
+  final String teacher;
   final String thumb;
   final String title;
   final String description;
@@ -19,7 +19,7 @@ class Course extends Equatable {
 
   const Course({
     required this.uid,
-    required this.teacherId,
+    required this.teacher,
     required this.thumb,
     required this.title,
     required this.description,
@@ -37,7 +37,7 @@ class Course extends Equatable {
 
     return Course(
         uid: courseDoc.id,
-        teacherId: courseData!['teacherId'],
+        teacher: courseData!['teacher'],
         thumb: courseData['thumb'],
         title: courseData['title'],
         time: courseData['time'],
@@ -52,7 +52,7 @@ class Course extends Equatable {
   factory Course.initialCourse() {
     return const Course(
         uid: '',
-        teacherId: '',
+        teacher: '',
         thumb: '',
         title: '',
         time: '',
@@ -69,7 +69,7 @@ class Course extends Equatable {
   List<Object> get props {
     return [
       uid,
-      teacherId,
+      teacher,
       thumb,
       title,
       description,
@@ -85,7 +85,7 @@ class Course extends Equatable {
 
   Course copyWith({
     String? uid,
-    String? teacherId,
+    String? teacher,
     String? thumb,
     String? title,
     String? description,
@@ -99,7 +99,7 @@ class Course extends Equatable {
   }) {
     return Course(
       uid: uid ?? this.uid,
-      teacherId: teacherId ?? this.teacherId,
+      teacher: teacher ?? this.teacher,
       thumb: thumb ?? this.thumb,
       title: title ?? this.title,
       description: description ?? this.description,

@@ -540,6 +540,26 @@ class S {
     );
   }
 
+  /// `Your course`
+  String get yourCourse {
+    return Intl.message(
+      'Your course',
+      name: 'yourCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite Course`
+  String get favoriteCourse {
+    return Intl.message(
+      'Favorite Course',
+      name: 'favoriteCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Commnet`
   String get comment {
     return Intl.message(

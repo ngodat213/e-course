@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_screen_cubit.dart';
+import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
@@ -37,6 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 context.read<HomeCubit>().getQuiz();
                 context.read<SettingCubit>().getUser();
                 context.read<MainCubit>().indexChanged(0);
+                context.read<CourseListScreenCubit>().getCourse();
+                context.read<CourseScreenCubit>().getCourse();
               } else {
                 BaseNavigation.push(context,
                     routeName: ManagerRoutes.signInScreen, clearStack: true);

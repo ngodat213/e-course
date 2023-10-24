@@ -8,7 +8,6 @@ import 'package:quiz_flutter/screen/sign_in_screen/cubit/sign_in_cubit.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/widget/login_btn.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/widget/remenber_me.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/widget/sign_up.dart';
-import 'package:quiz_flutter/screen/sign_up_screen/widget/thirty_part_login.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
@@ -71,7 +70,6 @@ class LoginForm extends StatelessWidget {
                     const BuildRememberMe(),
                     const SizedBox(height: Dimens.HEIGHT_20),
                     const LoginButton(),
-                    const ThirtyPartLogin(),
                     const BuildSignUp()
                   ],
                 ),

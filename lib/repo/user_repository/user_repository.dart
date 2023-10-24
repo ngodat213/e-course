@@ -229,4 +229,9 @@ class UserRepository extends UserBase {
       );
     }
   }
+
+  @override
+  Future<void> checkFavorite(String courseId) {
+    throw UnimplementedError();
+  }
 }

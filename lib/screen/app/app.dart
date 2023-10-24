@@ -8,6 +8,7 @@ import 'package:quiz_flutter/manager/manager_provider.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
   final AuthRepository _authRepository;
   final AppRepository _appRepository;
   final UserRepository _userRepository;
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -32,28 +34,31 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [...ManagerProvider.provider],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: ManagerRoutes.splashScreen,
-          supportedLocales: L10n.support,
-          locale: const Locale('vi'),
-          routes: {...ManagerRoutes.manager},
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          localeResolutionCallback: (locale, supportedLocales) {
-            for (var supportedLocale in supportedLocales) {
-              if (supportedLocale.languageCode == locale?.languageCode &&
-                  supportedLocale.countryCode == locale?.countryCode) {
-                return supportedLocale;
+        child: Builder(builder: (context) {
+          final stateAppLang = context.watch<ChangeLanguageCubit>().state;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: ManagerRoutes.splashScreen,
+            supportedLocales: L10n.support,
+            locale: stateAppLang.locale,
+            routes: {...ManagerRoutes.manager},
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode &&
+                    supportedLocale.countryCode == locale?.countryCode) {
+                  return supportedLocale;
+                }
               }
-            }
-            return supportedLocales.first;
-          },
-        ),
+              return supportedLocales.first;
+            },
+          );
+        }),
       ),
     );
   }

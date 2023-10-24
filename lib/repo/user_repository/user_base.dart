@@ -16,7 +16,7 @@ abstract class UserBase {
 
   Future<void> setCourse(String courseId);
 
-  Future<void> setFavorite(String courseId);
+  Future<void> checkFavorite(String courseId);
 
   Future<bool> checkCourseUserById(String courseId);
 

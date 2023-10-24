@@ -8,12 +8,14 @@ class Question extends Equatable {
   final String question;
   final List<String> options;
   final int answer;
+  String? imagePath;
 
-  const Question({
+  Question({
     required this.uid,
     required this.question,
     required this.options,
     required this.answer,
+    this.imagePath,
   });
 
   factory Question.fromDoc(DocumentSnapshot questionDoc) {
@@ -24,15 +26,17 @@ class Question extends Equatable {
       question: questionData!['question'],
       options: List.from(questionData['options']),
       answer: questionData['answer'],
+      imagePath: questionData['image'],
     );
   }
 
   factory Question.initialUser() {
-    return const Question(
+    return Question(
       uid: '',
       question: '',
-      options: [],
+      options: const [],
       answer: 0,
+      imagePath: "",
     );
   }
 
@@ -41,15 +45,17 @@ class Question extends Equatable {
     String? question,
     List<String>? options,
     int? answer,
+    String? imagePath,
   }) {
     return Question(
       uid: uid ?? this.uid,
       question: question ?? this.question,
       options: options ?? this.options,
       answer: answer ?? this.answer,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 
   @override
-  List<Object?> get props => [uid, question, options, answer];
+  List<Object?> get props => [uid, question, options, answer, imagePath];
 }

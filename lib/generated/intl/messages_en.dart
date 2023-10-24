@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "favoriteCourse":
+            MessageLookupByLibrary.simpleMessage("Favorite Course"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "forgotPasswordAnswer":
@@ -119,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("User name"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "wannaSignOut":
-            MessageLookupByLibrary.simpleMessage("Do you wanna sign out")
+            MessageLookupByLibrary.simpleMessage("Do you wanna sign out"),
+        "yourCourse": MessageLookupByLibrary.simpleMessage("Your course")
       };
 }

@@ -19,7 +19,7 @@ class BuildTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: label == null ? 45 : 60,
+      height: label == null ? 45 : 65,
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(

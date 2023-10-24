@@ -41,8 +41,8 @@ class CardExam extends StatelessWidget {
             right: Dimens.PADDING_ZERO,
             bottom: Dimens.PADDING_10,
             child: Container(
-              width: Dimens.HEIGHT_130,
-              height: Dimens.HEIGHT_100,
+              width: Dimens.HEIGHT_135,
+              height: Dimens.HEIGHT_130,
               decoration: const BoxDecoration(
                 color: AppColors.main,
                 borderRadius: BorderRadius.only(

@@ -63,7 +63,7 @@ class CourseCardListView extends StatelessWidget {
                             BorderRadius.circular(Dimens.RADIUS_CIRCLE),
                       ),
                     ),
-                    Text('HydraCoder', style: TxtStyle.labelStyle)
+                    Text('@${course.teacher}', style: TxtStyle.labelStyle)
                   ],
                 ),
               ],
@@ -89,14 +89,6 @@ class _CourseInfo extends StatelessWidget {
             SvgPicture.asset(Images.iconLesson),
             const SizedBox(width: 8),
             Text('${course.listLesson.length} ${S.of(context).lesson}',
-                style: TxtStyle.time.copyWith(fontWeight: FontWeight.w500)),
-          ],
-        ),
-        Row(
-          children: [
-            SvgPicture.asset(Images.iconLesson),
-            const SizedBox(width: 8),
-            Text('78 ${S.of(context).hour} 30 ${S.of(context).min}',
                 style: TxtStyle.time.copyWith(fontWeight: FontWeight.w500)),
           ],
         ),

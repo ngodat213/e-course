@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/course_slider.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/grid_course.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/home_header.dart';
@@ -100,8 +101,8 @@ class MenuDrawer extends StatelessWidget {
                 ),
                 MenuDrawerTile(
                   svgPath: Images.iconPerson,
-                  title: 'Account',
-                  subtitle: 'Setting account',
+                  title: S.of(context).account,
+                  subtitle: S.of(context).accountSetting,
                   onTap: () {
                     BaseNavigation.push(context,
                         routeName: ManagerRoutes.profileScreen);
@@ -119,16 +120,16 @@ class MenuDrawer extends StatelessWidget {
                         color: AppColors.label,
                       )),
                   title: Text(
-                    'Course',
+                    S.of(context).course,
                     style: TxtStyle.inputStyle
                         .copyWith(fontWeight: FontWeight.w600),
                   ),
-                  subtitle: const Text('Your course'),
+                  subtitle: Text(S.of(context).yourCourse),
                 ),
                 MenuDrawerTile(
                   svgPath: Images.iconFavorite,
-                  title: 'My favotite',
-                  subtitle: 'Favorite course',
+                  title: S.of(context).myFavorite,
+                  subtitle: S.of(context).favoriteCourse,
                   onTap: () {
                     BaseNavigation.push(context,
                         routeName: ManagerRoutes.favoriteScreen);
@@ -136,60 +137,20 @@ class MenuDrawer extends StatelessWidget {
                 ),
                 MenuDrawerTile(
                   svgPath: Images.iconGlobal,
-                  title: 'Language',
-                  subtitle: 'English',
+                  title: S.of(context).language,
+                  subtitle: context
+                              .watch<ChangeLanguageCubit>()
+                              .state
+                              .locale
+                              .languageCode ==
+                          "vi"
+                      ? "Việt Nam"
+                      : "English",
                   onTap: () {
                     BaseNavigation.push(context,
                         routeName: ManagerRoutes.changeLanguage);
                   },
                 ),
-                const Spacer(),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                  color: AppColors.label.withOpacity(0.05),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(0),
-                    leading: GestureDetector(
-                      onTap: () {
-                        BaseNavigation.push(context,
-                            routeName: ManagerRoutes.profileScreen);
-                      },
-                      child: Container(
-                        height: 45,
-                        width: 45,
-                        decoration: BoxDecoration(
-                          color: AppColors.main,
-                          borderRadius: BorderRadius.circular(Dimens.RADIUS_6),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://firebasestorage.googleapis.com/v0/b/quiz-app-4a98f.appspot.com/o/profileImageeZFxkvClu0e7HL152fnOZmuFYl82?alt=media&token=8babf39b-59d2-4764-b962-104a88c1c1a8')),
-                        ),
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        DialogLogout(context);
-                      },
-                      child: SvgPicture.asset(
-                        Images.iconLogout,
-                        color: AppColors.label,
-                      ),
-                    ),
-                    title: GestureDetector(
-                      onTap: () {
-                        BaseNavigation.push(context,
-                            routeName: ManagerRoutes.profileScreen);
-                      },
-                      child: Text(
-                        'HydraCoder',
-                        style: TxtStyle.inputStyle
-                            .copyWith(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

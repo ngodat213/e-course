@@ -33,7 +33,7 @@ class _TabLessonState extends State<TabLesson> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 1,
+                itemCount: state.courseLesson.length,
                 itemBuilder: (context, index) {
                   final lesson = state.courseLesson[index];
                   return LessonWidget(

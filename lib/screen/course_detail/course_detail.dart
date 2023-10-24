@@ -11,7 +11,6 @@ import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
-import 'package:quiz_flutter/widgets/build_button.dart';
 import 'package:quiz_flutter/widgets/title_screen.dart';
 import 'package:readmore/readmore.dart';
 import 'package:chewie/chewie.dart';
@@ -47,18 +46,6 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
         final course = state.course;
         context.read<CourseVideoCubit>().courseChanged(course);
         return Scaffold(
-          bottomNavigationBar: Container(
-            color: Colors.white.withOpacity(0.1),
-            margin: const EdgeInsets.symmetric(
-                horizontal: Dimens.PADDING_SCREEN,
-                vertical: Dimens.PADDING_SCREEN),
-            child: BuildButton(
-              text: 'Register',
-              onTap: () {
-                context.read<CourseDetailCubit>().updateCourse();
-              },
-            ),
-          ),
           body: SingleChildScrollView(
             child: SafeArea(
               child: Stack(
@@ -95,7 +82,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                         ),
                         const SizedBox(height: 32),
                         SizedBox(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height,
                           child: Column(
                             children: [
                               TabBar(
@@ -147,12 +134,17 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                           color: AppColors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: SvgPicture.asset(
-                          Images.iconFavorite,
-                          color: (state.favorite == true
-                              ? Colors.red
-                              : Colors.grey),
-                        ),
+                        child: state.favorite == false
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Colors.grey,
+                                size: 16,
+                              )
+                            : const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                                size: 16,
+                              ),
                       ),
                     ),
                   ),
@@ -175,31 +167,13 @@ class _typeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Text(
-              "@mftmkkus",
-              style: TxtStyle.pBold.copyWith(color: const Color(0xFF93989A)),
-            ),
-            const SizedBox(width: 4),
-            SvgPicture.asset(Images.iconCheckMark),
-          ],
+        Text(
+          "@${course.teacher}",
+          style: TxtStyle.pBold.copyWith(color: const Color(0xFF93989A)),
         ),
-        Row(
-          children: [
-            Text(course.ratting.toString(), style: TxtStyle.rating),
-            const SizedBox(width: 4),
-            SvgPicture.asset(Images.iconStar, width: 12),
-            SvgPicture.asset(Images.iconStar, width: 12),
-            SvgPicture.asset(Images.iconStar, width: 12),
-            SvgPicture.asset(Images.iconStar, width: 12),
-            SvgPicture.asset(Images.iconStar, width: 12),
-            const SizedBox(width: 4),
-            Text("(${course.register})", style: TxtStyle.labelStyle),
-          ],
-        ),
+        const SizedBox(width: 4),
+        SvgPicture.asset(Images.iconCheckMark),
       ],
     );
   }

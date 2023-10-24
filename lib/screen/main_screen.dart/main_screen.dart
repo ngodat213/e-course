@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_flutter/screen/course_list_screen/course_screen.dart';
+import 'package:quiz_flutter/screen/course_list_screen2/course_screen.dart';
 import 'package:quiz_flutter/screen/home_screen/home_screen.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/widget/bottom_nav.dart';

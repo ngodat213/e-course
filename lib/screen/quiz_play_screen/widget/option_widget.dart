@@ -94,7 +94,7 @@ class OptionChooice extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-        height: 60,
+        constraints: const BoxConstraints(minHeight: 60),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           boxShadow: AppColors.shadow,
@@ -123,11 +123,15 @@ class OptionChooice extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Dimens.RADIUS_CIRCLE),
                     ),
                   ),
-            Text(
-              option,
-              style: isSellect == true
-                  ? TxtStyle.text.copyWith(color: AppColors.white)
-                  : TxtStyle.text,
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              width: 250,
+              child: Text(
+                option,
+                style: isSellect == true
+                    ? TxtStyle.text.copyWith(color: AppColors.white)
+                    : TxtStyle.text,
+              ),
             )
           ],
         ),
@@ -158,7 +162,7 @@ class _OptionResult extends StatelessWidget {
     }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-      height: 60,
+      constraints: const BoxConstraints(minHeight: 60),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -177,7 +181,14 @@ class _OptionResult extends StatelessWidget {
               borderRadius: BorderRadius.circular(Dimens.RADIUS_CIRCLE),
             ),
           ),
-          Text(option, style: TxtStyle.text)
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: 250,
+            child: Text(
+              option,
+              style: TxtStyle.text,
+            ),
+          )
         ],
       ),
     );

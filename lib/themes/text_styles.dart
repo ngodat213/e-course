@@ -9,7 +9,7 @@ class TxtStyle {
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
 
   static TextStyle labelStyle = GoogleFonts.poppins(
-      fontWeight: FontWeight.w400, fontSize: 11, color: AppColors.label);
+      fontWeight: FontWeight.w400, fontSize: 13, color: AppColors.label);
 
   static TextStyle lineThrough = GoogleFonts.poppins(
       fontWeight: FontWeight.w400,

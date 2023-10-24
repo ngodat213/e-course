@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Nhập số điện thoại của bạn"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "favoriteCourse":
+            MessageLookupByLibrary.simpleMessage("Khóa học yêu thích"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "forgotPasswordAnswer":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
@@ -84,7 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa học phổ biến"),
         "profileDetail": MessageLookupByLibrary.simpleMessage("Chi tiết hồ sơ"),
         "progressTitle": MessageLookupByLibrary.simpleMessage(
-            "Tiến trình của bạn vào tuần trước"),
+            "Chào bạn mừng bạn đến với E-Course"),
         "question": MessageLookupByLibrary.simpleMessage("Câu"),
         "readmore": MessageLookupByLibrary.simpleMessage("Đọc thêm"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng kí"),
@@ -106,13 +108,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng kí"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
-        "todayTest":
-            MessageLookupByLibrary.simpleMessage("Bài kiểm tra hôm nay"),
-        "todayTestTitle": MessageLookupByLibrary.simpleMessage(
-            "Danh sách kiểm tra của bạn trong hôm nay"),
+        "todayTest": MessageLookupByLibrary.simpleMessage("Bài kiểm tra"),
+        "todayTestTitle":
+            MessageLookupByLibrary.simpleMessage("Danh sách kiểm tra"),
         "username": MessageLookupByLibrary.simpleMessage("Tên người dùng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng việt"),
         "wannaSignOut":
-            MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất không")
+            MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất không"),
+        "yourCourse": MessageLookupByLibrary.simpleMessage("Khóa học của bạn")
       };
 }

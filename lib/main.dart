@@ -1,5 +1,3 @@
-import 'package:cloudinary_flutter/cloudinary_context.dart';
-import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +11,6 @@ import 'package:quiz_flutter/screen/app/app.dart';
 Future<void> main() {
   return BlocOverrides.runZoned(
     () async {
-      CloudinaryContext.cloudinary =
-          Cloudinary.fromCloudName(cloudName: "duhncgkpo");
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.android,

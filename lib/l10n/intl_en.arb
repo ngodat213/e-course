@@ -49,6 +49,9 @@
     "hour": "hour",
     "min": "min",
     "register":"Register",
+    "yourCourse":"Your course",
+    "favoriteCourse":"Favorite Course",
+
 
     "comment": "Commnet",
     "commentTitle": "Write a comment...",

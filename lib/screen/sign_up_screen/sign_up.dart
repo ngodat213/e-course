@@ -5,7 +5,6 @@ import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/cubit/sign_up_cubit.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/widget/sign_up_btn.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/widget/terms.dart';
-import 'package:quiz_flutter/screen/sign_up_screen/widget/thirty_part_login.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
@@ -65,7 +64,6 @@ class SignUpForm extends StatelessWidget {
                         const Terms(),
                         const SizedBox(height: Dimens.HEIGHT_20),
                         const SignUpButton(),
-                        const ThirtyPartLogin(),
                         const SizedBox(height: Dimens.HEIGHT_48)
                       ],
                     ),
