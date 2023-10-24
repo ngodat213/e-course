@@ -25,5 +25,15 @@ class ManagerRoutes {
     communityScreen: (context) => const CommunityScreen(),
     settingScreen: (context) => const SettingScreen(),
     courseDetailScreen: (context) => const CourseDetailScreen(),
+<<<<<<< Updated upstream
+=======
+    quizScreen: (context) => const QuizScreen(),
+    quizPlayScreen: (context) => const QuizPlayScreen(),
+    commoInfoScreen: (context) => const CommoInfoScreen(),
+    profileScreen: (context) => const ProfileScreen(),
+    courseVideoScreen: (context) => const CourseVideoScreen(),
+    changeLanguage: (context) => const ChangeLanguageScreen(),
+    courseListScreen: (context) => const CourseListScreen(),
+>>>>>>> Stashed changes
   };
 }

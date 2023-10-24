@@ -8,8 +8,13 @@ class TxtStyle {
   static TextStyle pGray = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.white);
 
+<<<<<<< Updated upstream
   static TextStyle labelStyle = GoogleFonts.rubik(
       fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.label);
+=======
+  static TextStyle labelStyle = GoogleFonts.poppins(
+      fontWeight: FontWeight.w400, fontSize: 13, color: AppColors.label);
+>>>>>>> Stashed changes
 
   static TextStyle lineThrough = GoogleFonts.rubik(
       fontWeight: FontWeight.w400,
