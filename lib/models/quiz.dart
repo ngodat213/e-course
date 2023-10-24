@@ -9,8 +9,7 @@ class Quiz extends Equatable {
   final String title;
   final String image;
   final String description;
-  final int price;
-  final int? discount;
+  final String type;
   final List<String> lessons;
 
   const Quiz({
@@ -18,8 +17,7 @@ class Quiz extends Equatable {
     required this.title,
     required this.image,
     required this.description,
-    required this.price,
-    this.discount,
+    required this.type,
     required this.lessons,
   });
 
@@ -31,20 +29,18 @@ class Quiz extends Equatable {
       title: quizData!['title'],
       image: quizData['image'],
       description: quizData['description'],
-      price: quizData['price'],
-      discount: quizData['discount'],
+      type: quizData['type'],
       lessons: List.from(quizData['lessons']),
     );
   }
 
-  factory Quiz.initialUser() {
+  factory Quiz.initialQuiz() {
     return const Quiz(
       uid: '',
       title: '',
       image: '',
       description: '',
-      price: 0,
-      discount: 0,
+      type: '',
       lessons: [],
     );
   }
@@ -56,8 +52,6 @@ class Quiz extends Equatable {
       title,
       image,
       description,
-      price,
-      discount,
       lessons,
     ];
   }
@@ -67,8 +61,7 @@ class Quiz extends Equatable {
     String? title,
     String? image,
     String? description,
-    int? price,
-    int? discount,
+    String? type,
     List<String>? lessons,
   }) {
     return Quiz(
@@ -76,8 +69,7 @@ class Quiz extends Equatable {
       title: title ?? this.title,
       image: image ?? this.image,
       description: description ?? this.description,
-      price: price ?? this.price,
-      discount: discount ?? this.discount,
+      type: type ?? this.type,
       lessons: lessons ?? this.lessons,
     );
   }
@@ -88,8 +80,6 @@ class Quiz extends Equatable {
       'title': title,
       'image': image,
       'description': description,
-      'price': price,
-      'discount': discount,
       'lessons': lessons,
     };
   }

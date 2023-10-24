@@ -1,32 +1,41 @@
 part of 'home_cubit.dart';
 
-enum QuizStatus { isEmpty, isLoading, isNotEmpty }
+enum HomeStatus { isEmpty, isLoading, isNotEmpty }
 
 class HomeState extends Equatable {
-  const HomeState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class LoadingState extends HomeState {
-  @override
-  List<Object> get props => [];
-}
-
-class LoadedQuizState extends HomeState {
-  const LoadedQuizState({required this.quizs, required this.status});
+  const HomeState(
+      {required this.quizs,
+      required this.status,
+      required this.sliderIndex,
+      required this.courses});
   final List<Quiz> quizs;
-  final QuizStatus status;
+  final List<Course> courses;
+  final int sliderIndex;
+  final HomeStatus status;
 
-  factory LoadedQuizState.initial() {
-    return const LoadedQuizState(
-      quizs: [],
-      status: QuizStatus.isLoading,
+  HomeState copyWith({
+    List<Quiz>? quizs,
+    HomeStatus? status,
+    int? sliderIndex,
+    List<Course>? courses,
+  }) {
+    return HomeState(
+      quizs: quizs ?? this.quizs,
+      status: status ?? this.status,
+      sliderIndex: sliderIndex ?? this.sliderIndex,
+      courses: courses ?? this.courses,
     );
   }
-  @override
-  List<Object> get props => [quizs];
-}
 
-final class HomeInitial extends HomeState {}
+  factory HomeState.initial() {
+    return const HomeState(
+      quizs: [],
+      courses: [],
+      sliderIndex: 0,
+      status: HomeStatus.isLoading,
+    );
+  }
+
+  @override
+  List<Object> get props => [quizs, courses, sliderIndex, status];
+}

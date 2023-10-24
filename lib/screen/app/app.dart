@@ -7,56 +7,61 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quiz_flutter/manager/manager_provider.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
-import 'package:quiz_flutter/screen/app/bloc/app_bloc.dart';
-import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
+import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
 
 class App extends StatelessWidget {
   const App({
     super.key,
     required AuthRepository authRepository,
     required AppRepository appRepository,
+    required UserRepository userRepository,
   })  : _authRepository = authRepository,
-        _appRepository = appRepository;
+        _appRepository = appRepository,
+        _userRepository = userRepository;
 
   final AuthRepository _authRepository;
   final AppRepository _appRepository;
+  final UserRepository _userRepository;
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(value: _authRepository),
         RepositoryProvider.value(value: _appRepository),
+        RepositoryProvider.value(value: _userRepository),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-              create: (context) => AppBloc(authRepository: _authRepository)),
-          BlocProvider(
-              create: (context) => HomeCubit(appRepository: _appRepository)),
-          ...ManagerProvider.provider
+          ...ManagerProvider.provider,
+          BlocProvider(create: (context) => ChangeLanguageCubit()..getLang())
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: ManagerRoutes.splashScreen,
-          supportedLocales: L10n.support,
-          locale: const Locale('en'),
-          routes: {...ManagerRoutes.manager},
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          localeResolutionCallback: (locale, supportedLocales) {
-            for (var supportedLocale in supportedLocales) {
-              if (supportedLocale.languageCode == locale?.languageCode &&
-                  supportedLocale.countryCode == locale?.countryCode) {
-                return supportedLocale;
+        child: Builder(builder: (context) {
+          final stateAppLang = context.watch<ChangeLanguageCubit>().state;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: ManagerRoutes.splashScreen,
+            supportedLocales: L10n.support,
+            locale: stateAppLang.locale,
+            routes: {...ManagerRoutes.manager},
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode &&
+                    supportedLocale.countryCode == locale?.countryCode) {
+                  return supportedLocale;
+                }
               }
-            }
-            return supportedLocales.first;
-          },
-        ),
+              return supportedLocales.first;
+            },
+          );
+        }),
       ),
     );
   }

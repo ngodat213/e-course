@@ -23,9 +23,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     if (state.status == ForgotPasswordStatus.submitting) return;
     emit(state.copyWith(status: ForgotPasswordStatus.submitting));
     try {
-      await _authRepository.forgotPassword(
-        email: state.email,
-      );
+      await _authRepository.forgotPassword(email: state.email);
       toastInfo(msg: 'Check your message email');
       emit(state.copyWith(status: ForgotPasswordStatus.success));
     } catch (_) {}

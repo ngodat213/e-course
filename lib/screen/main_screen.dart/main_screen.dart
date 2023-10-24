@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/screen/course_list_screen2/course_screen.dart';
 import 'package:quiz_flutter/screen/home_screen/home_screen.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
 import 'package:quiz_flutter/screen/main_screen.dart/widget/bottom_nav.dart';
-import 'package:quiz_flutter/screen/play_screen/play_screen.dart';
 import 'package:quiz_flutter/screen/setting_screen/setting_screen.dart';
-import 'package:quiz_flutter/screen/community_screen/community.dart';
+import 'package:quiz_flutter/themes/colors.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,7 +18,6 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> pages = [
     const HomeScreen(),
     const CourseScreen(),
-    const CommunityScreen(),
     const SettingScreen(),
   ];
 
@@ -27,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: AppColors.white,
           bottomNavigationBar: const BuildBottomNavBar(),
           body: pages[state.pageIndex],
         );

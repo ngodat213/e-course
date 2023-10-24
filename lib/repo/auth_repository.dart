@@ -6,6 +6,7 @@ import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/models/user.dart';
 import 'package:quiz_flutter/models/custom_error.dart';
 import 'package:quiz_flutter/utils/base_shared_preferences.dart';
+import 'package:quiz_flutter/widgets/custom_toast.dart';
 
 class AuthRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth;
@@ -46,13 +47,16 @@ class AuthRepository {
           .set({
         'displayName': displayName,
         'email': email,
+        'phoneNumber': phoneNumber,
         'photoUrl': DEFAULT_AVATAR,
         'favorites_course': [],
         'favorites_teacher': [],
         'course': [],
-        'diamond': 1000,
       });
     } on firebase_auth.FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        toastInfo(msg: "Your email address is not valid");
+      }
       throw CustomError(
         code: e.code,
         msg: e.message!,
@@ -84,6 +88,13 @@ class AuthRepository {
         BaseSharedPreferences.savedBoolValue(ManagerKeyStorage.keepLogin, true);
       }
     } on firebase_auth.FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        toastInfo(msg: "No user found for that email address");
+      } else if (e.code == 'wrong-password') {
+        toastInfo(msg: "Wrong passwrod");
+      } else if (e.code == 'invalid-email') {
+        toastInfo(msg: "Your email format is wrong");
+      }
       throw CustomError(
         code: e.code,
         msg: e.message!,
@@ -101,7 +112,6 @@ class AuthRepository {
   Future<void> logout() async {
     try {
       await Future.wait([_firebaseAuth.signOut()]);
-      // toastInfo(msg: 'Logout successfull');
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw CustomError(
         code: e.code,

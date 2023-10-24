@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
@@ -30,13 +31,22 @@ class SignInCubit extends Cubit<SignInState> {
   Future<void> logInWithCredentials() async {
     if (state.status == LoginStatus.submitting) return;
     emit(state.copyWith(status: LoginStatus.submitting));
-    try {
-      await _authRepository.logInWithEmailAndPassword(
-        email: state.email,
-        password: state.password,
-      );
-      toastInfo(msg: 'Login successfull');
-      emit(state.copyWith(status: LoginStatus.success));
-    } catch (_) {}
+    if (state.email != "" || state.password != "") {
+      try {
+        await _authRepository.logInWithEmailAndPassword(
+          email: state.email,
+          password: state.password,
+        );
+        toastInfo(msg: 'Login successfull');
+        emit(state.copyWith(status: LoginStatus.success));
+      } on CustomError {
+        emit(state.copyWith(status: LoginStatus.error));
+      } catch (e) {
+        emit(state.copyWith(status: LoginStatus.error));
+      }
+    } else {
+      toastInfo(msg: "Fill in all text fields");
+      emit(state.copyWith(status: LoginStatus.error));
+    }
   }
 }

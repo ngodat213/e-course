@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -9,12 +8,14 @@ class Question extends Equatable {
   final String question;
   final List<String> options;
   final int answer;
+  String? imagePath;
 
-  const Question({
+  Question({
     required this.uid,
     required this.question,
     required this.options,
     required this.answer,
+    this.imagePath,
   });
 
   factory Question.fromDoc(DocumentSnapshot questionDoc) {
@@ -23,60 +24,38 @@ class Question extends Equatable {
     return Question(
       uid: questionDoc.id,
       question: questionData!['question'],
-      options: questionData['options'],
+      options: List.from(questionData['options']),
       answer: questionData['answer'],
+      imagePath: questionData['image'],
     );
   }
 
   factory Question.initialUser() {
-    return const Question(
+    return Question(
       uid: '',
       question: '',
-      options: [],
+      options: const [],
       answer: 0,
+      imagePath: "",
     );
   }
-
-  @override
-  List<Object?> get props => [uid, question, options, answer];
 
   Question copyWith({
     String? uid,
     String? question,
     List<String>? options,
     int? answer,
+    String? imagePath,
   }) {
     return Question(
       uid: uid ?? this.uid,
       question: question ?? this.question,
       options: options ?? this.options,
       answer: answer ?? this.answer,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'uid': uid,
-      'question': question,
-      'options': options,
-      'answer': answer,
-    };
-  }
-
-  factory Question.fromMap(Map<String, dynamic> map) {
-    return Question(
-      uid: map['uid'] as String,
-      question: map['question'] as String,
-      options: List<String>.from((map['options'] as List<String>)),
-      answer: map['answer'] as int,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Question.fromJson(String source) =>
-      Question.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  bool get stringify => true;
+  List<Object?> get props => [uid, question, options, answer, imagePath];
 }

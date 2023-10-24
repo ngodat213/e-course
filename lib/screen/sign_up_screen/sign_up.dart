@@ -5,7 +5,7 @@ import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/cubit/sign_up_cubit.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/widget/sign_up_btn.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/widget/terms.dart';
-import 'package:quiz_flutter/screen/sign_up_screen/widget/thirty_part_login.dart';
+import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
 import 'package:quiz_flutter/widgets/build_header.dart';
@@ -60,18 +60,17 @@ class SignUpForm extends StatelessWidget {
                     child: Column(
                       children: [
                         _textField(context),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: Dimens.HEIGHT_20),
                         const Terms(),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: Dimens.HEIGHT_20),
                         const SignUpButton(),
-                        const ThirtyPartLogin(),
-                        const SizedBox(height: 48)
+                        const SizedBox(height: Dimens.HEIGHT_48)
                       ],
                     ),
                   )
                 ],
               ),
-              const BuildBackButton()
+              BuildBackButton()
             ],
           ),
         ),
@@ -89,7 +88,7 @@ class SignUpForm extends StatelessWidget {
             context.read<SignUpCubit>().displayNameChanged(value);
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: Dimens.HEIGHT_20),
         BuildTextField(
           label: S.of(context).phoneNumber,
           hintText: S.of(context).enterPhoneNumber,
@@ -98,7 +97,7 @@ class SignUpForm extends StatelessWidget {
             context.read<SignUpCubit>().phoneNumberChanged(value);
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: Dimens.HEIGHT_20),
         BuildTextField(
           label: S.of(context).email,
           hintText: S.of(context).emailExample,
@@ -106,7 +105,7 @@ class SignUpForm extends StatelessWidget {
             context.read<SignUpCubit>().emailChanged(value);
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: Dimens.HEIGHT_20),
         BuildTextField(
           label: S.of(context).password,
           hintText: S.of(context).passwordExample,
@@ -115,7 +114,7 @@ class SignUpForm extends StatelessWidget {
             context.read<SignUpCubit>().passwordChanged(value);
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: Dimens.HEIGHT_20),
         BuildTextField(
           label: S.of(context).confirmPassword,
           hintText: S.of(context).passwordExample,

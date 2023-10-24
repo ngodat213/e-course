@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "711613143742-bcoqhef9dh37dg6kdqdf56bmbuqp8j2i.apps.googleusercontent.com",
+              "client_id": "711613143742-42pn6hedkivr8mnpn55vo7hflj49hck2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.quizFlutter.RunnerTests"
+                "bundle_id": "com.example.quizFlutter"
               }
             }
           ]
@@ -68,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "711613143742-bcoqhef9dh37dg6kdqdf56bmbuqp8j2i.apps.googleusercontent.com",
+              "client_id": "711613143742-42pn6hedkivr8mnpn55vo7hflj49hck2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.quizFlutter.RunnerTests"
+                "bundle_id": "com.example.quizFlutter"
               }
             }
           ]

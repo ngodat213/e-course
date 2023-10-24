@@ -5,4 +5,4 @@ export 'quiz.dart';
 export 'quiz_lesson.dart';
 export 'teacher.dart';
 export 'user.dart';
-export 'video_course.dart';
+export 'course_video.dart';

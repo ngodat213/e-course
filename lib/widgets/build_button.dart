@@ -8,11 +8,13 @@ class BuildButton extends StatelessWidget {
       required this.text,
       this.bgColor,
       this.textStyle,
-      this.onTap});
+      this.onTap,
+      this.isLoading});
   final String text;
   Color? bgColor;
   TextStyle? textStyle;
   VoidCallback? onTap;
+  bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class BuildButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(text, style: TxtStyle.buttonWhite),
+          child: isLoading == true
+              ? const CircularProgressIndicator()
+              : Text(text, style: TxtStyle.buttonWhite),
         ),
       ),
     );

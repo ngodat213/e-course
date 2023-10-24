@@ -15,7 +15,7 @@ class BuildHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.HEIGHT_200,
+      height: 205,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: AppColors.main,

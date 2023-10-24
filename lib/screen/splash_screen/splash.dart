@@ -1,11 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_screen_cubit.dart';
+import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
+import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
+import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
+import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
@@ -24,11 +33,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     checkUserKeepLogin().whenComplete(
         () async => Timer(const Duration(seconds: DELAY_SPLASH_SCREEN), () {
-              keepLogin
-                  ? BaseNavigation.push(context,
-                      routeName: ManagerRoutes.mainScreen)
-                  : BaseNavigation.push(context,
-                      routeName: ManagerRoutes.signInScreen);
+              if (keepLogin) {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.mainScreen, clearStack: true);
+                context.read<HomeCubit>().getCourse();
+                context.read<HomeCubit>().getQuiz();
+                context.read<SettingCubit>().getUser();
+                context.read<MainCubit>().indexChanged(0);
+                context.read<CourseListScreenCubit>().getCourse();
+                context.read<CourseScreenCubit>().getCourse();
+              } else {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.signInScreen, clearStack: true);
+              }
             }));
     super.initState();
   }
@@ -54,13 +71,23 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Images.imageSplash),
-            fit: BoxFit.cover,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(
+                Images.iconLogo,
+                color: AppColors.main,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                S.of(context).progressTitle,
+                style: TxtStyle.buttonBlack,
+              )
+            ],
           ),
         ),
       ),

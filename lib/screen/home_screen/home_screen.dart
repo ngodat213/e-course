@@ -1,20 +1,21 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
-import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
-import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/exam_done.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/course_slider.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/grid_course.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/home_header.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/search_view.dart';
+import 'package:quiz_flutter/utils/base_shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,255 +29,218 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          HomeCubit(appRepository: context.read<AppRepository>()),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 18, 25, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const HomeHeader(),
-                      const SearchView(),
-                      Text('Hi, HydraCoder', style: TxtStyle.title),
-                      const SizedBox(height: 8),
-                      Text('Here you progress last week',
-                          style: TxtStyle.hintStyle),
-                    ],
-                  ),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      drawer: const MenuDrawer(),
+      appBar: homeAppBar(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CourseSlider(),
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: Dimens.PADDING_SCREEN,
+                  vertical: Dimens.PADDING_16,
                 ),
-                const CourseContinue(),
-                Center(
-                  child: DotsIndicator(
-                    dotsCount: 3,
-                    decorator: DotsDecorator(
-                        color: AppColors.grey,
-                        activeColor: AppColors.main,
-                        size: const Size.square(5),
-                        activeSize: const Size(20, 5),
-                        activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5))),
-                  ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GridViewCourse(),
+                    SizedBox(height: Dimens.HEIGHT_20),
+                    ListExam(),
+                    SizedBox(height: Dimens.HEIGHT_20),
+                  ],
                 ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Choice your course', style: TxtStyle.title),
-                          Text('All', style: TxtStyle.pMainColor),
-                        ],
-                      ),
-                      const Row(
-                        children: [
-                          _reusableMenuText('All'),
-                          _reusableMenuText("Math"),
-                          _reusableMenuText('Hacker'),
-                        ],
-                      ),
-                      GridView.custom(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 15,
-                          childAspectRatio: 1.6,
-                        ),
-                        childrenDelegate: SliverChildBuilderDelegate(
-                          childCount: 4,
-                          (context, index) => GestureDetector(
-                            onTap: () {
-                              BaseNavigation.push(context,
-                                  routeName: ManagerRoutes.courseDetailScreen);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: AppColors.main,
-                                borderRadius:
-                                    BorderRadius.circular(Dimens.RADIUS_8),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Flutter for begginer',
-                                      style: TxtStyle.textWhite),
-                                  Text('Hydra', style: TxtStyle.p),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const ListExam(),
-                      const SizedBox(height: 20),
-                      Text('Last exam done', style: TxtStyle.title),
-                      const SizedBox(height: 8),
-                      const ExamDone(),
-                      const ExamDone(),
-                      const ExamDone()
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
-}
 
-class _reusableMenuText extends StatelessWidget {
-  const _reusableMenuText(
-    this.text,
-  );
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 12, top: 18, bottom: 18),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.main,
-        borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-      ),
-      child: Text(text, style: TxtStyle.p),
+  AppBar homeAppBar() {
+    return AppBar(
+      elevation: 0,
+      titleSpacing: Dimens.PADDING_SCREEN,
+      title: const HomeHeader(),
+      iconTheme: const IconThemeData(color: AppColors.label),
+      backgroundColor: AppColors.white,
     );
   }
 }
 
-class CourseContinue extends StatefulWidget {
-  const CourseContinue({
-    super.key,
-  });
-
-  @override
-  State<CourseContinue> createState() => _CourseContinueState();
-}
-
-class _CourseContinueState extends State<CourseContinue> {
-  final CarouselController carouselController = CarouselController();
-  int currentIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: const [
-        CardSliderContinue(),
-        CardSliderContinue(),
-        CardSliderContinue()
-      ],
-      carouselController: carouselController,
-      options: CarouselOptions(
-        autoPlay: true,
-        aspectRatio: 2,
-        viewportFraction: 1,
-        onPageChanged: (index, reason) {},
-      ),
-    );
-  }
-}
-
-class CardSliderContinue extends StatelessWidget {
-  const CardSliderContinue({
+class MenuDrawer extends StatelessWidget {
+  const MenuDrawer({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 150,
-      margin: const EdgeInsets.only(top: 18, left: 25, right: 25),
-      decoration: BoxDecoration(
-        color: AppColors.main,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            right: 0,
-            child: SvgPicture.asset(
-              Images.imageCourse,
-              height: 150,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    return Drawer(
+      backgroundColor: AppColors.white,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - 120,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Hydra', style: TxtStyle.p),
-                const SizedBox(height: 25),
-                SizedBox(
-                  width: 200,
-                  child:
-                      Text('Flutter for begginer', style: TxtStyle.titleWhite),
-                ),
-                Text('20/25 Lesson', style: TxtStyle.p),
-                Expanded(child: Container()),
                 Container(
-                  width: 100,
-                  height: 25,
-                  decoration: BoxDecoration(
-                    color: AppColors.colorTw,
-                    borderRadius: BorderRadius.circular(Dimens.RADIUS_8),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Continue",
-                      style: TxtStyle.pBold,
+                  padding: const EdgeInsets.only(
+                      top: Dimens.PADDING_SCREEN, bottom: Dimens.PADDING_33),
+                  child: ListTile(
+                    leading: SvgPicture.asset(
+                      Images.iconLogo,
+                      height: 32,
+                      color: AppColors.main,
                     ),
+                    title: Text(S.of(context).app_name, style: TxtStyle.h3),
                   ),
-                )
+                ),
+                MenuDrawerTile(
+                  svgPath: Images.iconPerson,
+                  title: S.of(context).account,
+                  subtitle: S.of(context).accountSetting,
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.profileScreen);
+                  },
+                ),
+                ListTile(
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.courseListScreen);
+                  },
+                  leading: CircleAvatar(
+                      backgroundColor: Colors.black.withOpacity(0.05),
+                      child: const Icon(
+                        Icons.menu_book_rounded,
+                        color: AppColors.label,
+                      )),
+                  title: Text(
+                    S.of(context).course,
+                    style: TxtStyle.inputStyle
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: Text(S.of(context).yourCourse),
+                ),
+                MenuDrawerTile(
+                  svgPath: Images.iconFavorite,
+                  title: S.of(context).myFavorite,
+                  subtitle: S.of(context).favoriteCourse,
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.favoriteScreen);
+                  },
+                ),
+                MenuDrawerTile(
+                  svgPath: Images.iconGlobal,
+                  title: S.of(context).language,
+                  subtitle: context
+                              .watch<ChangeLanguageCubit>()
+                              .state
+                              .locale
+                              .languageCode ==
+                          "vi"
+                      ? "Việt Nam"
+                      : "English",
+                  onTap: () {
+                    BaseNavigation.push(context,
+                        routeName: ManagerRoutes.changeLanguage);
+                  },
+                ),
               ],
             ),
           ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Future<dynamic> DialogLogout(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.warning_amber_outlined,
+                  color: Color(0xFFEA3434),
+                ),
+              ),
+              Text(
+                S.of(context).logout,
+                style: TxtStyle.inputStyle.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          content: Text(S.of(context).logout),
+          actions: [
+            TextButton(
+              onPressed: () {
+                BaseNavigation.pop(context);
+              },
+              child: Text(S.of(context).cancel, style: TxtStyle.text),
+            ),
+            TextButton(
+              onPressed: () {
+                BaseSharedPreferences.remove(ManagerKeyStorage.accessToken);
+                BaseSharedPreferences.remove(ManagerKeyStorage.keepLogin);
+                context.read<SettingCubit>().signOut();
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.signInScreen);
+              },
+              style: const ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll<Color>(AppColors.main),
+              ),
+              child: Text(S.of(context).logout, style: TxtStyle.p),
+            )
+          ],
+        );
+      },
     );
   }
 }
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
+class MenuDrawerTile extends StatelessWidget {
+  const MenuDrawerTile({
     super.key,
+    required this.svgPath,
+    required this.subtitle,
+    this.title,
+    this.onTap,
+    this.color,
   });
+  final String svgPath;
+  final String? title;
+  final String subtitle;
+  final Color? color;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(Images.iconMenu, width: 16),
-        Expanded(child: Container()),
-        const Icon(Icons.notifications_none_sharp),
-        Container(
-          width: 32,
-          height: 32,
-          margin: const EdgeInsets.only(left: 16),
-          child: const CircleAvatar(
-            radius: Dimens.RADIUS_CIRCLE,
-            backgroundImage: NetworkImage(DEFAULT_AVATAR),
-          ),
+    return ListTile(
+      onTap: onTap,
+      leading: CircleAvatar(
+        backgroundColor: Colors.black.withOpacity(0.05),
+        child: SvgPicture.asset(
+          svgPath,
+          width: 20,
         ),
-      ],
+      ),
+      title: Text(
+        title ?? "",
+        style: TxtStyle.inputStyle.copyWith(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(subtitle, style: TxtStyle.labelStyle),
     );
   }
 }
