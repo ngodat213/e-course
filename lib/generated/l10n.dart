@@ -430,10 +430,10 @@ class S {
     );
   }
 
-  /// `Here you progress last week`
+  /// `Welcome to E-Course`
   String get progressTitle {
     return Intl.message(
-      'Here you progress last week',
+      'Welcome to E-Course',
       name: 'progressTitle',
       desc: '',
       args: [],
@@ -640,6 +640,116 @@ class S {
     );
   }
 
+  /// `Topic`
+  String get topic {
+    return Intl.message(
+      'Topic',
+      name: 'topic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Topic of Message`
+  String get topicInfo {
+    return Intl.message(
+      'Topic of Message',
+      name: 'topicInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text`
+  String get text {
+    return Intl.message(
+      'Text',
+      name: 'text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Message`
+  String get summitMessage {
+    return Intl.message(
+      'Submit Message',
+      name: 'summitMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a comment....`
+  String get writeComment {
+    return Intl.message(
+      'Write a comment....',
+      name: 'writeComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application information`
+  String get appInfo {
+    return Intl.message(
+      'Application information',
+      name: 'appInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For`
+  String get for4 {
+    return Intl.message(
+      'For',
+      name: 'for4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `iOS and Android`
+  String get iOSAndroid {
+    return Intl.message(
+      'iOS and Android',
+      name: 'iOSAndroid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduce`
+  String get introduce {
+    return Intl.message(
+      'Introduce',
+      name: 'introduce',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Section`
+  String get section {
+    return Intl.message(
+      'Section',
+      name: 'section',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `ChangeLanguage`
   String get changeLanguage {
     return Intl.message(
@@ -830,11 +940,31 @@ class S {
     );
   }
 
+  /// `Common Info`
+  String get commonInfo {
+    return Intl.message(
+      'Common Info',
+      name: 'commonInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter the email associated with your account and well send and email with instructions to reset your password`
   String get resetPasswordDescription {
     return Intl.message(
       'Enter the email associated with your account and well send and email with instructions to reset your password',
       name: 'resetPasswordDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The E-Course application is a powerful learning support tool, developed by Flutter, making it easy to manage learning materials, study time, and optimize your learning process. This is an application that supports students, students and anyone who wants to improve their learning performance and manage knowledge effectively. The E-Course application is a reliable friend in supporting your learning process. Download application today and experience convenience and effectiveness in learning management.`
+  String get infoApp {
+    return Intl.message(
+      'The E-Course application is a powerful learning support tool, developed by Flutter, making it easy to manage learning materials, study time, and optimize your learning process. This is an application that supports students, students and anyone who wants to improve their learning performance and manage knowledge effectively. The E-Course application is a reliable friend in supporting your learning process. Download application today and experience convenience and effectiveness in learning management.',
+      name: 'infoApp',
       desc: '',
       args: [],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/quiz.dart';
 import 'package:quiz_flutter/models/quiz_lesson.dart';
@@ -8,7 +8,6 @@ import 'package:quiz_flutter/screen/quiz_play_screen/cubit/quiz_play_cubit.dart'
 import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
-import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
@@ -99,25 +98,15 @@ class BuildContent extends StatelessWidget {
             const SizedBox(height: Dimens.RADIUS_8),
             Text(quiz.title, style: TxtStyle.h2),
             const SizedBox(height: Dimens.HEIGHT_6),
-            Row(
-              children: [
-                Text(
-                  "@mftmkkus",
-                  style:
-                      TxtStyle.pBold.copyWith(color: const Color(0xFF93989A)),
-                ),
-                const SizedBox(width: 4),
-                SvgPicture.asset(Images.iconCheckMark),
-              ],
-            ),
             const SizedBox(height: Dimens.HEIGHT_16),
             ReadMoreText(
               quiz.description,
               trimLines: 2,
+              trimCollapsedText: S.of(context).readmore,
               style: TxtStyle.text.copyWith(color: const Color(0xFF93989A)),
             ),
             const SizedBox(height: 32),
-            Text('Lessons', style: TxtStyle.title),
+            Text(S.of(context).lesson, style: TxtStyle.title),
             const SizedBox(height: 12),
             ListView.builder(
               shrinkWrap: true,

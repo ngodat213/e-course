@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 
@@ -17,10 +18,31 @@ class _AboutAppTabState extends State<AboutAppTab> {
       child: Column(
         children: [
           const SizedBox(height: Dimens.HEIGHT_30),
-          Text(
-            'Discover this 4.8-km out-and-back trail near Estes Park, Colorado. Generally considered an easy route, it takes an average of 1 h 34 min to complete. This is a very popular area for hiking and snowshoeing, so you\'ll likely encounter other people while exploring. The trail is open year-round and is beautiful to visit anytime. You\'ll need to leave pups at home — dogs aren\'t allowed on this trail.\n\nDiscover this 4.8-km out-and-back trail near Estes Park, Colorado. Generally considered an easy route, it takes an average of 1 h 34 min to complete. This is a very popular area for hiking and snowshoeing, so you\'ll likely encounter other people while exploring.',
-            style: TxtStyle.text
-                .copyWith(color: const Color(0xFF93989A), height: 1.5),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${S.of(context).appInfo}: ${S.of(context).app_name}",
+                style: TxtStyle.text.copyWith(height: 1.5),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "${S.of(context).version}: 1.0",
+                style: TxtStyle.text.copyWith(height: 1.5),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "${S.of(context).for4}: ${S.of(context).iOSAndroid}",
+                style: TxtStyle.text.copyWith(height: 1.5),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                S.of(context).infoApp,
+                style: TxtStyle.text.copyWith(
+                  height: 1.5,
+                ),
+              ),
+            ],
           ),
         ],
       ),

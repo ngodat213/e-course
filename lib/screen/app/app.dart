@@ -33,7 +33,10 @@ class App extends StatelessWidget {
         RepositoryProvider.value(value: _userRepository),
       ],
       child: MultiBlocProvider(
-        providers: [...ManagerProvider.provider],
+        providers: [
+          ...ManagerProvider.provider,
+          BlocProvider(create: (context) => ChangeLanguageCubit()..getLang())
+        ],
         child: Builder(builder: (context) {
           final stateAppLang = context.watch<ChangeLanguageCubit>().state;
           return MaterialApp(

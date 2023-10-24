@@ -2,9 +2,10 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quiz_flutter/const/const.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/models/comment.dart';
 import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -109,7 +110,7 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                         Row(
                           children: [
                             Text(
-                              "@mftmkkus",
+                              "@${state.course.teacher}",
                               style: TxtStyle.pBold
                                   .copyWith(color: const Color(0xFF93989A)),
                             ),
@@ -119,13 +120,14 @@ class CourseVideoScreenState extends State<CourseVideoScreen>
                         ),
                         const SizedBox(height: 16),
                         ReadMoreText(
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                          state.video.description,
                           trimLines: 2,
+                          trimCollapsedText: S.of(context).readmore,
                           style: TxtStyle.text
                               .copyWith(color: const Color(0xFF93989A)),
                         ),
                         const SizedBox(height: 20),
-                        Text('Comment', style: TxtStyle.inputStyle),
+                        Text(S.of(context).comment, style: TxtStyle.inputStyle),
                         const SizedBox(height: 10),
                         const SendComment(),
                         const ShowComment(),
@@ -176,6 +178,8 @@ class SendComment extends StatefulWidget {
   State<SendComment> createState() => _SendCommentState();
 }
 
+TextEditingController _textEditingController = TextEditingController();
+
 class _SendCommentState extends State<SendComment> {
   @override
   Widget build(BuildContext context) {
@@ -183,17 +187,20 @@ class _SendCommentState extends State<SendComment> {
       builder: (context, state) {
         return ListTile(
           contentPadding: const EdgeInsets.all(0),
-          leading: const CircleAvatar(
-            backgroundImage: NetworkImage(DEFAULT_AVATAR),
+          leading: CircleAvatar(
+            backgroundImage:
+                NetworkImage(context.read<SettingCubit>().state.user.photoUrl!),
           ),
           title: BuildTextField(
-            hintText: 'Write a comment...',
+            controller: _textEditingController,
+            hintText: S.of(context).writeComment,
             func: (value) {
               context.read<CourseVideoCubit>().commentChanged(value);
             },
           ),
           trailing: GestureDetector(
             onTap: () {
+              _textEditingController.clear();
               context.read<CourseVideoCubit>().sendCommnet();
               setState(() {
                 context.read<CourseVideoCubit>().getComment();
@@ -207,7 +214,7 @@ class _SendCommentState extends State<SendComment> {
   }
 }
 
-class UserComment extends StatelessWidget {
+class UserComment extends StatefulWidget {
   const UserComment({
     super.key,
     required this.comment,
@@ -215,43 +222,55 @@ class UserComment extends StatelessWidget {
   final Comment comment;
 
   @override
+  State<UserComment> createState() => _UserCommentState();
+}
+
+class _UserCommentState extends State<UserComment> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
           contentPadding: const EdgeInsets.only(top: 16),
-          leading:
-              const CircleAvatar(backgroundImage: NetworkImage(DEFAULT_AVATAR)),
-          title: Text(
-            'HydraCoder',
-            style: TxtStyle.hintStyle,
+          leading: FutureBuilder<String?>(
+            future: context
+                .read<CourseVideoCubit>()
+                .getPhotoUrlById(widget.comment.userId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData && snapshot.data != null) {
+                return CircleAvatar(
+                  backgroundImage: NetworkImage(snapshot.data!),
+                );
+              } else {
+                return const CircleAvatar();
+              }
+            },
           ),
-          subtitle: Column(
-            children: [
-              ReadMoreText(
-                comment.title,
-                textAlign: TextAlign.start,
-                trimLength: 192,
-                style: TxtStyle.labelStyle
-                    .copyWith(color: const Color(0xFF93989A)),
-              ),
-              const SizedBox(height: 10),
-              const Row(
-                children: [
-                  Icon(
-                    Icons.thumb_up_outlined,
-                    size: 16,
-                  ),
-                  SizedBox(width: 8),
-                  Text('10'),
-                  SizedBox(width: 20),
-                  Icon(
-                    Icons.comment_outlined,
-                    size: 16,
-                  ),
-                ],
-              ),
-            ],
+          title: FutureBuilder<String?>(
+            future: context
+                .read<CourseVideoCubit>()
+                .getUsernameById(widget.comment.userId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Text("");
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData && snapshot.data != null) {
+                return Text(snapshot.data!, style: TxtStyle.hintStyle);
+              } else {
+                return const Text("");
+              }
+            },
+          ),
+          subtitle: ReadMoreText(
+            widget.comment.title,
+            textAlign: TextAlign.start,
+            trimLength: 192,
+            style: TxtStyle.labelStyle.copyWith(color: const Color(0xFF93989A)),
           ),
         ),
       ],

@@ -6,13 +6,16 @@ import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/models/course_video.dart';
 import 'package:quiz_flutter/models/custom_error.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
+import 'package:quiz_flutter/repo/user_repository/user_repository.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
 part 'course_video_state.dart';
 
 class CourseVideoCubit extends Cubit<CourseVideoState> {
   final AppRepository _appRepository;
-  CourseVideoCubit(this._appRepository) : super(CourseVideoState.initial());
+  final UserRepository _userRepository;
+  CourseVideoCubit(this._appRepository, this._userRepository)
+      : super(CourseVideoState.initial());
 
   void videoChanged(CourseVideo value) {
     emit(
@@ -51,6 +54,14 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
     );
   }
 
+  Future<String?> getPhotoUrlById(String id) async {
+    return await _userRepository.getPhotoUrlByUID(id);
+  }
+
+  Future<String?> getUsernameById(String id) async {
+    return await _userRepository.getNameUserByUID(id);
+  }
+
   Future<void> sendCommnet() async {
     emit(state.copyWith(commentStatus: CommentStatus.isLoading));
     if (state.comment != "") {
@@ -59,7 +70,6 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
           videoId: state.video.uid,
           title: state.comment,
         );
-        print("send oke");
         toastInfo(msg: 'Send oke!');
         emit(state.copyWith(commentStatus: CommentStatus.success));
       } on CustomError {

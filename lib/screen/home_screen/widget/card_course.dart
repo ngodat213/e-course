@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -51,18 +50,9 @@ class CardSlider extends StatelessWidget {
                 Text('${course.listLesson.length} ${S.of(context).lesson}',
                     style: TxtStyle.p),
                 const SizedBox(height: 5),
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 10,
-                      backgroundImage: NetworkImage(DEFAULT_AVATAR),
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      'Hydra',
-                      style: TxtStyle.p,
-                    )
-                  ],
+                Text(
+                  'Hydra',
+                  style: TxtStyle.p,
                 )
               ],
             ),

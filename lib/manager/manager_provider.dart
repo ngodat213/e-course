@@ -71,7 +71,10 @@ class ManagerProvider {
       ),
     ),
     BlocProvider(
-      create: (context) => CourseVideoCubit(context.read<AppRepository>()),
+      create: (context) => CourseVideoCubit(
+        context.read<AppRepository>(),
+        context.read<UserRepository>(),
+      ),
     ),
     BlocProvider(
       create: (context) => ChangeLanguageCubit(),

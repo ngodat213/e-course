@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/change_language/cubit/change_language_cubit.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
@@ -48,7 +49,14 @@ class SettingMenu extends StatelessWidget {
           SettingTile(
             svgPath: Images.iconGlobal,
             text: S.of(context).language,
-            subtitle: S.of(context).vietnamese,
+            subtitle: context
+                        .watch<ChangeLanguageCubit>()
+                        .state
+                        .locale
+                        .languageCode ==
+                    "vi"
+                ? "Việt Nam"
+                : "English",
             onTap: () {
               BaseNavigation.push(context,
                   routeName: ManagerRoutes.changeLanguage);

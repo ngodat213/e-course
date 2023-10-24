@@ -44,6 +44,19 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
     );
   }
 
+  List<CourseVideo> getVideoByLessonIndex(int lessonIndex) {
+    List<CourseVideo> listVideo = [];
+    for (var i in state.courseLesson[lessonIndex].listCourseVideo) {
+      for (var j in state.courseVideo) {
+        if (i == j.uid) {
+          listVideo.add(j);
+          break;
+        }
+      }
+    }
+    return listVideo;
+  }
+
   List<CourseVideo>? listVideo;
   List<CourseLesson>? lesson;
   void getCourseLesson() async {

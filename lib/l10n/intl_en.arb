@@ -38,7 +38,7 @@
     
     "course": "Course",
     "searchTitle":"Search course, exam test",
-    "progressTitle": "Here you progress last week",
+    "progressTitle": "Welcome to E-Course",
     "populraCourse": "Populra Course",
     "todayTest": "Today test",
     "todayTestTitle": "Here you test list for today",
@@ -62,6 +62,17 @@
     "aboutUs": "AboutUs",
     "help": "Help",
     "contactUs": "Contact Us",
+    "topic": "Topic",
+    "topicInfo": "Topic of Message",
+    "text": "Text",
+    "summitMessage": "Submit Message",
+    "writeComment": "Write a comment....",
+    "appInfo": "Application information",
+    "version": "Version",
+    "for4": "For",
+    "iOSAndroid": "iOS and Android",
+    "introduce": "Introduce",
+    "section": "Section",
 
     "changeLanguage": "ChangeLanguage",
 
@@ -83,5 +94,7 @@
     "save": "Save",
     "oldEmail": "Old email",
     "newEmail": "New email",
-    "resetPasswordDescription": "Enter the email associated with your account and well send and email with instructions to reset your password"
+    "commonInfo": "Common Info",
+    "resetPasswordDescription": "Enter the email associated with your account and well send and email with instructions to reset your password",
+    "infoApp": "The E-Course application is a powerful learning support tool, developed by Flutter, making it easy to manage learning materials, study time, and optimize your learning process. This is an application that supports students, students and anyone who wants to improve their learning performance and manage knowledge effectively. The E-Course application is a reliable friend in supporting your learning process. Download application today and experience convenience and effectiveness in learning management."
 }

@@ -20,5 +20,7 @@ abstract class UserBase {
 
   Future<bool> checkCourseUserById(String courseId);
 
+  Future<void> setFavorite(String courseId);
+
   Future<List<String>> getFavoriteCourseUser();
 }

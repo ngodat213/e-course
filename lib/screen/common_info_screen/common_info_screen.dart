@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/screen/common_info_screen/widget/common_tabbar_content.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
@@ -34,7 +35,7 @@ class _CommoInfoScreenState extends State<CommoInfoScreen>
               child: Stack(
                 children: [
                   CommonTabbarContent(tabController: _tabController),
-                  const TitleScreen(title: "Common info"),
+                  TitleScreen(title: S.of(context).commonInfo),
                   BuildBackButton(top: 24),
                 ],
               ),

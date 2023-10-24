@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
@@ -26,24 +27,31 @@ class _TabLessonState extends State<TabLesson> {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(
       builder: (context, state) {
         if (state.status == CourseDetail.isNotEmpty) {
-          if (state.isFull) {
-          } else {
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 28),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: state.courseLesson.length,
-                itemBuilder: (context, index) {
-                  final lesson = state.courseLesson[index];
-                  return LessonWidget(
-                    lesson: lesson,
-                    video: state.courseVideo,
-                  );
-                },
-              ),
-            );
-          }
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 28),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.courseLesson.length,
+              itemBuilder: (context, index) {
+                final lesson = state.courseLesson[index];
+
+                List<CourseVideo> listVideo = [];
+                for (var i in lesson.listCourseVideo) {
+                  for (var j in state.courseVideo) {
+                    if (i == j.uid) {
+                      listVideo.add(j);
+                      break;
+                    }
+                  }
+                }
+                return LessonWidget(
+                  lesson: lesson,
+                  video: listVideo,
+                );
+              },
+            ),
+          );
         } else if (state.status == CourseDetail.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -79,18 +87,18 @@ class _LessonWidgetState extends State<LessonWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Section ${widget.lesson.selection} - ${widget.lesson.title}',
+                  '${S.of(context).section} ${widget.lesson.selection} - ${widget.lesson.title}',
                   style:
                       TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
                 ),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: state.courseVideo.length,
+                  itemCount: widget.lesson.listCourseVideo.length,
                   itemBuilder: (context, index) {
                     return LessonContent(
                       lesson: widget.lesson,
-                      video: state.courseVideo[index],
+                      video: widget.video[index],
                     );
                   },
                 ),

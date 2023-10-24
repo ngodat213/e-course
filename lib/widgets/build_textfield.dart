@@ -9,6 +9,7 @@ class BuildTextField extends StatelessWidget {
     this.isNumber,
     this.func,
     this.label,
+    this.controller,
     required this.hintText,
   });
   String? label;
@@ -16,10 +17,11 @@ class BuildTextField extends StatelessWidget {
   bool? isPassword = false;
   bool? isNumber = false;
   void Function(String value)? func;
+  TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: label == null ? 45 : 65,
+      height: label == null ? 47 : 67,
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
@@ -38,6 +40,7 @@ class BuildTextField extends StatelessWidget {
                 )
               : Container(),
           TextFormField(
+            controller: controller,
             onChanged: (value) => func!(value),
             keyboardType: isNumber == true ? TextInputType.number : null,
             obscureText: isPassword ?? false,

@@ -33,10 +33,11 @@
     "question": "Câu",
     "yourCourse":"Khóa học của bạn",
     "favoriteCourse":"Khóa học yêu thích",
-    
+    "section": "Phần",
+
     "course": "Khóa học",
     "searchTitle":"Tìm kiếm khóa học, bài kiểm tra",
-    "progressTitle": "Chào bạn mừng bạn đến với E-Course",
+    "progressTitle": "Chào mừng bạn đến với E-Course",
     "populraCourse": "Khóa học phổ biến",
     "todayTest": "Bài kiểm tra",
     "todayTestTitle": "Danh sách kiểm tra",
@@ -57,6 +58,17 @@
     "aboutUs": "Về chúng tôi",
     "help": "Trợ giúp",
     "contactUs": "Liên hệ chúng tôi",
+    "topic": "Chủ đề",
+    "topicInfo": "Thông tin chủ đề",
+    "text": "Thông tin",
+    "commonInfo": "Thông tin chung",
+    "summitMessage": "Gửi tin nhắn",
+    "writeComment": "Viết bình luận...",
+    "appInfo": "Thông tin ứng dụng",
+    "version": "Phiên bản",
+    "for4": "Dành cho",
+    "iOSAndroid": "iOS và Android",
+    "introduce": "Giới thiệu",
 
     "changeLanguage": "Đổi ngôn ngữ",
 
@@ -78,5 +90,6 @@
     "save": "Lưu",
     "oldEmail": "Email cũ",
     "newEmail": "Email mới",
-    "resetPasswordDescription": "Nhập email được liên kết với tài khoản của bạn và chúng tôi sẽ gửi và gửi email kèm theo hướng dẫn để đặt lại mật khẩu của bạn"
+    "resetPasswordDescription": "Nhập email được liên kết với tài khoản của bạn và chúng tôi sẽ gửi và gửi email kèm theo hướng dẫn để đặt lại mật khẩu của bạn",
+    "infoApp": "Ứng dụng E-Course là một công cụ hỗ trợ học tập mạnh mẽ, được phát triển bằng Flutter, giúp bạn dễ dàng quản lý tài liệu học tập, thời gian học, và tối ưu hóa quá trình học tập của bạn. Đây là ứng dụng hỗ trợ cho học sinh, sinh viên và bất kỳ ai đang muốn nâng cao hiệu suất học tập và quản lý kiến thức một cách hiệu quả. Ứng dụng E-Course là một người bạn đáng tin cậy trong việc hỗ trợ quá trình học tập của bạn. Tải ứng dụng ngay hôm nay và trải nghiệm sự tiện lợi và hiệu quả trong việc quản lý học tập."
 }

@@ -28,12 +28,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountSetting":
             MessageLookupByLibrary.simpleMessage("Cài đặt tài khoản"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "appInfo": MessageLookupByLibrary.simpleMessage("Thông tin ứng dụng"),
         "app_name": MessageLookupByLibrary.simpleMessage("E-Course"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Đổi ngôn ngữ"),
         "comment": MessageLookupByLibrary.simpleMessage("Bình luận"),
         "commentTitle":
             MessageLookupByLibrary.simpleMessage("Viết bình luận..."),
+        "commonInfo": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Liên hệ chúng tôi"),
@@ -54,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "favoriteCourse":
             MessageLookupByLibrary.simpleMessage("Khóa học yêu thích"),
+        "for4": MessageLookupByLibrary.simpleMessage("Dành cho"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "forgotPasswordAnswer":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
@@ -65,6 +68,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "hiTitle": MessageLookupByLibrary.simpleMessage("Chào mừng quay lại!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "hour": MessageLookupByLibrary.simpleMessage("giờ"),
+        "iOSAndroid": MessageLookupByLibrary.simpleMessage("iOS và Android"),
+        "infoApp": MessageLookupByLibrary.simpleMessage(
+            "Ứng dụng E-Course là một công cụ hỗ trợ học tập mạnh mẽ, được phát triển bằng Flutter, giúp bạn dễ dàng quản lý tài liệu học tập, thời gian học, và tối ưu hóa quá trình học tập của bạn. Đây là ứng dụng hỗ trợ cho học sinh, sinh viên và bất kỳ ai đang muốn nâng cao hiệu suất học tập và quản lý kiến thức một cách hiệu quả. Ứng dụng E-Course là một người bạn đáng tin cậy trong việc hỗ trợ quá trình học tập của bạn. Tải ứng dụng ngay hôm nay và trải nghiệm sự tiện lợi và hiệu quả trong việc quản lý học tập."),
+        "introduce": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "lesson": MessageLookupByLibrary.simpleMessage("Bài học"),
         "logOutTitle":
@@ -86,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa học phổ biến"),
         "profileDetail": MessageLookupByLibrary.simpleMessage("Chi tiết hồ sơ"),
         "progressTitle": MessageLookupByLibrary.simpleMessage(
-            "Chào bạn mừng bạn đến với E-Course"),
+            "Chào mừng bạn đến với E-Course"),
         "question": MessageLookupByLibrary.simpleMessage("Câu"),
         "readmore": MessageLookupByLibrary.simpleMessage("Đọc thêm"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng kí"),
@@ -102,19 +109,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchTitle": MessageLookupByLibrary.simpleMessage(
             "Tìm kiếm khóa học, bài kiểm tra"),
+        "section": MessageLookupByLibrary.simpleMessage("Phần"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "selection": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng kí"),
+        "summitMessage": MessageLookupByLibrary.simpleMessage("Gửi tin nhắn"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
+        "text": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "todayTest": MessageLookupByLibrary.simpleMessage("Bài kiểm tra"),
         "todayTestTitle":
             MessageLookupByLibrary.simpleMessage("Danh sách kiểm tra"),
+        "topic": MessageLookupByLibrary.simpleMessage("Chủ đề"),
+        "topicInfo": MessageLookupByLibrary.simpleMessage("Thông tin chủ đề"),
         "username": MessageLookupByLibrary.simpleMessage("Tên người dùng"),
+        "version": MessageLookupByLibrary.simpleMessage("Phiên bản"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng việt"),
         "wannaSignOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất không"),
+        "writeComment":
+            MessageLookupByLibrary.simpleMessage("Viết bình luận..."),
         "yourCourse": MessageLookupByLibrary.simpleMessage("Khóa học của bạn")
       };
 }

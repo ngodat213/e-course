@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/screen/common_info_screen/widget/about_app_tab.dart';
 import 'package:quiz_flutter/screen/common_info_screen/widget/contact_us_tab.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -60,9 +61,9 @@ class _CommonTabbar extends StatelessWidget {
         ),
       ),
       controller: _tabController,
-      tabs: const [
-        Tab(text: 'About us'),
-        Tab(text: 'Contact us'),
+      tabs: [
+        Tab(text: S.of(context).aboutUs),
+        Tab(text: S.of(context).contactUs),
       ],
     );
   }

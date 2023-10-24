@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/screen/common_info_screen/cubit/commo_info_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
@@ -23,24 +24,24 @@ class _ContactUsTabState extends State<ContactUsTab> {
         children: [
           const SizedBox(height: Dimens.HEIGHT_30),
           BuildTextField(
-            label: 'Full name',
-            hintText: 'Name, Surname',
+            label: S.of(context).name,
+            hintText: 'Cát tường',
             func: (value) {
               context.read<CommoInfoCubit>().fullNameChanged(value);
             },
           ),
           const SizedBox(height: Dimens.HEIGHT_20),
           BuildTextField(
-            label: 'Email',
-            hintText: 'E-mail',
+            label: S.of(context).email,
+            hintText: S.of(context).emailAddress,
             func: (value) {
               context.read<CommoInfoCubit>().emailChanged(value);
             },
           ),
           const SizedBox(height: Dimens.HEIGHT_20),
           BuildTextField(
-            label: 'Topic',
-            hintText: 'Topic of Message',
+            label: S.of(context).topic,
+            hintText: S.of(context).topicInfo,
             func: (value) {
               context.read<CommoInfoCubit>().topicChanged(value);
             },
@@ -53,7 +54,7 @@ class _ContactUsTabState extends State<ContactUsTab> {
           ),
           const SizedBox(height: Dimens.HEIGHT_20),
           BuildButton(
-            text: 'Submit message',
+            text: S.of(context).summitMessage,
             onTap: () {
               context.read<CommoInfoCubit>().updateContact();
             },
@@ -89,7 +90,7 @@ class _TextField extends StatelessWidget {
             style: TxtStyle.inputStyle,
             decoration: InputDecoration(
               isDense: true,
-              hintText: 'Text',
+              hintText: S.of(context).text,
               contentPadding: const EdgeInsets.symmetric(vertical: 6),
               labelStyle: TxtStyle.labelStyle,
               border: InputBorder.none,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/course_detail/widget/tab_review.dart';
@@ -11,6 +12,7 @@ import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/widgets/back_button.dart';
+import 'package:quiz_flutter/widgets/build_button.dart';
 import 'package:quiz_flutter/widgets/title_screen.dart';
 import 'package:readmore/readmore.dart';
 import 'package:chewie/chewie.dart';
@@ -46,6 +48,18 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
         final course = state.course;
         context.read<CourseVideoCubit>().courseChanged(course);
         return Scaffold(
+          bottomNavigationBar: Container(
+            color: Colors.white.withOpacity(0.1),
+            margin: const EdgeInsets.symmetric(
+                horizontal: Dimens.PADDING_SCREEN,
+                vertical: Dimens.PADDING_SCREEN),
+            child: BuildButton(
+              text: S.of(context).register,
+              onTap: () {
+                context.read<CourseDetailCubit>().updateCourse();
+              },
+            ),
+          ),
           body: SingleChildScrollView(
             child: SafeArea(
               child: Stack(
@@ -77,6 +91,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                         ReadMoreText(
                           course.description,
                           trimLines: 2,
+                          trimCollapsedText: S.of(context).readmore,
                           style: TxtStyle.text
                               .copyWith(color: const Color(0xFF93989A)),
                         ),
@@ -98,9 +113,9 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                                   ),
                                 ),
                                 controller: _tabController,
-                                tabs: const [
-                                  Tab(text: 'Lesson'),
-                                  Tab(text: 'Review'),
+                                tabs: [
+                                  Tab(text: S.of(context).lesson),
+                                  Tab(text: S.of(context).review),
                                 ],
                               ),
                               Expanded(

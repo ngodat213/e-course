@@ -40,6 +40,47 @@ class UserRepository extends UserBase {
     }
   }
 
+  Future<String?> getPhotoUrlByUID(String uid) async {
+    try {
+      final userDoc =
+          await _firebaseFirestore.collection(ApiPath.USER).doc(uid).get();
+
+      if (userDoc.exists) {
+        final user = User.fromDoc(userDoc);
+        return user.photoUrl;
+      }
+      return null;
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception while getting photoUrl',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  Future<String?> getNameUserByUID(String uid) async {
+    try {
+      final userDoc =
+          await _firebaseFirestore.collection(ApiPath.USER).doc(uid).get();
+      if (userDoc.exists) {
+        final user = User.fromDoc(userDoc);
+        return user.displayName;
+      }
+      return null;
+    } on FirebaseException catch (e) {
+      throw CustomError(code: e.code, msg: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception while getting name',
+        msg: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
   @override
   Future<void> updateUserName(String value) async {
     try {

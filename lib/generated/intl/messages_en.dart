@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountSetting":
             MessageLookupByLibrary.simpleMessage("Account setting"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "appInfo":
+            MessageLookupByLibrary.simpleMessage("Application information"),
         "app_name": MessageLookupByLibrary.simpleMessage("E-Course"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeLanguage":
@@ -35,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "comment": MessageLookupByLibrary.simpleMessage("Commnet"),
         "commentTitle":
             MessageLookupByLibrary.simpleMessage("Write a comment..."),
+        "commonInfo": MessageLookupByLibrary.simpleMessage("Common Info"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
@@ -57,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "favoriteCourse":
             MessageLookupByLibrary.simpleMessage("Favorite Course"),
+        "for4": MessageLookupByLibrary.simpleMessage("For"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "forgotPasswordAnswer":
@@ -69,6 +73,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "hiTitle": MessageLookupByLibrary.simpleMessage("Hi, Welcome back!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "hour": MessageLookupByLibrary.simpleMessage("hour"),
+        "iOSAndroid": MessageLookupByLibrary.simpleMessage("iOS and Android"),
+        "infoApp": MessageLookupByLibrary.simpleMessage(
+            "The E-Course application is a powerful learning support tool, developed by Flutter, making it easy to manage learning materials, study time, and optimize your learning process. This is an application that supports students, students and anyone who wants to improve their learning performance and manage knowledge effectively. The E-Course application is a reliable friend in supporting your learning process. Download application today and experience convenience and effectiveness in learning management."),
+        "introduce": MessageLookupByLibrary.simpleMessage("Introduce"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lastExamDone": MessageLookupByLibrary.simpleMessage("Last exam done"),
         "lesson": MessageLookupByLibrary.simpleMessage("Lesson"),
@@ -93,7 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileDetail":
             MessageLookupByLibrary.simpleMessage("Profile Details"),
         "progressTitle":
-            MessageLookupByLibrary.simpleMessage("Here you progress last week"),
+            MessageLookupByLibrary.simpleMessage("Welcome to E-Course"),
         "question": MessageLookupByLibrary.simpleMessage("Question"),
         "readmore": MessageLookupByLibrary.simpleMessage("Readmore"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
@@ -109,19 +117,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchTitle":
             MessageLookupByLibrary.simpleMessage("Search course, exam test"),
+        "section": MessageLookupByLibrary.simpleMessage("Section"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "selection": MessageLookupByLibrary.simpleMessage("Selection"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "summitMessage": MessageLookupByLibrary.simpleMessage("Submit Message"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
+        "text": MessageLookupByLibrary.simpleMessage("Text"),
         "todayTest": MessageLookupByLibrary.simpleMessage("Today test"),
         "todayTestTitle": MessageLookupByLibrary.simpleMessage(
             "Here you test list for today"),
+        "topic": MessageLookupByLibrary.simpleMessage("Topic"),
+        "topicInfo": MessageLookupByLibrary.simpleMessage("Topic of Message"),
         "username": MessageLookupByLibrary.simpleMessage("User name"),
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "wannaSignOut":
             MessageLookupByLibrary.simpleMessage("Do you wanna sign out"),
+        "writeComment":
+            MessageLookupByLibrary.simpleMessage("Write a comment...."),
         "yourCourse": MessageLookupByLibrary.simpleMessage("Your course")
       };
 }

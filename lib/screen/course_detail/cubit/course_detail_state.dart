@@ -8,7 +8,6 @@ class CourseDetailState extends Equatable {
     required this.video,
     required this.courseLesson,
     required this.courseVideo,
-    required this.isFull,
     required this.status,
     required this.favorite,
   });
@@ -16,7 +15,6 @@ class CourseDetailState extends Equatable {
   final String video;
   final List<CourseLesson> courseLesson;
   final List<CourseVideo> courseVideo;
-  final bool isFull;
   final bool favorite;
   final CourseDetail status;
 
@@ -34,7 +32,6 @@ class CourseDetailState extends Equatable {
       video: video ?? this.video,
       courseLesson: courseLesson ?? this.courseLesson,
       courseVideo: courseVideo ?? this.courseVideo,
-      isFull: isFull ?? this.isFull,
       favorite: favorite ?? this.favorite,
       status: status ?? this.status,
     );
@@ -46,13 +43,11 @@ class CourseDetailState extends Equatable {
       video: "",
       courseLesson: const [],
       courseVideo: const [],
-      isFull: false,
       favorite: false,
       status: CourseDetail.isLoading,
     );
   }
 
   @override
-  List<Object> get props =>
-      [course, video, courseLesson, courseVideo, isFull, status];
+  List<Object> get props => [course, video, courseLesson, courseVideo, status];
 }
