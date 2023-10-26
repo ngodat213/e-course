@@ -70,7 +70,7 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
           videoId: state.video.uid,
           title: state.comment,
         );
-        toastInfo(msg: 'Send oke!');
+        toastInfo(msg: 'Your comment will be updated!');
         emit(state.copyWith(commentStatus: CommentStatus.success));
       } on CustomError {
         emit(state.copyWith(commentStatus: CommentStatus.error));

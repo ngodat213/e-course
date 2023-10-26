@@ -92,4 +92,14 @@
     "newEmail": "Email mới",
     "resetPasswordDescription": "Nhập email được liên kết với tài khoản của bạn và chúng tôi sẽ gửi và gửi email kèm theo hướng dẫn để đặt lại mật khẩu của bạn",
     "infoApp": "Ứng dụng E-Course là một công cụ hỗ trợ học tập mạnh mẽ, được phát triển bằng Flutter, giúp bạn dễ dàng quản lý tài liệu học tập, thời gian học, và tối ưu hóa quá trình học tập của bạn. Đây là ứng dụng hỗ trợ cho học sinh, sinh viên và bất kỳ ai đang muốn nâng cao hiệu suất học tập và quản lý kiến thức một cách hiệu quả. Ứng dụng E-Course là một người bạn đáng tin cậy trong việc hỗ trợ quá trình học tập của bạn. Tải ứng dụng ngay hôm nay và trải nghiệm sự tiện lợi và hiệu quả trong việc quản lý học tập."
+    ,"toastUsername": "Tên người dùng được cập nhật thành công!"
+    ,"toastUsernameFail": "Tên người dùng được cập nhật thành công!"
+    ,"fillAll": "Điền vào tất cả các trường văn bản",
+    "goHome": "Trang chủ",
+    "checkResult": "Kết quả",
+    "yourResult": "Kết quả của bạn",
+    "correct": "Đúng",
+    "fail": "Sai",
+    "point":"Điểm",
+    "showless": "Ít hơn"
 }

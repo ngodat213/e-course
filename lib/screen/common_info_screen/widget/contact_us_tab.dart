@@ -25,7 +25,7 @@ class _ContactUsTabState extends State<ContactUsTab> {
           const SizedBox(height: Dimens.HEIGHT_30),
           BuildTextField(
             label: S.of(context).name,
-            hintText: 'Cát tường',
+            hintText: S.of(context).username,
             func: (value) {
               context.read<CommoInfoCubit>().fullNameChanged(value);
             },
@@ -56,7 +56,7 @@ class _ContactUsTabState extends State<ContactUsTab> {
           BuildButton(
             text: S.of(context).summitMessage,
             onTap: () {
-              context.read<CommoInfoCubit>().updateContact();
+              context.read<CommoInfoCubit>().updateContact(context);
             },
           ),
         ],

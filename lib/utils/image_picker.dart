@@ -29,7 +29,8 @@ class ImagePickerProfile with ChangeNotifier {
         .collection(ApiPath.USER)
         .doc(userToken)
         .update({'photoUrl': newUrl})
-        .then((value) => {toastInfo(msg: "Profile update"), image = null})
+        .then((value) =>
+            {toastInfo(msg: "Your profile image will be update"), image = null})
         .onError((error, stackTrace) => toastInfo(msg: error.toString()));
   }
 

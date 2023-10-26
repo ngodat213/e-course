@@ -55,7 +55,7 @@ class SettingMenu extends StatelessWidget {
                         .locale
                         .languageCode ==
                     "vi"
-                ? "Việt Nam"
+                ? "Tiếng việt"
                 : "English",
             onTap: () {
               BaseNavigation.push(context,
