@@ -103,6 +103,7 @@ class BuildContent extends StatelessWidget {
               quiz.description,
               trimLines: 2,
               trimCollapsedText: S.of(context).readmore,
+              trimExpandedText: S.of(context).showless,
               style: TxtStyle.text.copyWith(color: const Color(0xFF93989A)),
             ),
             const SizedBox(height: 32),

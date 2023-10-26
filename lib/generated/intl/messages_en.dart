@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeLanguage":
             MessageLookupByLibrary.simpleMessage("ChangeLanguage"),
+        "checkResult": MessageLookupByLibrary.simpleMessage("Check result"),
         "comment": MessageLookupByLibrary.simpleMessage("Commnet"),
         "commentTitle":
             MessageLookupByLibrary.simpleMessage("Write a comment..."),
@@ -42,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
+        "correct": MessageLookupByLibrary.simpleMessage("Correct"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "course": MessageLookupByLibrary.simpleMessage("Course"),
         "courseFavorite":
@@ -58,8 +60,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "fail": MessageLookupByLibrary.simpleMessage("Fail"),
         "favoriteCourse":
             MessageLookupByLibrary.simpleMessage("Favorite Course"),
+        "fillAll":
+            MessageLookupByLibrary.simpleMessage("Fill in all text fields"),
         "for4": MessageLookupByLibrary.simpleMessage("For"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
@@ -67,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
             "You’ll get a message soon on your e-mail address"),
+        "goHome": MessageLookupByLibrary.simpleMessage("Go Home"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi"),
@@ -95,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordExample": MessageLookupByLibrary.simpleMessage("********"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "point": MessageLookupByLibrary.simpleMessage("Point"),
         "popularDestination":
             MessageLookupByLibrary.simpleMessage("Populra Destination"),
         "populraCourse": MessageLookupByLibrary.simpleMessage("Populra Course"),
@@ -121,11 +128,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "selection": MessageLookupByLibrary.simpleMessage("Selection"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "showless": MessageLookupByLibrary.simpleMessage("Show less"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "summitMessage": MessageLookupByLibrary.simpleMessage("Submit Message"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
         "text": MessageLookupByLibrary.simpleMessage("Text"),
+        "toastUsername": MessageLookupByLibrary.simpleMessage(
+            "Username updated successfully"),
+        "toastUsernameFail":
+            MessageLookupByLibrary.simpleMessage("Username update failed!"),
         "todayTest": MessageLookupByLibrary.simpleMessage("Today test"),
         "todayTestTitle": MessageLookupByLibrary.simpleMessage(
             "Here you test list for today"),
@@ -138,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you wanna sign out"),
         "writeComment":
             MessageLookupByLibrary.simpleMessage("Write a comment...."),
-        "yourCourse": MessageLookupByLibrary.simpleMessage("Your course")
+        "yourCourse": MessageLookupByLibrary.simpleMessage("Your course"),
+        "yourResult": MessageLookupByLibrary.simpleMessage("Your result")
       };
 }

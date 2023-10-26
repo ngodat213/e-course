@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/screen/quiz_play_screen/cubit/quiz_play_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
@@ -45,13 +46,16 @@ class CommitPage extends StatelessWidget {
                   children: [
                     Text(state.lesson.title, style: TxtStyle.h2),
                     const SizedBox(height: 16),
-                    Text("Your result", style: TxtStyle.title),
+                    Text(S.of(context).yourResult, style: TxtStyle.title),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        BoxResult(res: state.userCorrect, title: "Correct"),
-                        BoxResult(res: fail, title: "Fail"),
-                        BoxResult(res: point.ceil(), title: "Point"),
+                        BoxResult(
+                            res: state.userCorrect,
+                            title: S.of(context).correct),
+                        BoxResult(res: fail, title: S.of(context).fail),
+                        BoxResult(
+                            res: point.ceil(), title: S.of(context).point),
                       ],
                     ),
                     const SizedBox(height: 32),
@@ -65,7 +69,7 @@ class CommitPage extends StatelessWidget {
                                 routeName: ManagerRoutes.mainScreen,
                                 clearStack: true);
                           },
-                          text: 'Go Home',
+                          text: S.of(context).goHome,
                           bgColor: AppColors.grey,
                           style: TxtStyle.buttonBlack,
                         ),
@@ -73,7 +77,7 @@ class CommitPage extends StatelessWidget {
                           onTap: () {
                             context.read<QuizPlayCubit>().checkResult();
                           },
-                          text: "Check Result",
+                          text: S.of(context).checkResult,
                           bgColor: AppColors.main,
                           style: TxtStyle.buttonWhite,
                         ),

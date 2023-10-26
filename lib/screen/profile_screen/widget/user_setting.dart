@@ -56,9 +56,9 @@ class BuildUserSetting extends StatelessWidget {
                           BaseNavigation.push(context,
                               routeName: ManagerRoutes.mainScreen);
                           if (state.status == ProfileStatus.success) {
-                            toastInfo(msg: 'Update user name successfully!');
+                            toastInfo(msg: S.of(context).toastUsername);
                           } else if (state.status == ProfileStatus.error) {
-                            toastInfo(msg: 'Update user name fail!');
+                            toastInfo(msg: S.of(context).toastUsernameFail);
                           }
                         },
                       ),

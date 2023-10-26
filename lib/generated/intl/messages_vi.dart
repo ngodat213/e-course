@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_name": MessageLookupByLibrary.simpleMessage("E-Course"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Đổi ngôn ngữ"),
+        "checkResult": MessageLookupByLibrary.simpleMessage("Kết quả"),
         "comment": MessageLookupByLibrary.simpleMessage("Bình luận"),
         "commentTitle":
             MessageLookupByLibrary.simpleMessage("Viết bình luận..."),
@@ -40,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Liên hệ chúng tôi"),
         "continueText": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
+        "correct": MessageLookupByLibrary.simpleMessage("Đúng"),
         "course": MessageLookupByLibrary.simpleMessage("Khóa học"),
         "courseFavorite":
             MessageLookupByLibrary.simpleMessage("Khóa học yêu thích"),
@@ -54,14 +56,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Nhập số điện thoại của bạn"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "fail": MessageLookupByLibrary.simpleMessage("Sai"),
         "favoriteCourse":
             MessageLookupByLibrary.simpleMessage("Khóa học yêu thích"),
+        "fillAll": MessageLookupByLibrary.simpleMessage(
+            "Điền vào tất cả các trường văn bản"),
         "for4": MessageLookupByLibrary.simpleMessage("Dành cho"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "forgotPasswordAnswer":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
             "Bạn sẽ nhận một tin nhắn vào địa chỉ email của bạn"),
+        "goHome": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "help": MessageLookupByLibrary.simpleMessage("Trợ giúp"),
         "hi": MessageLookupByLibrary.simpleMessage("Chào"),
@@ -89,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "passwordExample": MessageLookupByLibrary.simpleMessage("********"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "point": MessageLookupByLibrary.simpleMessage("Điểm"),
         "populraCourse":
             MessageLookupByLibrary.simpleMessage("Khóa học phổ biến"),
         "profileDetail": MessageLookupByLibrary.simpleMessage("Chi tiết hồ sơ"),
@@ -113,11 +120,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "seeAll": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "selection": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
+        "showless": MessageLookupByLibrary.simpleMessage("Ít hơn"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng kí"),
         "summitMessage": MessageLookupByLibrary.simpleMessage("Gửi tin nhắn"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "By tapping sign up you agree to the Terms and Condition and Privacy Policy of this app"),
         "text": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "toastUsername": MessageLookupByLibrary.simpleMessage(
+            "Tên người dùng được cập nhật thành công!"),
+        "toastUsernameFail": MessageLookupByLibrary.simpleMessage(
+            "Tên người dùng được cập nhật thành công!"),
         "todayTest": MessageLookupByLibrary.simpleMessage("Bài kiểm tra"),
         "todayTestTitle":
             MessageLookupByLibrary.simpleMessage("Danh sách kiểm tra"),
@@ -130,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất không"),
         "writeComment":
             MessageLookupByLibrary.simpleMessage("Viết bình luận..."),
-        "yourCourse": MessageLookupByLibrary.simpleMessage("Khóa học của bạn")
+        "yourCourse": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
+        "yourResult": MessageLookupByLibrary.simpleMessage("Kết quả của bạn")
       };
 }

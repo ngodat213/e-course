@@ -36,6 +36,9 @@ class _ProfileScreenState extends State<ProfileScreen>
       _image = img;
     });
     await ImagePickerProfile.uploadImage();
+    setState(() {
+      context.read<SettingCubit>().getUser();
+    });
   }
 
   @override

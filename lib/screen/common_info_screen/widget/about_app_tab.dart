@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
@@ -27,7 +28,7 @@ class _AboutAppTabState extends State<AboutAppTab> {
               ),
               const SizedBox(height: 10),
               Text(
-                "${S.of(context).version}: 1.0",
+                "${S.of(context).version}: $VERSION_APP",
                 style: TxtStyle.text.copyWith(height: 1.5),
               ),
               const SizedBox(height: 10),

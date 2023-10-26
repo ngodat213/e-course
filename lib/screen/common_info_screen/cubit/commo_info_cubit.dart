@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/repo/app_repository.dart/app_repository.dart';
 import 'package:quiz_flutter/widgets/custom_toast.dart';
 
@@ -54,19 +56,18 @@ class CommoInfoCubit extends Cubit<CommoInfoState> {
     );
   }
 
-  Future<void> updateContact() async {
+  Future<void> updateContact(BuildContext context) async {
     if (state.status == CommoInfoStatus.submitting) return;
     emit(state.copyWith(status: CommoInfoStatus.submitting));
     if (state.email == "" ||
         state.fullName == "" ||
         state.topic == "" ||
         state.text == "") {
-      toastInfo(msg: 'Fill all text field');
+      toastInfo(msg: S.of(context).fillAll);
     } else {
       try {
         await _appRepository.setContactUs(
             state.fullName, state.email, state.topic, state.text);
-        print('successfull!');
         toastInfo(msg: 'Contact us successfull!');
         emit(state.copyWith(status: CommoInfoStatus.success));
       } catch (e) {

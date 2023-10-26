@@ -969,6 +969,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Username updated successfully`
+  String get toastUsername {
+    return Intl.message(
+      'Username updated successfully',
+      name: 'toastUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username update failed!`
+  String get toastUsernameFail {
+    return Intl.message(
+      'Username update failed!',
+      name: 'toastUsernameFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill in all text fields`
+  String get fillAll {
+    return Intl.message(
+      'Fill in all text fields',
+      name: 'fillAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Home`
+  String get goHome {
+    return Intl.message(
+      'Go Home',
+      name: 'goHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check result`
+  String get checkResult {
+    return Intl.message(
+      'Check result',
+      name: 'checkResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your result`
+  String get yourResult {
+    return Intl.message(
+      'Your result',
+      name: 'yourResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Correct`
+  String get correct {
+    return Intl.message(
+      'Correct',
+      name: 'correct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fail`
+  String get fail {
+    return Intl.message(
+      'Fail',
+      name: 'fail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Point`
+  String get point {
+    return Intl.message(
+      'Point',
+      name: 'point',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show less`
+  String get showless {
+    return Intl.message(
+      'Show less',
+      name: 'showless',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

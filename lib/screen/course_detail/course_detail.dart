@@ -92,6 +92,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                           course.description,
                           trimLines: 2,
                           trimCollapsedText: S.of(context).readmore,
+                          trimExpandedText: S.of(context).showless,
                           style: TxtStyle.text
                               .copyWith(color: const Color(0xFF93989A)),
                         ),
