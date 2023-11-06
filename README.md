@@ -1,32 +1,45 @@
 # E-Course
 
-Access your ERPNext desk or any other Frappe desk anytime from your smartphone.
+E-Course is a mobile application that provides access to your ERPNext desk or any other Frappe desk from your smartphone.
 
 <kbd><img width="216" height="432" src="screenshots/homepage.jpg" alt="Desk" /></kbd>
 <kbd><img width="216" height="432" src="screenshots/course.jpg" alt="Awesome Bar" /></kbd>
 <kbd><img width="216" height="432" src="screenshots/quiz.jpg" alt="Form View" /></kbd>
 
-## Features:
-1) Login, signup, and forgot password functionality.
-2) Home page: View all courses, search for courses.
-3) Courses: Comments, reviews, and watch videos.
-4) Quizzes: Multiple-choice questions, view results, and check answers.
-5) Settings: User account settings, multiple languages (Vietnamese and English), favorite courses, about us, contact us, and logout.
+## Overview
+E-Course is a powerful mobile application that brings the ERPNext desk and Frappe desk experience to your smartphone. With E-Course, you can conveniently manage your courses, participate in quizzes, and access educational content on the go. This application is designed to enhance your learning and course management experience.
 
-## Tech:
-1) Firebase: Authentication, Storage, Realtime Database, Firestore Database
-2) Cloud Dinary
+## Table of Contents
+- [Features](#features)
+- [Technologies](#technologies)
+- [Development](#development)
+  - [Setup](#setup)
+  - [Running the Project](#running-the-project)
+- [Architecture](#architecture)
+
+## Features
+1. **User Authentication**: Includes login, signup, and password recovery functionality.
+2. **Home Page**: Easily view all courses and search for specific ones.
+3. **Course Management**: Access comments, reviews, and watch course videos.
+4. **Quizzes**: Participate in quizzes with multiple-choice questions, view your results, and check your answers.
+5. **Settings**: Manage your user account settings, choose between multiple languages (Vietnamese and English), mark courses as favorites, learn more about us, get in touch through contact information, and log out.
+
+## Technologies
+1. **Firebase**: Utilizes Firebase for authentication, storage, realtime database, and Firestore database.
+2. **Cloudinary**: Employs Cloudinary for various cloud services.
 
 ## Development
-0) To run this Project first you need to [Setup Flutter](https://flutter.dev/docs/get-started/install)
 
-1) Install packages<br/>
+### Setup
+To run this project, ensure you have [Flutter](https://flutter.dev/docs/get-started/install) set up.
+
+1. Install the required packages:
 ```sh
-flutter pub get
-```
-2) Run the Project<br/>
+  flutter pub get
+```   
+2. Run the Project<br/>
 ```sh
-flutter run
+  flutter run
 ```
 
 ### Architecture
