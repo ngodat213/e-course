@@ -50,5 +50,5 @@ This Project roughly follows MVVM Architecture where each screen has seperate fi
 2) View Model File (data processing and state management). 
 
 This Project uses [provider](https://pub.dev/packages/provider) for State Management. 
-[hive](https://pub.dev/packages/hive), [shared_preferences](https://pub.dev/packages/shared_preferences) for storage. 
-[dio](https://pub.dev/packages/dio) for making network requests.
+[bloc](https://pub.dev/packages/bloc), [shared_preferences](https://pub.dev/packages/shared_preferences) for storage. 
+[firebase](https://firebase.google.com/docs?hl=vi) for making network requests.
