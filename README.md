@@ -2,9 +2,9 @@
 
 Access your ERPNext desk or any other Frappe desk anytime from your smartphone.
 
-<kbd><img width="216" height="432" src="screenshots/homepage.png" alt="Desk" /></kbd>
-<kbd><img width="216" height="432" src="screenshots/course.png" alt="Awesome Bar" /></kbd>
-<kbd><img width="216" height="432" src="screenshots/quiz.png" alt="Form View" /></kbd>
+<kbd><img width="216" height="432" src="screenshots/homepage.jpg" alt="Desk" /></kbd>
+<kbd><img width="216" height="432" src="screenshots/course.jpg" alt="Awesome Bar" /></kbd>
+<kbd><img width="216" height="432" src="screenshots/quiz.jpg" alt="Form View" /></kbd>
 
 ## Features:
 1) Login, signup, and forgot password functionality.
