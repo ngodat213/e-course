@@ -1,17 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/sign_in_screen/cubit/sign_in_cubit.dart';
-import 'package:quiz_flutter/screen/sign_in_screen/widget/login_btn.dart';
-import 'package:quiz_flutter/screen/sign_in_screen/widget/remenber_me.dart';
-import 'package:quiz_flutter/screen/sign_in_screen/widget/sign_up.dart';
-import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/screen/sign_in_screen/widget/login_screen_content.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/build_header.dart';
-import 'package:quiz_flutter/widgets/build_textfield.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -21,7 +14,17 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool isCheck = false;
+  bool isWrong = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,85 +32,27 @@ class _SignInScreenState extends State<SignInScreen> {
       create: (_) => SignInCubit(
         context.read<AuthRepository>(),
       ),
-      child: const LoginForm(),
-    );
-  }
-}
-
-class LoginForm extends StatelessWidget {
-  const LoginForm({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<SignInCubit, SignInState>(
-      listener: (context, state) {
-        if (state.status == LoginStatus.error) {}
-        if (state.status == LoginStatus.success) {
-          BaseNavigation.push(
-            context,
-            routeName: ManagerRoutes.splashScreen,
-            clearStack: true,
-          );
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              BuildHeader(
-                text: S.of(context).login,
-                title: S.of(context).hiTitle,
-              ),
-              const SizedBox(height: Dimens.HEIGHT_25),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                    horizontal: Dimens.PADDING_SCREEN),
-                child: Column(
-                  children: [
-                    _textField(context),
-                    const BuildRememberMe(),
-                    const SizedBox(height: Dimens.HEIGHT_20),
-                    const LoginButton(),
-                    const BuildSignUp()
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: LoginContent(
+        isWrongAccount: isWrong,
+        emailController: _emailController,
+        passwordController: _passwordController,
+        onPressedSignIn: _onPressedSignIn,
+        onPressedCreateAccount: _onPressedCreateAccount,
+        onPressedForgetPassword: _onPressedForgetPassword,
       ),
     );
   }
 
-  BlocBuilder _textField(BuildContext context) {
-    return BlocBuilder<SignInCubit, SignInState>(
-      buildWhen: ((previous, current) =>
-          previous.email != current.email &&
-          previous.password != current.password),
-      builder: (context, state) {
-        return Column(
-          children: [
-            BuildTextField(
-              label: S.of(context).email,
-              hintText: S.of(context).emailExample,
-              func: (value) {
-                context.read<SignInCubit>().emailChanged(value);
-              },
-            ),
-            const SizedBox(height: Dimens.HEIGHT_20),
-            BuildTextField(
-              label: S.of(context).password,
-              hintText: S.of(context).passwordExample,
-              isPassword: true,
-              func: (value) {
-                context.read<SignInCubit>().passwordChanged(value);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void _onPressedSignIn() {
+    BaseNavigation.push(context,
+        routeName: ManagerRoutes.mainScreen, clearStack: true);
+  }
+
+  void _onPressedCreateAccount() {
+    BaseNavigation.push(context, routeName: ManagerRoutes.signUpScreen);
+  }
+
+  void _onPressedForgetPassword() {
+    BaseNavigation.push(context, routeName: ManagerRoutes.forgotPasswordScreen);
   }
 }

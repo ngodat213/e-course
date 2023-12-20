@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_flutter/generated/l10n.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/screen/sign_up_screen/cubit/sign_up_cubit.dart';
-import 'package:quiz_flutter/screen/sign_up_screen/widget/sign_up_btn.dart';
-import 'package:quiz_flutter/screen/sign_up_screen/widget/terms.dart';
-import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/screen/sign_up_screen/widget/sign_up_screen_content.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
-import 'package:quiz_flutter/widgets/back_button.dart';
-import 'package:quiz_flutter/widgets/build_header.dart';
-import 'package:quiz_flutter/widgets/build_textfield.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,111 +14,47 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _phoneNumberController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SignUpCubit(
         context.read<AuthRepository>(),
       ),
-      child: const SignUpForm(),
-    );
-  }
-}
-
-class SignUpForm extends StatelessWidget {
-  const SignUpForm({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<SignUpCubit, SignUpState>(
-      listener: (context, state) {
-        if (state.status == SignUpStatus.error) {}
-        if (state.status == SignUpStatus.success) {
-          BaseNavigation.pop(context);
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  BuildHeader(
-                    text: S.of(context).signUp,
-                    title: S.of(context).createYourAccount,
-                  ),
-                  const SizedBox(height: 25),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      children: [
-                        _textField(context),
-                        const SizedBox(height: Dimens.HEIGHT_20),
-                        const Terms(),
-                        const SizedBox(height: Dimens.HEIGHT_20),
-                        const SignUpButton(),
-                        const SizedBox(height: Dimens.HEIGHT_48)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              BuildBackButton()
-            ],
-          ),
-        ),
+      child: SignUpForm(
+        onPressedSignIn: _onPressedSignIn,
+        onPressedCreateAccount: _onPressedCreateAccount,
+        usernameController: _usernameController,
+        phoneNumberController: _phoneNumberController,
+        emailController: _emailController,
+        passwordController: _passwordController,
+        confirmPassController: _confirmPasswordController,
       ),
     );
   }
 
-  Column _textField(BuildContext context) {
-    return Column(
-      children: [
-        BuildTextField(
-          label: S.of(context).name,
-          hintText: 'James Kris',
-          func: (value) {
-            context.read<SignUpCubit>().displayNameChanged(value);
-          },
-        ),
-        const SizedBox(height: Dimens.HEIGHT_20),
-        BuildTextField(
-          label: S.of(context).phoneNumber,
-          hintText: S.of(context).enterPhoneNumber,
-          isNumber: true,
-          func: (value) {
-            context.read<SignUpCubit>().phoneNumberChanged(value);
-          },
-        ),
-        const SizedBox(height: Dimens.HEIGHT_20),
-        BuildTextField(
-          label: S.of(context).email,
-          hintText: S.of(context).emailExample,
-          func: (value) {
-            context.read<SignUpCubit>().emailChanged(value);
-          },
-        ),
-        const SizedBox(height: Dimens.HEIGHT_20),
-        BuildTextField(
-          label: S.of(context).password,
-          hintText: S.of(context).passwordExample,
-          isPassword: true,
-          func: (value) {
-            context.read<SignUpCubit>().passwordChanged(value);
-          },
-        ),
-        const SizedBox(height: Dimens.HEIGHT_20),
-        BuildTextField(
-          label: S.of(context).confirmPassword,
-          hintText: S.of(context).passwordExample,
-          isPassword: true,
-          func: (value) {
-            context.read<SignUpCubit>().confirmPasswordChanged(value);
-          },
-        ),
-      ],
-    );
+  void _onPressedSignIn() {
+    BaseNavigation.push(context,
+        routeName: ManagerRoutes.mainScreen, clearStack: true);
+  }
+
+  void _onPressedCreateAccount() {
+    BaseNavigation.push(context, routeName: ManagerRoutes.signUpScreen);
   }
 }
