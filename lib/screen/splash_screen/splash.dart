@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/const/const.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
 import 'package:quiz_flutter/manager/manager_key_storage.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
-import 'package:quiz_flutter/screen/course_list_screen/cubit/course_list_screen_cubit.dart';
-import 'package:quiz_flutter/screen/course_screen/cubit/course_screen_cubit.dart';
-import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
-import 'package:quiz_flutter/screen/main_screen.dart/cubit/main_cubit.dart';
-import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
+import 'package:quiz_flutter/repo/auth_repository.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
@@ -28,31 +25,37 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late AuthRepository _authRepository;
   bool keepLogin = false;
   @override
   void initState() {
-    checkUserKeepLogin().whenComplete(
-        () async => Timer(const Duration(seconds: DELAY_SPLASH_SCREEN), () {
-              if (keepLogin) {
-                BaseNavigation.push(context,
-                    routeName: ManagerRoutes.mainScreen, clearStack: true);
-                context.read<HomeCubit>().getCourse();
-                context.read<HomeCubit>().getQuiz();
-                context.read<SettingCubit>().getUser();
-                context.read<MainCubit>().indexChanged(0);
-                context.read<CourseListScreenCubit>().getCourse();
-                context.read<CourseScreenCubit>().getCourse();
-              } else {
-                BaseNavigation.push(context,
-                    routeName: ManagerRoutes.signInScreen, clearStack: true);
-              }
-            }));
     super.initState();
+    _authRepository = context.read<AuthRepository>();
+    onWidgetBuildDone(_splashScreenDelay);
   }
 
-  Future<void> checkUserKeepLogin() async {
-    print(
-        "${await BaseSharedPreferences.containKey(ManagerKeyStorage.keepLogin)}- ${await BaseSharedPreferences.getStringValue(ManagerKeyStorage.accessToken)}");
+  void onWidgetBuildDone(Function function) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      function();
+    });
+  }
+
+  Future<void> _splashScreenDelay() async {
+    await _authRepository.handleGetUser();
+    await _checkUserKeepLogin();
+    await Future.delayed(const Duration(seconds: DELAY_SPLASH_SCREEN))
+        .whenComplete(() {
+      if (_authRepository.currentUser?.email != null || keepLogin) {
+        BaseNavigation.push(context,
+            routeName: ManagerRoutes.mainScreen, clearStack: true);
+      } else {
+        BaseNavigation.push(context,
+            routeName: ManagerRoutes.signInScreen, clearStack: true);
+      }
+    });
+  }
+
+  Future<void> _checkUserKeepLogin() async {
     if (await BaseSharedPreferences.containKey(ManagerKeyStorage.keepLogin) ==
         true) {
       setState(() {

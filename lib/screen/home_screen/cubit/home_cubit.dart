@@ -20,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   late var quizs;
-  void getQuiz() async {
+  Future<void> handleGetQuiz() async {
     emit(state.copyWith(status: HomeStatus.isLoading));
     try {
       quizs = await appRepository.getQuizByLimit(5);
@@ -37,7 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   late var courses;
-  void getCourse() async {
+  Future<void> handleGetCourse() async {
     emit(state.copyWith(status: HomeStatus.isLoading));
     try {
       courses = await appRepository.getCourseByLimit(4);

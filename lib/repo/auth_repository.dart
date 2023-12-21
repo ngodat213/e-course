@@ -18,10 +18,10 @@ class AuthRepository {
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _firebaseFireStore = firebaseFirestore ?? FirebaseFirestore.instance;
 
-  var currentUser;
+  User? currentUser;
 
-  Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((event) {
+  Future<void> handleGetUser() async {
+    _firebaseAuth.authStateChanges().map((event) {
       final user = event == null ? User.empty : event.toUser;
       currentUser = user;
       return user;

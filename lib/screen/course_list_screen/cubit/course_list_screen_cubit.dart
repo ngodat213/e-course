@@ -14,7 +14,7 @@ class CourseListScreenCubit extends Cubit<CourseListScreenState> {
   ) : super(CourseListScreenState.initial());
 
   late var courses;
-  void getCourse() async {
+  void handleGetCourse() async {
     emit(state.copyWith(status: CourseListScreenStatus.isLoading));
     try {
       List<Course> res = [];

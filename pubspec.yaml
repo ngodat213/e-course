@@ -58,6 +58,7 @@ dependencies:
   #APP ICONS
   flutter_launcher_icons: ^0.13.1
   image_picker: ^1.0.4
+  schedulers: ^1.0.1
 
 flutter_launcher_icons:
   android: "launcher_icon"

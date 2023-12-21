@@ -16,7 +16,7 @@ class SettingCubit extends Cubit<SettingState> {
     this._userRepository,
   ) : super(SettingState.initial());
 
-  void getUser() async {
+  Future<void> handleGetUser() async {
     emit(state.copyWith(status: SettingStatus.submitting));
     try {
       final User user = await _userRepository.getProfile();

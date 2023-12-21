@@ -14,8 +14,10 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class CourseSlider extends StatefulWidget {
+  final CarouselController carouselController;
   const CourseSlider({
     super.key,
+    required this.carouselController,
   });
 
   @override
@@ -23,7 +25,6 @@ class CourseSlider extends StatefulWidget {
 }
 
 class _CourseSliderState extends State<CourseSlider> {
-  final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _CourseSliderState extends State<CourseSlider> {
                       },
                       child: CardSlider(e)))
                   .toList(),
-              carouselController: carouselController,
+              carouselController: widget.carouselController,
               options: CarouselOptions(
                 autoPlay: true,
                 aspectRatio: 2,
