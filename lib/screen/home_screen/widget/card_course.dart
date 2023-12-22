@@ -4,6 +4,7 @@ import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
+import 'package:quiz_flutter/widgets/skeleton_widget.dart';
 
 class CardSlider extends StatelessWidget {
   const CardSlider(
@@ -27,14 +28,20 @@ class CardSlider extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.main,
-              borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
-              image: DecorationImage(
-                image: NetworkImage(course.thumb),
-                fit: BoxFit.cover,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(Dimens.RADIUS_16),
+            child: Image.network(
+              course.thumb,
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Skeleton(radius: Dimens.RADIUS_8);
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return const Skeleton(radius: Dimens.RADIUS_8);
+              },
             ),
           ),
           Positioned(

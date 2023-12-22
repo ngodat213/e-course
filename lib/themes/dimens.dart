@@ -18,6 +18,7 @@ class Dimens {
   static const HEIGHT_296 = 296.0;
   static const HEIGHT_230 = 230.0;
   static const HEIGHT_200 = 200.0;
+  static const HEIGHT_180 = 180.0;
   static const HEIGHT_160 = 160.0;
   static const HEIGHT_150 = 150.0;
   static const HEIGHT_135 = 135.0;

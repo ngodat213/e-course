@@ -15,7 +15,11 @@ import 'package:quiz_flutter/themes/text_styles.dart';
 import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class TabLesson extends StatefulWidget {
-  const TabLesson({super.key});
+  const TabLesson({
+    super.key,
+    required this.courseLesson,
+  });
+  final List<CourseLesson> courseLesson;
 
   @override
   State<TabLesson> createState() => _TabLessonState();
@@ -45,7 +49,7 @@ class _TabLessonState extends State<TabLesson> {
                     }
                   }
                 }
-                return LessonWidget(
+                return TabbarLessonContent(
                   lesson: lesson,
                   video: listVideo,
                 );
@@ -61,8 +65,8 @@ class _TabLessonState extends State<TabLesson> {
   }
 }
 
-class LessonWidget extends StatefulWidget {
-  const LessonWidget({
+class TabbarLessonContent extends StatefulWidget {
+  const TabbarLessonContent({
     super.key,
     required this.lesson,
     required this.video,
@@ -71,10 +75,10 @@ class LessonWidget extends StatefulWidget {
   final CourseLesson lesson;
   final List<CourseVideo> video;
   @override
-  State<LessonWidget> createState() => _LessonWidgetState();
+  State<TabbarLessonContent> createState() => _TabbarLessonContentState();
 }
 
-class _LessonWidgetState extends State<LessonWidget> {
+class _TabbarLessonContentState extends State<TabbarLessonContent> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CourseDetailCubit, CourseDetailState>(

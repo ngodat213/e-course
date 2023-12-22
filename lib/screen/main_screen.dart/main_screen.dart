@@ -18,6 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> pages = [
     const HomeScreen(),
     const CourseScreen(),
+    const CourseScreen(),
     const SettingScreen(),
   ];
 

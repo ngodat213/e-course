@@ -20,8 +20,10 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
-  late List<Course> courseList;
+  late List<Course> _courseList;
+  late CourseScreenCubit _courseScreenCubit;
   List<Course> found = [];
+
   @override
   void initState() {
     super.initState();
@@ -30,17 +32,17 @@ class _CourseScreenState extends State<CourseScreen> {
 
   Future<void> loadCourses() async {
     setState(() {
-      courseList = context.read<CourseScreenCubit>().courses;
-      found = courseList;
+      _courseList = context.read<CourseScreenCubit>().courses;
+      found = _courseList;
     });
   }
 
   void _runFilter(String value) {
     List<Course> res = [];
     if (value.isEmpty) {
-      res = courseList;
+      res = _courseList;
     } else {
-      res = courseList
+      res = _courseList
           .where((element) =>
               element.title.toLowerCase().contains(value.toLowerCase()))
           .toList();

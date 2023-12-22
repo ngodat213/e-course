@@ -59,7 +59,7 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
 
   List<CourseVideo>? listVideo;
   List<CourseLesson>? lesson;
-  void getCourseLesson() async {
+  Future<void> getCourseLesson() async {
     emit(state.copyWith(status: CourseDetail.isLoading));
     try {
       List<CourseLesson> lessons = [];

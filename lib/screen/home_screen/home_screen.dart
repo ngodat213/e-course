@@ -1,12 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/course_slider.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/grid_course.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/home_header.dart';
-import 'package:quiz_flutter/screen/home_screen/widget/list_exam.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
+import 'package:quiz_flutter/screen/home_screen/widget/home_screen_content.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/menu_drawer.dart';
+import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
+import 'package:quiz_flutter/utils/base_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,10 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final CarouselController carouselController = CarouselController();
+  late HomeCubit _homeCubit;
+  late SettingCubit _settingCubit;
 
   @override
   void initState() {
-    // TODO: implement initState
+    _homeCubit = context.read<HomeCubit>();
+    _settingCubit = context.read<SettingCubit>();
     super.initState();
   }
 
@@ -32,29 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.white,
       drawer: const MenuDrawer(),
       appBar: _homeAppBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CourseSlider(carouselController: carouselController),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: Dimens.PADDING_SCREEN,
-                  vertical: Dimens.PADDING_16,
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GridViewCourse(),
-                    SizedBox(height: Dimens.HEIGHT_20),
-                    ListExam(),
-                    SizedBox(height: Dimens.HEIGHT_20),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: HomeScreenContent(
+        carouselController: carouselController,
+        homeCubit: _homeCubit,
+        settingCubit: _settingCubit,
       ),
     );
   }
@@ -63,9 +49,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       elevation: 0,
       titleSpacing: Dimens.PADDING_SCREEN,
-      title: const HomeHeader(),
+      title: _homeHeader(),
       iconTheme: const IconThemeData(color: AppColors.label),
       backgroundColor: AppColors.white,
+    );
+  }
+
+  Widget _homeHeader() {
+    return BlocBuilder<SettingCubit, SettingState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(child: Container()),
+            GestureDetector(
+              onTap: () {
+                BaseNavigation.push(context,
+                    routeName: ManagerRoutes.profileScreen);
+              },
+              child: Container(
+                width: Dimens.HEIGHT_32,
+                height: Dimens.HEIGHT_32,
+                margin: const EdgeInsets.only(left: Dimens.PADDING_16),
+                child: CircleAvatar(
+                  radius: Dimens.RADIUS_CIRCLE,
+                  backgroundImage: NetworkImage(state.user.photoUrl!),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
