@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/manager/manager_path_routes.dart';
-import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/course_video.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
-import 'package:quiz_flutter/screen/course_video/cubit/course_video_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/images.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
-import 'package:quiz_flutter/utils/base_navigation.dart';
+import 'package:quiz_flutter/widgets/skeleton_widget.dart';
 
 class TabLesson extends StatefulWidget {
   const TabLesson({
     super.key,
     required this.courseLesson,
+    required this.onPressedLesson,
   });
   final List<CourseLesson> courseLesson;
+  final Function(CourseLesson lesson, CourseVideo video) onPressedLesson;
 
   @override
   State<TabLesson> createState() => _TabLessonState();
@@ -41,18 +40,14 @@ class _TabLessonState extends State<TabLesson> {
                 final lesson = state.courseLesson[index];
 
                 List<CourseVideo> listVideo = [];
-                for (var i in lesson.listCourseVideo) {
-                  for (var j in state.courseVideo) {
-                    if (i == j.uid) {
-                      listVideo.add(j);
-                      break;
-                    }
-                  }
+                listVideo =
+                    context.read<CourseDetailCubit>().getVideoByLesson(lesson);
+
+                if (listVideo.isEmpty) {
+                  return _tabbarLessonSkeletonContent(context);
+                } else {
+                  return _tabbarLessonContent(context, lesson, listVideo);
                 }
-                return TabbarLessonContent(
-                  lesson: lesson,
-                  video: listVideo,
-                );
               },
             ),
           );
@@ -63,85 +58,64 @@ class _TabLessonState extends State<TabLesson> {
       },
     );
   }
-}
 
-class TabbarLessonContent extends StatefulWidget {
-  const TabbarLessonContent({
-    super.key,
-    required this.lesson,
-    required this.video,
-  });
-
-  final CourseLesson lesson;
-  final List<CourseVideo> video;
-  @override
-  State<TabbarLessonContent> createState() => _TabbarLessonContentState();
-}
-
-class _TabbarLessonContentState extends State<TabbarLessonContent> {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CourseDetailCubit, CourseDetailState>(
-      builder: (context, state) {
-        if (state.status == CourseDetail.isNotEmpty) {
-          return Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${S.of(context).section} ${widget.lesson.selection} - ${widget.lesson.title}',
-                  style:
-                      TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
-                ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: widget.lesson.listCourseVideo.length,
-                  itemBuilder: (context, index) {
-                    return LessonContent(
-                      lesson: widget.lesson,
-                      video: widget.video[index],
-                    );
-                  },
-                ),
-              ],
-            ),
-          );
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
+  Container _tabbarLessonContent(
+      BuildContext context, CourseLesson lesson, List<CourseVideo> video) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '${S.of(context).section} ${lesson.selection} - ${lesson.title}',
+            style: TxtStyle.hintStyle.copyWith(fontWeight: FontWeight.w600),
+          ),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: lesson.listCourseVideo.length,
+            itemBuilder: (context, index) {
+              return _lessonButton(context, lesson, video[index]);
+            },
+          ),
+        ],
+      ),
     );
   }
-}
 
-class LessonContent extends StatefulWidget {
-  const LessonContent({
-    super.key,
-    required this.video,
-    required this.lesson,
-  });
-  final CourseLesson lesson;
-  final CourseVideo video;
+  Container _tabbarLessonSkeletonContent(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Skeleton(width: 80),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Skeleton(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
-  @override
-  State<LessonContent> createState() => _LessonContentState();
-}
-
-class _LessonContentState extends State<LessonContent> {
-  @override
-  Widget build(BuildContext context) {
+  GestureDetector _lessonButton(
+      BuildContext context, CourseLesson lesson, CourseVideo video) {
     return GestureDetector(
       onTap: () {
-        Course course = context.read<CourseDetailCubit>().state.course;
-        String selection = widget.lesson.title;
-        context.read<CourseVideoCubit>().videoChanged(widget.video);
-        context.read<CourseVideoCubit>().courseChanged(course);
-        context.read<CourseVideoCubit>().selectionChanged(selection);
-        BaseNavigation.push(context,
-            routeName: ManagerRoutes.courseVideoScreen);
+        widget.onPressedLesson.call(lesson, video);
       },
       child: Container(
         height: 70,
@@ -158,7 +132,7 @@ class _LessonContentState extends State<LessonContent> {
               width: Dimens.HEIGHT_30,
               height: Dimens.HEIGHT_30,
               child: Center(
-                child: Text(widget.video.part,
+                child: Text(video.part,
                     style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
               ),
             ),
@@ -166,10 +140,10 @@ class _LessonContentState extends State<LessonContent> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.video.title,
+                Text(video.title,
                     style: TxtStyle.text.copyWith(fontWeight: FontWeight.w600)),
                 const Expanded(child: SizedBox()),
-                Text('${widget.video.hour}hour ${widget.video.minute}min',
+                Text('${video.hour}hour ${video.minute}min',
                     style: TxtStyle.p.copyWith(color: AppColors.label)),
               ],
             ),

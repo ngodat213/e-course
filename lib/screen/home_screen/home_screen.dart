@@ -2,9 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_flutter/manager/manager_path_routes.dart';
+import 'package:quiz_flutter/models/models.dart';
+import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/home_screen_content.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/menu_drawer.dart';
+import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
@@ -41,8 +44,29 @@ class _HomeScreenState extends State<HomeScreen> {
         carouselController: carouselController,
         homeCubit: _homeCubit,
         settingCubit: _settingCubit,
+        onPressedCourse: _onPressedCourse,
+        onPressedExam: _onPressedExam,
+        onPressedCourseList: _onPressedCourseList,
       ),
     );
+  }
+
+  void _onPressedExam(Quiz quiz) {
+    context.read<QuizCubit>().quizChanged(quiz);
+    BaseNavigation.push(context, routeName: ManagerRoutes.quizScreen);
+  }
+
+  void _onPressedCourse(Course course) {
+    context.read<CourseDetailCubit>().courseChanged(course);
+    BaseNavigation.push(context, routeName: ManagerRoutes.courseDetailScreen);
+  }
+
+  void _onPressedAvatarUser() {
+    BaseNavigation.push(context, routeName: ManagerRoutes.profileScreen);
+  }
+
+  void _onPressedCourseList() {
+    BaseNavigation.push(context, routeName: ManagerRoutes.courseListScreen);
   }
 
   AppBar _homeAppBar() {
@@ -63,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(child: Container()),
             GestureDetector(
               onTap: () {
-                BaseNavigation.push(context,
-                    routeName: ManagerRoutes.profileScreen);
+                _onPressedAvatarUser.call();
               },
               child: Container(
                 width: Dimens.HEIGHT_32,

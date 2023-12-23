@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/models/course.dart';
 import 'package:quiz_flutter/models/course_lesson.dart';
 import 'package:quiz_flutter/models/models.dart';
 import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
@@ -23,10 +22,12 @@ class CourseDetailScreenContent extends StatelessWidget {
     required this.tabController,
     required this.course,
     required this.courseLesson,
+    required this.onPressedLesson,
   });
   final TabController tabController;
   final List<CourseLesson> courseLesson;
   final Course course;
+  final Function(CourseLesson lesson, CourseVideo video) onPressedLesson;
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +186,10 @@ class CourseDetailScreenContent extends StatelessWidget {
             child: TabBarView(
               controller: tabController,
               children: [
-                TabLesson(courseLesson: courseLesson),
+                TabLesson(
+                  courseLesson: courseLesson,
+                  onPressedLesson: onPressedLesson,
+                ),
                 const TabReview(),
               ],
             ),

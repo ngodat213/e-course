@@ -62,9 +62,9 @@ class CourseVideoCubit extends Cubit<CourseVideoState> {
     return await _userRepository.getNameUserByUID(id);
   }
 
-  Future<void> sendCommnet() async {
+  Future<void> sendCommnet(String comment) async {
     emit(state.copyWith(commentStatus: CommentStatus.isLoading));
-    if (state.comment != "") {
+    if (comment != "") {
       try {
         await _appRepository.setCommentCollection(
           videoId: state.video.uid,

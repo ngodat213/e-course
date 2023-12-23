@@ -3,31 +3,32 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_flutter/generated/l10n.dart';
-import 'package:quiz_flutter/manager/manager_path_routes.dart';
 import 'package:quiz_flutter/models/models.dart';
-import 'package:quiz_flutter/screen/course_detail/cubit/course_detail_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/cubit/home_cubit.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/card_course.dart';
 import 'package:quiz_flutter/screen/home_screen/widget/card_exam.dart';
-import 'package:quiz_flutter/screen/quiz_screen/cubit/quiz_cubit.dart';
 import 'package:quiz_flutter/screen/setting_screen/cubit/setting_cubit.dart';
 import 'package:quiz_flutter/themes/colors.dart';
 import 'package:quiz_flutter/themes/dimens.dart';
 import 'package:quiz_flutter/themes/text_styles.dart';
-import 'package:quiz_flutter/utils/base_navigation.dart';
 import 'package:quiz_flutter/widgets/skeleton_widget.dart';
 
 class HomeScreenContent extends StatefulWidget {
-  final HomeCubit homeCubit;
-  final SettingCubit settingCubit;
   const HomeScreenContent({
     super.key,
     required this.carouselController,
     required this.homeCubit,
     required this.settingCubit,
+    required this.onPressedCourse,
+    required this.onPressedExam,
+    required this.onPressedCourseList,
   });
-
+  final HomeCubit homeCubit;
+  final SettingCubit settingCubit;
   final CarouselController carouselController;
+  final Function(Quiz quiz) onPressedExam;
+  final Function(Course course) onPressedCourse;
+  final Function() onPressedCourseList;
 
   @override
   State<HomeScreenContent> createState() => _HomeScreenContentState();
@@ -96,9 +97,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  context.read<QuizCubit>().quizChanged(quizs[index]);
-                  BaseNavigation.push(context,
-                      routeName: ManagerRoutes.quizScreen);
+                  widget.onPressedExam.call(quizs[index]);
                 },
                 child: CardExam(
                   quiz: quizs[index],
@@ -130,9 +129,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             childCount: courses.length < 4 ? courses.length : 4,
             (context, index) => GestureDetector(
               onTap: () {
-                context.read<CourseDetailCubit>().courseChanged(courses[index]);
-                BaseNavigation.push(context,
-                    routeName: ManagerRoutes.courseDetailScreen);
+                widget.onPressedCourse.call(courses[index]);
               },
               child: Stack(
                 children: [
@@ -187,8 +184,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             Text(S.of(context).populraCourse, style: TxtStyle.title),
             GestureDetector(
               onTap: () {
-                BaseNavigation.push(context,
-                    routeName: ManagerRoutes.courseListScreen);
+                widget.onPressedCourseList.call();
               },
               child: Text(S.of(context).all, style: TxtStyle.pMainColor),
             ),
@@ -206,9 +202,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           items: courses
               .map((e) => GestureDetector(
                   onTap: () {
-                    context.read<CourseDetailCubit>().courseChanged(e);
-                    BaseNavigation.push(context,
-                        routeName: ManagerRoutes.courseDetailScreen);
+                    widget.onPressedCourse.call(e);
                   },
                   child: CardSlider(e)))
               .toList(),

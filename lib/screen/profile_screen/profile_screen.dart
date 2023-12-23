@@ -30,6 +30,12 @@ class _ProfileScreenState extends State<ProfileScreen>
     _tabController = TabController(length: 2, vsync: this);
   }
 
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   void selectImage() async {
     Uint8List img = await ImagePickerProfile.pickImage(ImageSource.gallery);
     setState(() {
